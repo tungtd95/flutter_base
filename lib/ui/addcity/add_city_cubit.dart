@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/repo/weather_repo.dart';
 import 'package:flutter_base/ui/addcity/add_city_state.dart';
+import 'package:flutter_base/ui/base/base_cubit.dart';
 import 'package:flutter_base/ui/base/screen_state.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
 @injectable
-class AddCityCubit extends Cubit<AddCityState> {
+class AddCityCubit extends BaseCubit<AddCityState> {
   WeatherRepo _weatherRepo;
   final _queryController = StreamController<String>();
 
@@ -51,6 +51,7 @@ class AddCityCubit extends Cubit<AddCityState> {
     );
   }
 
+  @override
   void dispose() {
     _queryController.close();
   }
