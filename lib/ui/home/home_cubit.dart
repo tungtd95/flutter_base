@@ -5,8 +5,18 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {
-  WeatherRepo weatherRepo;
+  WeatherRepo _weatherRepo;
 
-  HomeCubit({required this.weatherRepo}) : super(HomeState());
+  HomeCubit({required WeatherRepo weatherRepo})
+      : this._weatherRepo = weatherRepo,
+        super(HomeState());
 
+  void subscribeCitiesStream() {
+    _weatherRepo.getCitiesStream().listen(
+      (event) {
+        emit(state.copyWith(cities: event));
+      },
+      onError: (e) {},
+    );
+  }
 }

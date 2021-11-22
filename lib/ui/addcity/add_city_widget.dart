@@ -4,6 +4,7 @@ import 'package:flutter_base/ui/addcity/add_city_cubit.dart';
 import 'package:flutter_base/ui/addcity/add_city_state.dart';
 import 'package:flutter_base/ui/addcity/components/city_widget.dart';
 import 'package:flutter_base/ui/addcity/components/search_bar_widget.dart';
+import 'package:flutter_base/ui/base/screen_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddCityWidget extends StatefulWidget {
@@ -28,6 +29,21 @@ class _AddCityWidgetState extends State<AddCityWidget> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocListener<AddCityCubit, AddCityState>(
+      bloc: _cubit,
+      listener: (_, state) {
+        if (state.screenState is Completed) {
+          Navigator.of(context).pop();
+        }
+      },
+      child: BlocBuilder<AddCityCubit, AddCityState>(
+        bloc: _cubit,
+        builder: _buildPage,
+      ),
+    );
+  }
+
+  Widget _buildPage(BuildContext context, AddCityState state) {
     return Scaffold(
       body: Column(
         children: [
@@ -36,37 +52,35 @@ class _AddCityWidgetState extends State<AddCityWidget> {
             child: SearchBarWidget(
               onSearch: _cubit.searchCity,
               focusNode: _searchFocusNode,
+              loading: state.screenState is Loading,
             ),
             margin: EdgeInsets.symmetric(horizontal: 16),
           ),
           Expanded(
-            child: _buildCities(),
+            child: _buildCities(state),
           )
         ],
       ),
     );
   }
 
-  Widget _buildCities() {
-    return BlocBuilder<AddCityCubit, AddCityState>(
-      bloc: _cubit,
-      builder: (context, state) {
-        final cities = state.cities ?? [];
-        return ListView.separated(
-          itemBuilder: (context, index) {
-            return CityWidget(
-              cityName: cities[index].getFullName(),
-              onTap: () {
-                print("WTF ${cities[index].getFullName()}");
-              },
-            );
-          },
-          itemCount: cities.length,
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-          separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(height: 4);
+  Widget _buildCities(AddCityState state) {
+    final cities = state.cities ?? [];
+    if (cities.isEmpty) return Container();
+    return ListView.separated(
+      itemBuilder: (context, index) {
+        final city = cities[index];
+        return CityWidget(
+          cityName: city.getFullName(),
+          onTap: () {
+            _cubit.addCityToFav(city);
           },
         );
+      },
+      itemCount: cities.length,
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+      separatorBuilder: (BuildContext context, int index) {
+        return SizedBox(height: 4);
       },
     );
   }

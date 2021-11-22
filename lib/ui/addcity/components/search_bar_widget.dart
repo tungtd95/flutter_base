@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 class SearchBarWidget extends StatelessWidget {
   final Function(String) onSearch;
   final FocusNode? focusNode;
+  final bool loading;
 
-  SearchBarWidget({required this.onSearch, this.focusNode});
+  SearchBarWidget({
+    required this.onSearch,
+    this.focusNode,
+    this.loading = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +36,15 @@ class SearchBarWidget extends StatelessWidget {
               focusNode: focusNode,
             ),
           ),
+          if (loading) ...[
+            SizedBox(width: 8),
+            Container(
+              width: 16,
+              height: 16,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+          ],
+          SizedBox(width: 12),
         ],
       ),
     );

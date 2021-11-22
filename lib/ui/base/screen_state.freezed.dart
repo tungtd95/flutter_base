@@ -40,6 +40,10 @@ class _$ScreenStateTearOff {
   Success success() {
     return const Success();
   }
+
+  Completed completed() {
+    return const Completed();
+  }
 }
 
 /// @nodoc
@@ -55,6 +59,7 @@ mixin _$ScreenState {
     required TResult Function() submitting,
     required TResult Function() error,
     required TResult Function() success,
+    required TResult Function() completed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +70,7 @@ mixin _$ScreenState {
     TResult Function()? submitting,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function()? completed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +81,7 @@ mixin _$ScreenState {
     TResult Function()? submitting,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function()? completed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -86,6 +93,7 @@ mixin _$ScreenState {
     required TResult Function(Submmiting value) submitting,
     required TResult Function(Error value) error,
     required TResult Function(Success value) success,
+    required TResult Function(Completed value) completed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -96,6 +104,7 @@ mixin _$ScreenState {
     TResult Function(Submmiting value)? submitting,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -106,6 +115,7 @@ mixin _$ScreenState {
     TResult Function(Submmiting value)? submitting,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -171,6 +181,7 @@ class _$Init implements Init {
     required TResult Function() submitting,
     required TResult Function() error,
     required TResult Function() success,
+    required TResult Function() completed,
   }) {
     return init();
   }
@@ -184,6 +195,7 @@ class _$Init implements Init {
     TResult Function()? submitting,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function()? completed,
   }) {
     return init?.call();
   }
@@ -197,6 +209,7 @@ class _$Init implements Init {
     TResult Function()? submitting,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function()? completed,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -214,6 +227,7 @@ class _$Init implements Init {
     required TResult Function(Submmiting value) submitting,
     required TResult Function(Error value) error,
     required TResult Function(Success value) success,
+    required TResult Function(Completed value) completed,
   }) {
     return init(this);
   }
@@ -227,6 +241,7 @@ class _$Init implements Init {
     TResult Function(Submmiting value)? submitting,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
   }) {
     return init?.call(this);
   }
@@ -240,6 +255,7 @@ class _$Init implements Init {
     TResult Function(Submmiting value)? submitting,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -297,6 +313,7 @@ class _$Loading implements Loading {
     required TResult Function() submitting,
     required TResult Function() error,
     required TResult Function() success,
+    required TResult Function() completed,
   }) {
     return loading();
   }
@@ -310,6 +327,7 @@ class _$Loading implements Loading {
     TResult Function()? submitting,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function()? completed,
   }) {
     return loading?.call();
   }
@@ -323,6 +341,7 @@ class _$Loading implements Loading {
     TResult Function()? submitting,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function()? completed,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -340,6 +359,7 @@ class _$Loading implements Loading {
     required TResult Function(Submmiting value) submitting,
     required TResult Function(Error value) error,
     required TResult Function(Success value) success,
+    required TResult Function(Completed value) completed,
   }) {
     return loading(this);
   }
@@ -353,6 +373,7 @@ class _$Loading implements Loading {
     TResult Function(Submmiting value)? submitting,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
   }) {
     return loading?.call(this);
   }
@@ -366,6 +387,7 @@ class _$Loading implements Loading {
     TResult Function(Submmiting value)? submitting,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -423,6 +445,7 @@ class _$Idle implements Idle {
     required TResult Function() submitting,
     required TResult Function() error,
     required TResult Function() success,
+    required TResult Function() completed,
   }) {
     return idle();
   }
@@ -436,6 +459,7 @@ class _$Idle implements Idle {
     TResult Function()? submitting,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function()? completed,
   }) {
     return idle?.call();
   }
@@ -449,6 +473,7 @@ class _$Idle implements Idle {
     TResult Function()? submitting,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function()? completed,
     required TResult orElse(),
   }) {
     if (idle != null) {
@@ -466,6 +491,7 @@ class _$Idle implements Idle {
     required TResult Function(Submmiting value) submitting,
     required TResult Function(Error value) error,
     required TResult Function(Success value) success,
+    required TResult Function(Completed value) completed,
   }) {
     return idle(this);
   }
@@ -479,6 +505,7 @@ class _$Idle implements Idle {
     TResult Function(Submmiting value)? submitting,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
   }) {
     return idle?.call(this);
   }
@@ -492,6 +519,7 @@ class _$Idle implements Idle {
     TResult Function(Submmiting value)? submitting,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
     required TResult orElse(),
   }) {
     if (idle != null) {
@@ -550,6 +578,7 @@ class _$Submmiting implements Submmiting {
     required TResult Function() submitting,
     required TResult Function() error,
     required TResult Function() success,
+    required TResult Function() completed,
   }) {
     return submitting();
   }
@@ -563,6 +592,7 @@ class _$Submmiting implements Submmiting {
     TResult Function()? submitting,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function()? completed,
   }) {
     return submitting?.call();
   }
@@ -576,6 +606,7 @@ class _$Submmiting implements Submmiting {
     TResult Function()? submitting,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function()? completed,
     required TResult orElse(),
   }) {
     if (submitting != null) {
@@ -593,6 +624,7 @@ class _$Submmiting implements Submmiting {
     required TResult Function(Submmiting value) submitting,
     required TResult Function(Error value) error,
     required TResult Function(Success value) success,
+    required TResult Function(Completed value) completed,
   }) {
     return submitting(this);
   }
@@ -606,6 +638,7 @@ class _$Submmiting implements Submmiting {
     TResult Function(Submmiting value)? submitting,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
   }) {
     return submitting?.call(this);
   }
@@ -619,6 +652,7 @@ class _$Submmiting implements Submmiting {
     TResult Function(Submmiting value)? submitting,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
     required TResult orElse(),
   }) {
     if (submitting != null) {
@@ -676,6 +710,7 @@ class _$Error implements Error {
     required TResult Function() submitting,
     required TResult Function() error,
     required TResult Function() success,
+    required TResult Function() completed,
   }) {
     return error();
   }
@@ -689,6 +724,7 @@ class _$Error implements Error {
     TResult Function()? submitting,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function()? completed,
   }) {
     return error?.call();
   }
@@ -702,6 +738,7 @@ class _$Error implements Error {
     TResult Function()? submitting,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function()? completed,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -719,6 +756,7 @@ class _$Error implements Error {
     required TResult Function(Submmiting value) submitting,
     required TResult Function(Error value) error,
     required TResult Function(Success value) success,
+    required TResult Function(Completed value) completed,
   }) {
     return error(this);
   }
@@ -732,6 +770,7 @@ class _$Error implements Error {
     TResult Function(Submmiting value)? submitting,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
   }) {
     return error?.call(this);
   }
@@ -745,6 +784,7 @@ class _$Error implements Error {
     TResult Function(Submmiting value)? submitting,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -802,6 +842,7 @@ class _$Success implements Success {
     required TResult Function() submitting,
     required TResult Function() error,
     required TResult Function() success,
+    required TResult Function() completed,
   }) {
     return success();
   }
@@ -815,6 +856,7 @@ class _$Success implements Success {
     TResult Function()? submitting,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function()? completed,
   }) {
     return success?.call();
   }
@@ -828,6 +870,7 @@ class _$Success implements Success {
     TResult Function()? submitting,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function()? completed,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -845,6 +888,7 @@ class _$Success implements Success {
     required TResult Function(Submmiting value) submitting,
     required TResult Function(Error value) error,
     required TResult Function(Success value) success,
+    required TResult Function(Completed value) completed,
   }) {
     return success(this);
   }
@@ -858,6 +902,7 @@ class _$Success implements Success {
     TResult Function(Submmiting value)? submitting,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
   }) {
     return success?.call(this);
   }
@@ -871,6 +916,7 @@ class _$Success implements Success {
     TResult Function(Submmiting value)? submitting,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -882,4 +928,136 @@ class _$Success implements Success {
 
 abstract class Success implements ScreenState {
   const factory Success() = _$Success;
+}
+
+/// @nodoc
+abstract class $CompletedCopyWith<$Res> {
+  factory $CompletedCopyWith(Completed value, $Res Function(Completed) then) =
+      _$CompletedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$CompletedCopyWithImpl<$Res> extends _$ScreenStateCopyWithImpl<$Res>
+    implements $CompletedCopyWith<$Res> {
+  _$CompletedCopyWithImpl(Completed _value, $Res Function(Completed) _then)
+      : super(_value, (v) => _then(v as Completed));
+
+  @override
+  Completed get _value => super._value as Completed;
+}
+
+/// @nodoc
+
+class _$Completed implements Completed {
+  const _$Completed();
+
+  @override
+  String toString() {
+    return 'ScreenState.completed()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is Completed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() loading,
+    required TResult Function() idle,
+    required TResult Function() submitting,
+    required TResult Function() error,
+    required TResult Function() success,
+    required TResult Function() completed,
+  }) {
+    return completed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function()? idle,
+    TResult Function()? submitting,
+    TResult Function()? error,
+    TResult Function()? success,
+    TResult Function()? completed,
+  }) {
+    return completed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function()? idle,
+    TResult Function()? submitting,
+    TResult Function()? error,
+    TResult Function()? success,
+    TResult Function()? completed,
+    required TResult orElse(),
+  }) {
+    if (completed != null) {
+      return completed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Idle value) idle,
+    required TResult Function(Submmiting value) submitting,
+    required TResult Function(Error value) error,
+    required TResult Function(Success value) success,
+    required TResult Function(Completed value) completed,
+  }) {
+    return completed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(Loading value)? loading,
+    TResult Function(Idle value)? idle,
+    TResult Function(Submmiting value)? submitting,
+    TResult Function(Error value)? error,
+    TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
+  }) {
+    return completed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(Loading value)? loading,
+    TResult Function(Idle value)? idle,
+    TResult Function(Submmiting value)? submitting,
+    TResult Function(Error value)? error,
+    TResult Function(Success value)? success,
+    TResult Function(Completed value)? completed,
+    required TResult orElse(),
+  }) {
+    if (completed != null) {
+      return completed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Completed implements ScreenState {
+  const factory Completed() = _$Completed;
 }

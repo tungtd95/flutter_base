@@ -15,4 +15,6 @@ class ScreenState with _$ScreenState {
   const factory ScreenState.error() = Error;
 
   const factory ScreenState.success() = Success;
+
+  const factory ScreenState.completed() = Completed;
 }

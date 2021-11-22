@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/di/di.dart';
 import 'package:flutter_base/ui/home/home_widget.dart';
 
-void main() {
-  configureDependencies();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
   runApp(const MyApp());
 }
 

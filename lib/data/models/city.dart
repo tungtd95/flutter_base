@@ -1,9 +1,12 @@
+import 'package:floor/floor.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'city.g.dart';
 
 @JsonSerializable()
+@entity
 class City {
+  @PrimaryKey(autoGenerate: true)
   int? id;
   String? name;
   String? country;

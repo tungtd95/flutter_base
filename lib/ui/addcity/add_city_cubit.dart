@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/repo/weather_repo.dart';
 import 'package:flutter_base/ui/addcity/add_city_state.dart';
 import 'package:flutter_base/ui/base/screen_state.dart';
@@ -29,6 +30,7 @@ class AddCityCubit extends Cubit<AddCityState> {
   }
 
   void _searchCity(String query) {
+    emit(state.copyWith(screenState: ScreenState.loading()));
     _weatherRepo.searchCitiesByName(query).then((cities) {
       emit(state.copyWith(
         cities: cities,
@@ -36,7 +38,17 @@ class AddCityCubit extends Cubit<AddCityState> {
       ));
     }, onError: (e) {
       // TODO: handle error
+      emit(state.copyWith(screenState: ScreenState.error()));
     });
+  }
+
+  void addCityToFav(City city) {
+    _weatherRepo.addCity(city).then(
+      (value) {
+        emit(state.copyWith(screenState: ScreenState.completed()));
+      },
+      onError: (e) {},
+    );
   }
 
   void dispose() {
