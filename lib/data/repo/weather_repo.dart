@@ -27,9 +27,9 @@ class WeatherRepo {
     return _weatherDatabase.weatherDao.getCitiesStream();
   }
 
-  Future<void> addCity(City city) {
+  Future<void> addCity(City city) async {
     List<City> currentCity = [];
-    _weatherDatabase.weatherDao.getCitiesOneShot().then(
+    await _weatherDatabase.weatherDao.getCitiesOneShot().then(
       (value) {
         currentCity = value;
       },
