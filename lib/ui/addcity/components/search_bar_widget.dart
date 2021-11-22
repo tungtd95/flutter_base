@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class SearchBarWidget extends StatelessWidget {
   final Function(String) onSearch;
+  final FocusNode? focusNode;
 
-  SearchBarWidget({required this.onSearch});
+  SearchBarWidget({required this.onSearch, this.focusNode});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,7 @@ class SearchBarWidget extends StatelessWidget {
               onChanged: (newText) {
                 onSearch.call(newText);
               },
+              focusNode: focusNode,
             ),
           ),
         ],
