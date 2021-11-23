@@ -3,6 +3,7 @@ import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/models/weather.dart';
 import 'package:flutter_base/data/repo/weather_repo.dart';
 import 'package:flutter_base/ui/base/base_cubit.dart';
+import 'package:flutter_base/ui/base/screen_state.dart';
 import 'package:flutter_base/ui/common/models.dart';
 import 'package:flutter_base/ui/home/home_state.dart';
 import 'package:injectable/injectable.dart';
@@ -28,9 +29,16 @@ class HomeCubit extends BaseCubit<HomeState> {
 
   void _getWeathers(List<City> cities) async {
     if (cities.isEmpty) {
-      emit(state.copyWith(weathers: null));
+      emit(state.copyWith(
+        weathers: null,
+        screenState: ScreenState.success(),
+      ));
       return;
     }
+    emit(state.copyWith(
+      cities: cities,
+      screenState: ScreenState.loading(),
+    ));
     final List<WeatherCity> weathers = [];
     for (var i = 0; i < cities.length; i++) {
       Weather? weather;
@@ -44,7 +52,14 @@ class HomeCubit extends BaseCubit<HomeState> {
         weathers.add(WeatherCity(city: cities[i], weather: weather!));
       }
     }
-    emit(state.copyWith(weathers: weathers));
+    emit(state.copyWith(
+      weathers: weathers,
+      screenState: ScreenState.success(),
+    ));
+  }
+
+  void refreshWeathers() {
+    _getWeathers(state.cities ?? []);
   }
 
   void removeCity(City city) {
