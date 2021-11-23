@@ -25,6 +25,7 @@ class _AddCityWidgetState
 
   @override
   void onStateChange(BuildContext context, AddCityState state) {
+    super.onStateChange(context, state);
     if (state.screenState is Completed) {
       Navigator.of(context).pop();
     }

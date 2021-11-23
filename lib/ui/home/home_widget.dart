@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/ui/addcity/add_city_widget.dart';
 import 'package:flutter_base/ui/base/base_page_widget.dart';
+import 'package:flutter_base/ui/home/components/weather_widget.dart';
 import 'package:flutter_base/ui/home/home_cubit.dart';
 import 'package:flutter_base/ui/home/home_state.dart';
 
@@ -38,9 +39,23 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeState> {
   }
 
   Widget _buildContent(HomeState state) {
-    final cities = state.cities ?? [];
-    return Center(
-      child: Text("cities: ${cities.map((e) => e.name ?? '').join(", ")}"),
+    final weathers = state.weathers ?? [];
+    return ListView.separated(
+      itemBuilder: (context, index) {
+        final weather = weathers[index];
+        return WeatherWidget(
+          city: weather.city,
+          weather: weather.weather,
+          onRemoved: () {
+            cubit.removeCity(weather.city);
+          },
+        );
+      },
+      itemCount: weathers.length,
+      separatorBuilder: (BuildContext context, int index) {
+        return SizedBox(height: 4);
+      },
+      padding: EdgeInsets.symmetric(vertical: 64),
     );
   }
 }

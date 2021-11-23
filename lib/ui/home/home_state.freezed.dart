@@ -19,10 +19,12 @@ class _$HomeStateTearOff {
 
   _HomeState call(
       {ScreenState screenState = const ScreenState.init(),
-      List<City>? cities}) {
+      List<City>? cities,
+      List<WeatherCity>? weathers}) {
     return _HomeState(
       screenState: screenState,
       cities: cities,
+      weathers: weathers,
     );
   }
 }
@@ -34,6 +36,7 @@ const $HomeState = _$HomeStateTearOff();
 mixin _$HomeState {
   ScreenState get screenState => throw _privateConstructorUsedError;
   List<City>? get cities => throw _privateConstructorUsedError;
+  List<WeatherCity>? get weathers => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -44,7 +47,10 @@ mixin _$HomeState {
 abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res>;
-  $Res call({ScreenState screenState, List<City>? cities});
+  $Res call(
+      {ScreenState screenState,
+      List<City>? cities,
+      List<WeatherCity>? weathers});
 
   $ScreenStateCopyWith<$Res> get screenState;
 }
@@ -61,6 +67,7 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
   $Res call({
     Object? screenState = freezed,
     Object? cities = freezed,
+    Object? weathers = freezed,
   }) {
     return _then(_value.copyWith(
       screenState: screenState == freezed
@@ -71,6 +78,10 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
           ? _value.cities
           : cities // ignore: cast_nullable_to_non_nullable
               as List<City>?,
+      weathers: weathers == freezed
+          ? _value.weathers
+          : weathers // ignore: cast_nullable_to_non_nullable
+              as List<WeatherCity>?,
     ));
   }
 
@@ -88,7 +99,10 @@ abstract class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
           _HomeState value, $Res Function(_HomeState) then) =
       __$HomeStateCopyWithImpl<$Res>;
   @override
-  $Res call({ScreenState screenState, List<City>? cities});
+  $Res call(
+      {ScreenState screenState,
+      List<City>? cities,
+      List<WeatherCity>? weathers});
 
   @override
   $ScreenStateCopyWith<$Res> get screenState;
@@ -107,6 +121,7 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
   $Res call({
     Object? screenState = freezed,
     Object? cities = freezed,
+    Object? weathers = freezed,
   }) {
     return _then(_HomeState(
       screenState: screenState == freezed
@@ -117,6 +132,10 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
           ? _value.cities
           : cities // ignore: cast_nullable_to_non_nullable
               as List<City>?,
+      weathers: weathers == freezed
+          ? _value.weathers
+          : weathers // ignore: cast_nullable_to_non_nullable
+              as List<WeatherCity>?,
     ));
   }
 }
@@ -125,17 +144,21 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
 class _$_HomeState implements _HomeState {
   const _$_HomeState(
-      {this.screenState = const ScreenState.init(), this.cities});
+      {this.screenState = const ScreenState.init(),
+      this.cities,
+      this.weathers});
 
   @JsonKey(defaultValue: const ScreenState.init())
   @override
   final ScreenState screenState;
   @override
   final List<City>? cities;
+  @override
+  final List<WeatherCity>? weathers;
 
   @override
   String toString() {
-    return 'HomeState(screenState: $screenState, cities: $cities)';
+    return 'HomeState(screenState: $screenState, cities: $cities, weathers: $weathers)';
   }
 
   @override
@@ -145,12 +168,16 @@ class _$_HomeState implements _HomeState {
             other is _HomeState &&
             (identical(other.screenState, screenState) ||
                 other.screenState == screenState) &&
-            const DeepCollectionEquality().equals(other.cities, cities));
+            const DeepCollectionEquality().equals(other.cities, cities) &&
+            const DeepCollectionEquality().equals(other.weathers, weathers));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, screenState, const DeepCollectionEquality().hash(cities));
+      runtimeType,
+      screenState,
+      const DeepCollectionEquality().hash(cities),
+      const DeepCollectionEquality().hash(weathers));
 
   @JsonKey(ignore: true)
   @override
@@ -159,13 +186,17 @@ class _$_HomeState implements _HomeState {
 }
 
 abstract class _HomeState implements HomeState {
-  const factory _HomeState({ScreenState screenState, List<City>? cities}) =
-      _$_HomeState;
+  const factory _HomeState(
+      {ScreenState screenState,
+      List<City>? cities,
+      List<WeatherCity>? weathers}) = _$_HomeState;
 
   @override
   ScreenState get screenState;
   @override
   List<City>? get cities;
+  @override
+  List<WeatherCity>? get weathers;
   @override
   @JsonKey(ignore: true)
   _$HomeStateCopyWith<_HomeState> get copyWith =>

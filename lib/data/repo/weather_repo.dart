@@ -44,4 +44,8 @@ class WeatherRepo {
       return _weatherDatabase.weatherDao.add(city);
     }
   }
+
+  Future<void> removeCity(City city) {
+    return _weatherDatabase.weatherDao.remove(city);
+  }
 }
