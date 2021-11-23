@@ -5,6 +5,7 @@ part 'weather.g.dart';
 @JsonSerializable()
 class Weather {
   WeatherMain? main;
+  @JsonKey(name: 'weather')
   List<WeatherInfo>? weathers;
 
   Weather({this.main, this.weathers});
@@ -41,4 +42,12 @@ class WeatherInfo {
       _$WeatherInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$WeatherInfoToJson(this);
+
+  String getWeatherIconUrl() {
+    if (icon == null || icon!.isEmpty) {
+      return '';
+    } else {
+      return 'https://openweathermap.org/img/wn/$icon@2x.png';
+    }
+  }
 }

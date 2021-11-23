@@ -1,15 +1,13 @@
-import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/ui/base/screen_state.dart';
 import 'package:flutter_base/ui/common/models.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'home_state.freezed.dart';
+part 'city_details_state.freezed.dart';
 
 @freezed
-class HomeState with _$HomeState {
-  const factory HomeState({
+class CityDetailsState with _$CityDetailsState {
+  const factory CityDetailsState({
     @Default(ScreenState.init()) ScreenState screenState,
-    List<City>? cities,
-    List<WeatherCity>? weathers,
-  }) = _HomeState;
+    WeatherCity? weather,
+  }) = _CityDetailsState;
 }

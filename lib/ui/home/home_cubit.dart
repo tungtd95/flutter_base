@@ -2,6 +2,7 @@ import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/models/weather.dart';
 import 'package:flutter_base/data/repo/weather_repo.dart';
 import 'package:flutter_base/ui/base/base_cubit.dart';
+import 'package:flutter_base/ui/common/models.dart';
 import 'package:flutter_base/ui/home/home_state.dart';
 import 'package:injectable/injectable.dart';
 
@@ -57,11 +58,4 @@ class HomeCubit extends BaseCubit<HomeState> {
   void dispose() {
     // TODO: implement dispose
   }
-}
-
-class WeatherCity {
-  Weather weather;
-  City city;
-
-  WeatherCity({required this.city, required this.weather});
 }

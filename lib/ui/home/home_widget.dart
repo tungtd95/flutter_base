@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/ui/addcity/add_city_widget.dart';
 import 'package:flutter_base/ui/base/base_page_widget.dart';
+import 'package:flutter_base/ui/citydetails/city_details_widget.dart';
 import 'package:flutter_base/ui/home/components/weather_widget.dart';
 import 'package:flutter_base/ui/home/home_cubit.dart';
 import 'package:flutter_base/ui/home/home_state.dart';
@@ -48,6 +49,13 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeState> {
           weather: weather.weather,
           onRemoved: () {
             cubit.removeCity(weather.city);
+          },
+          onSelected: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) {
+                return CityDetailsWidget(city: weather.city);
+              }),
+            );
           },
         );
       },

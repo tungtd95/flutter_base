@@ -12,8 +12,9 @@ import '../data/local/weather_database.dart' as _i6;
 import '../data/repo/weather_repo.dart' as _i5;
 import '../data/service/weather_service.dart' as _i4;
 import '../ui/addcity/add_city_cubit.dart' as _i7;
-import '../ui/home/home_cubit.dart' as _i8;
-import 'data_module.dart' as _i9; // ignore_for_file: unnecessary_lambdas
+import '../ui/citydetails/city_details_cubit.dart' as _i8;
+import '../ui/home/home_cubit.dart' as _i9;
+import 'data_module.dart' as _i10; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -28,9 +29,11 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       weatherDatabase: get<_i6.WeatherDatabase>()));
   gh.factory<_i7.AddCityCubit>(
       () => _i7.AddCityCubit(weatherRepo: get<_i5.WeatherRepo>()));
-  gh.factory<_i8.HomeCubit>(
-      () => _i8.HomeCubit(weatherRepo: get<_i5.WeatherRepo>()));
+  gh.factory<_i8.CityDetailsCubit>(
+      () => _i8.CityDetailsCubit(weatherRepo: get<_i5.WeatherRepo>()));
+  gh.factory<_i9.HomeCubit>(
+      () => _i9.HomeCubit(weatherRepo: get<_i5.WeatherRepo>()));
   return get;
 }
 
-class _$DataModule extends _i9.DataModule {}
+class _$DataModule extends _i10.DataModule {}
