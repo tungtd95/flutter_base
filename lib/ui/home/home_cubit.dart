@@ -1,3 +1,4 @@
+import 'package:flutter_base/data/local/pref.dart';
 import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/models/weather.dart';
 import 'package:flutter_base/data/repo/weather_repo.dart';
@@ -9,9 +10,11 @@ import 'package:injectable/injectable.dart';
 @injectable
 class HomeCubit extends BaseCubit<HomeState> {
   WeatherRepo _weatherRepo;
+  Pref _pref;
 
-  HomeCubit({required WeatherRepo weatherRepo})
+  HomeCubit({required WeatherRepo weatherRepo, required Pref pref})
       : this._weatherRepo = weatherRepo,
+        this._pref = pref,
         super(HomeState());
 
   void subscribeCitiesStream() {
@@ -52,6 +55,14 @@ class HomeCubit extends BaseCubit<HomeState> {
     currentWeathers.removeWhere((element) => element.city == city);
     emit(state.copyWith(cities: currentCities, weathers: currentWeathers));
     _weatherRepo.removeCity(city);
+  }
+
+  bool checkFirstTimeStartUp() {
+    return _pref.isFirstTimeStartUp();
+  }
+
+  void markFirstTimeStartUp() {
+    _pref.markFirstTimeStartUp();
   }
 
   @override

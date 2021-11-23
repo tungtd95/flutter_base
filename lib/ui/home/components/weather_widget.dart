@@ -27,6 +27,7 @@ class WeatherWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(city.getFullName()),
+                SizedBox(height: 6),
                 Text(
                   '${weather.main?.temp ?? 0} Fahrenheit',
                   style: TextStyle(color: Colors.black45),

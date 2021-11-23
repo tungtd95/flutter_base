@@ -30,6 +30,8 @@ dependencies:
   json_annotation: ^4.3.0
   freezed: ^1.0.0
   rxdart: ^0.27.3
+  rive: ^0.7.33
+  shared_preferences: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -41,3 +43,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/anim/

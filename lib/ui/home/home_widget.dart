@@ -5,6 +5,7 @@ import 'package:flutter_base/ui/citydetails/city_details_widget.dart';
 import 'package:flutter_base/ui/home/components/weather_widget.dart';
 import 'package:flutter_base/ui/home/home_cubit.dart';
 import 'package:flutter_base/ui/home/home_state.dart';
+import 'package:flutter_base/ui/splash/splash_widget.dart';
 
 class HomeWidget extends StatefulWidget {
   @override
@@ -18,6 +19,12 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeState> {
   void onViewCreated() {
     super.onViewCreated();
     cubit.subscribeCitiesStream();
+    if (cubit.checkFirstTimeStartUp()) {
+      cubit.markFirstTimeStartUp();
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+        return SplashWidget();
+      }));
+    }
   }
 
   @override
