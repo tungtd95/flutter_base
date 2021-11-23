@@ -33,8 +33,10 @@ class _$ScreenStateTearOff {
     return const Submmiting();
   }
 
-  Error error() {
-    return const Error();
+  Error error(String message) {
+    return Error(
+      message,
+    );
   }
 
   Success success() {
@@ -57,7 +59,7 @@ mixin _$ScreenState {
     required TResult Function() loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function() error,
+    required TResult Function(String message) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) =>
@@ -68,7 +70,7 @@ mixin _$ScreenState {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) =>
@@ -79,7 +81,7 @@ mixin _$ScreenState {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
@@ -179,7 +181,7 @@ class _$Init implements Init {
     required TResult Function() loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function() error,
+    required TResult Function(String message) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) {
@@ -193,7 +195,7 @@ class _$Init implements Init {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) {
@@ -207,7 +209,7 @@ class _$Init implements Init {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
@@ -311,7 +313,7 @@ class _$Loading implements Loading {
     required TResult Function() loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function() error,
+    required TResult Function(String message) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) {
@@ -325,7 +327,7 @@ class _$Loading implements Loading {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) {
@@ -339,7 +341,7 @@ class _$Loading implements Loading {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
@@ -443,7 +445,7 @@ class _$Idle implements Idle {
     required TResult Function() loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function() error,
+    required TResult Function(String message) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) {
@@ -457,7 +459,7 @@ class _$Idle implements Idle {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) {
@@ -471,7 +473,7 @@ class _$Idle implements Idle {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
@@ -576,7 +578,7 @@ class _$Submmiting implements Submmiting {
     required TResult Function() loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function() error,
+    required TResult Function(String message) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) {
@@ -590,7 +592,7 @@ class _$Submmiting implements Submmiting {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) {
@@ -604,7 +606,7 @@ class _$Submmiting implements Submmiting {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
@@ -670,6 +672,7 @@ abstract class Submmiting implements ScreenState {
 abstract class $ErrorCopyWith<$Res> {
   factory $ErrorCopyWith(Error value, $Res Function(Error) then) =
       _$ErrorCopyWithImpl<$Res>;
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -680,26 +683,48 @@ class _$ErrorCopyWithImpl<$Res> extends _$ScreenStateCopyWithImpl<$Res>
 
   @override
   Error get _value => super._value as Error;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(Error(
+      message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$Error implements Error {
-  const _$Error();
+  const _$Error(this.message);
+
+  @override
+  final String message;
 
   @override
   String toString() {
-    return 'ScreenState.error()';
+    return 'ScreenState.error(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is Error);
+        (other.runtimeType == runtimeType &&
+            other is Error &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  $ErrorCopyWith<Error> get copyWith =>
+      _$ErrorCopyWithImpl<Error>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -708,11 +733,11 @@ class _$Error implements Error {
     required TResult Function() loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function() error,
+    required TResult Function(String message) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) {
-    return error();
+    return error(message);
   }
 
   @override
@@ -722,11 +747,11 @@ class _$Error implements Error {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) {
-    return error?.call();
+    return error?.call(message);
   }
 
   @override
@@ -736,13 +761,13 @@ class _$Error implements Error {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error();
+      return error(message);
     }
     return orElse();
   }
@@ -795,7 +820,11 @@ class _$Error implements Error {
 }
 
 abstract class Error implements ScreenState {
-  const factory Error() = _$Error;
+  const factory Error(String message) = _$Error;
+
+  String get message;
+  @JsonKey(ignore: true)
+  $ErrorCopyWith<Error> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -840,7 +869,7 @@ class _$Success implements Success {
     required TResult Function() loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function() error,
+    required TResult Function(String message) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) {
@@ -854,7 +883,7 @@ class _$Success implements Success {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) {
@@ -868,7 +897,7 @@ class _$Success implements Success {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
@@ -972,7 +1001,7 @@ class _$Completed implements Completed {
     required TResult Function() loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function() error,
+    required TResult Function(String message) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) {
@@ -986,7 +1015,7 @@ class _$Completed implements Completed {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) {
@@ -1000,7 +1029,7 @@ class _$Completed implements Completed {
     TResult Function()? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function()? error,
+    TResult Function(String message)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),

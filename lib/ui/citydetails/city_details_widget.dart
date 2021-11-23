@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/models/weather.dart';
 import 'package:flutter_base/ui/base/base_page_widget.dart';
+import 'package:flutter_base/ui/base/screen_state.dart';
 import 'package:flutter_base/ui/citydetails/city_details_cubit.dart';
 import 'package:flutter_base/ui/citydetails/city_details_state.dart';
 import 'package:flutter_base/ui/common/models.dart';
@@ -23,6 +24,15 @@ class _CityDetailsWidgetState extends BasePageState<CityDetailsWidget,
   void onViewCreated() {
     super.onViewCreated();
     cubit.getWeatherByCity(widget.city);
+  }
+
+  @override
+  void onStateChange(BuildContext context, CityDetailsState state) {
+    super.onStateChange(context, state);
+    final screenState = state.screenState;
+    if (screenState is Error) {
+      showSnackMessage(screenState.message);
+    }
   }
 
   @override

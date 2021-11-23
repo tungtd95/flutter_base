@@ -1,4 +1,5 @@
 import 'package:flutter_base/data/service/weather_service.dart';
+import 'package:flutter_base/data/utils/exception_handler.dart';
 import 'package:flutter_base/di/di.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dio/dio.dart';
@@ -13,6 +14,7 @@ abstract class DataModule {
       requestHeader: false,
       responseHeader: false,
     ));
+    dio.interceptors.add(ErrorHandlerInterceptor());
     return dio;
   }
 
@@ -22,5 +24,12 @@ abstract class DataModule {
       getIt<Dio>(),
       baseUrl: "https://api.openweathermap.org",
     );
+  }
+}
+
+class ErrorHandlerInterceptor extends Interceptor {
+  @override
+  void onError(DioError err, ErrorInterceptorHandler handler) {
+    getIt.get<ErrorHandler>().dioErrorParser(err);
   }
 }

@@ -12,7 +12,7 @@ class ScreenState with _$ScreenState {
 
   const factory ScreenState.submitting() = Submmiting;
 
-  const factory ScreenState.error() = Error;
+  const factory ScreenState.error(String message) = Error;
 
   const factory ScreenState.success() = Success;
 

@@ -26,8 +26,11 @@ class _AddCityWidgetState
   @override
   void onStateChange(BuildContext context, AddCityState state) {
     super.onStateChange(context, state);
-    if (state.screenState is Completed) {
+    final screenState = state.screenState;
+    if (screenState is Completed) {
       Navigator.of(context).pop();
+    } else if (screenState is Error) {
+      showSnackMessage(screenState.message);
     }
   }
 

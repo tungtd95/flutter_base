@@ -33,6 +33,13 @@ abstract class BasePageState<W extends StatefulWidget, C extends BaseCubit<S>,
 
   Widget buildPage(BuildContext context, S state);
 
+  void showSnackMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+      duration: Duration(milliseconds: 1000),
+    ));
+  }
+
   @override
   void dispose() {
     cubit.dispose();
