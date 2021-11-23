@@ -6,6 +6,8 @@ import 'package:flutter_base/ui/base/base_cubit.dart';
 import 'package:flutter_base/ui/common/models.dart';
 import 'package:flutter_base/ui/home/home_state.dart';
 import 'package:injectable/injectable.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:rxdart/src/transformers/backpressure/debounce.dart';
 
 @injectable
 class HomeCubit extends BaseCubit<HomeState> {
@@ -18,13 +20,10 @@ class HomeCubit extends BaseCubit<HomeState> {
         super(HomeState());
 
   void subscribeCitiesStream() {
-    _weatherRepo.getCitiesStream().listen(
-      (event) {
-        emit(state.copyWith(cities: event));
-        _getWeathers(event);
-      },
-      onError: (e) {},
-    );
+    _weatherRepo
+        .getCitiesStream()
+        .debounceTime(Duration(milliseconds: 500))
+        .listen((event) => _getWeathers(event));
   }
 
   void _getWeathers(List<City> cities) async {
