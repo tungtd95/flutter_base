@@ -1,0 +1,58 @@
+---
+format_version: '11'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: flutter
+trigger_map:
+  - push_branch: master
+    workflow: android
+workflows:
+  android:
+    steps:
+      - activate-ssh-key@4:
+          run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+      - git-clone@6: {}
+      - flutter-installer@0:
+          inputs:
+            - is_update: 'false'
+      - cache-pull@2: {}
+      - flutter-build@0:
+          inputs:
+            - android_additional_params: "--dart-define=Env=dev --release"
+            - platform: android
+      - deploy-to-bitrise-io@2: {}
+      - create-install-page-qr-code@1: {}
+      - slack@3:
+          inputs:
+            - image_url: "$BITRISE_PUBLIC_INSTALL_PAGE_QR_CODE_IMAGE_URL"
+            - pretext: "*Build ANDROID-DEV Succeeded!*"
+            - channel: "#flutter-build"
+            - text: "@tungtd95"
+            - from_username: Sekiro BOT
+            - icon_url: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR99UzpCE5djM64xEfK-XfVP2Dy5G1bPVIlyg&usqp=CAU
+            - author_name: ''
+            - footer: Scan *QRCode* or click *Install Page* to download
+            - footer_icon: https://upload.wikimedia.org/wikipedia/commons/a/a0/APK_format_icon.png
+            - fields: ''
+            - buttons: |
+                View Build|${BITRISE_BUILD_URL}
+                Install Page|${BITRISE_PUBLIC_INSTALL_PAGE_URL}
+            - color: "#0bde4a"
+            - webhook_url: "$SLACK_WEBHOOK"
+      - cache-push@2: {}
+meta:
+  bitrise.io:
+    stack: osx-xcode-13.1.x
+app:
+  envs:
+    - opts:
+        is_expand: false
+      BITRISE_FLUTTER_PROJECT_LOCATION: "."
+    - opts:
+        is_expand: false
+      BITRISE_PROJECT_PATH: ios/Runner.xcworkspace
+    - opts:
+        is_expand: false
+      BITRISE_SCHEME: Runner
+    - opts:
+        is_expand: false
+      BITRISE_DISTRIBUTION_METHOD: ad-hoc
