@@ -28,11 +28,11 @@ dependencies:
   # others
   json_serializable: ^6.0.1
   json_annotation: ^4.3.0
-  freezed: ^1.0.0
   rxdart: ^0.27.3
   rive: ^0.7.33
   shared_preferences: ^2.0.9
   pull_to_refresh: ^2.0.0
+  copy_with_extension: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -41,6 +41,7 @@ dev_dependencies:
   build_runner: any
   injectable_generator: any
   floor_generator: ^1.2.0
+  copy_with_extension_gen: ^2.0.3
 
 flutter:
   uses-material-design: true

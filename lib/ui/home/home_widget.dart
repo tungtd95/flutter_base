@@ -35,8 +35,12 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
   @override
   void onDataChange(BuildContext context, HomeData data) {
     super.onDataChange(context, data);
-    if (!(data.status is Loading)) {
+    final status = data.status;
+    if (!(status is Loading)) {
       _refreshController.refreshCompleted();
+    }
+    if (status is Error) {
+      showSnackMessage(status.err.message);
     }
   }
 

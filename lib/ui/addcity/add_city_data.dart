@@ -1,13 +1,16 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter_base/data/models/city.dart';
+import 'package:flutter_base/ui/base/base_data.dart';
 import 'package:flutter_base/ui/base/status.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'add_city_data.freezed.dart';
+part 'add_city_data.g.dart';
 
-@freezed
-class AddCityData with _$AddCityData {
-  const factory AddCityData({
-    @Default(Status.init()) Status status,
-    List<City>? cities,
-  }) = _AddCityData;
+@CopyWith()
+class AddCityData extends BaseData {
+  List<City>? cities;
+
+  AddCityData({
+    Status? status,
+    this.cities,
+  }) : super(status ?? Init());
 }

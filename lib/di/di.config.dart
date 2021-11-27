@@ -40,7 +40,9 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       weatherRepo: get<_i8.WeatherRepo>(),
       errorHandler: get<_i4.ErrorHandler>()));
   gh.factory<_i12.HomeCubit>(() => _i12.HomeCubit(
-      weatherRepo: get<_i8.WeatherRepo>(), pref: get<_i5.Pref>()));
+      weatherRepo: get<_i8.WeatherRepo>(),
+      pref: get<_i5.Pref>(),
+      errorHandler: get<_i4.ErrorHandler>()));
   return get;
 }
 

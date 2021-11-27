@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/di/di.dart';
 import 'package:flutter_base/ui/base/base_cubit.dart';
+import 'package:flutter_base/ui/base/base_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class BasePageState<W extends StatefulWidget, C extends BaseCubit<D>,
-    D> extends State<W> {
+    D extends BaseData> extends State<W> {
   C cubit = getIt.get();
 
   @override

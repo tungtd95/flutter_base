@@ -31,7 +31,7 @@ class _CityDetailsWidgetState extends BasePageState<CityDetailsWidget,
     super.onDataChange(context, data);
     final status = data.status;
     if (status is Error) {
-      showSnackMessage(status.error.message);
+      showSnackMessage(status.err.message);
     }
   }
 
