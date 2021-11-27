@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/ui/addcity/add_city_cubit.dart';
-import 'package:flutter_base/ui/addcity/add_city_state.dart';
+import 'package:flutter_base/ui/addcity/add_city_data.dart';
 import 'package:flutter_base/ui/addcity/components/city_widget.dart';
 import 'package:flutter_base/ui/addcity/components/search_bar_widget.dart';
 import 'package:flutter_base/ui/base/base_page_widget.dart';
@@ -14,7 +14,7 @@ class AddCityWidget extends StatefulWidget {
 }
 
 class _AddCityWidgetState
-    extends BasePageState<AddCityWidget, AddCityCubit, AddCityState> {
+    extends BasePageState<AddCityWidget, AddCityCubit, AddCityData> {
   FocusNode _searchFocusNode = FocusNode();
 
   @override
@@ -24,9 +24,9 @@ class _AddCityWidgetState
   }
 
   @override
-  void onStateChange(BuildContext context, AddCityState state) {
-    super.onStateChange(context, state);
-    final status = state.status;
+  void onDataChange(BuildContext context, AddCityData data) {
+    super.onDataChange(context, data);
+    final status = data.status;
     if (status is Completed) {
       Navigator.of(context).pop();
     } else if (status is Error) {
@@ -35,7 +35,7 @@ class _AddCityWidgetState
   }
 
   @override
-  Widget buildPage(BuildContext context, AddCityState state) {
+  Widget buildPage(BuildContext context, AddCityData data) {
     return Scaffold(
       body: Column(
         children: [
@@ -44,20 +44,20 @@ class _AddCityWidgetState
             child: SearchBarWidget(
               onSearch: cubit.searchCity,
               focusNode: _searchFocusNode,
-              loading: state.status is Loading,
+              loading: data.status is Loading,
             ),
             margin: EdgeInsets.symmetric(horizontal: 16),
           ),
           Expanded(
-            child: _buildCities(state),
+            child: _buildCities(data),
           )
         ],
       ),
     );
   }
 
-  Widget _buildCities(AddCityState state) {
-    final cities = state.cities ?? [];
+  Widget _buildCities(AddCityData data) {
+    final cities = data.cities ?? [];
     if (cities.isEmpty) return Container();
     return ListView.separated(
       itemBuilder: (context, index) {

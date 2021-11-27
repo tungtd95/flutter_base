@@ -5,20 +5,20 @@ import 'package:flutter_base/data/repo/weather_repo.dart';
 import 'package:flutter_base/ui/base/base_cubit.dart';
 import 'package:flutter_base/ui/base/status.dart';
 import 'package:flutter_base/ui/common/models.dart';
-import 'package:flutter_base/ui/home/home_state.dart';
+import 'package:flutter_base/ui/home/home_data.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/src/transformers/backpressure/debounce.dart';
 
 @injectable
-class HomeCubit extends BaseCubit<HomeState> {
+class HomeCubit extends BaseCubit<HomeData> {
   WeatherRepo _weatherRepo;
   Pref _pref;
 
   HomeCubit({required WeatherRepo weatherRepo, required Pref pref})
       : this._weatherRepo = weatherRepo,
         this._pref = pref,
-        super(HomeState());
+        super(HomeData());
 
   void subscribeCitiesStream() {
     _weatherRepo

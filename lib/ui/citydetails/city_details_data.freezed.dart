@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'city_details_state.dart';
+part of 'city_details_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$CityDetailsStateTearOff {
-  const _$CityDetailsStateTearOff();
+class _$CityDetailsDataTearOff {
+  const _$CityDetailsDataTearOff();
 
-  _CityDetailsState call(
+  _CityDetailsData call(
       {Status status = const Status.init(), WeatherCity? weather}) {
-    return _CityDetailsState(
+    return _CityDetailsData(
       status: status,
       weather: weather,
     );
@@ -27,36 +27,36 @@ class _$CityDetailsStateTearOff {
 }
 
 /// @nodoc
-const $CityDetailsState = _$CityDetailsStateTearOff();
+const $CityDetailsData = _$CityDetailsDataTearOff();
 
 /// @nodoc
-mixin _$CityDetailsState {
+mixin _$CityDetailsData {
   Status get status => throw _privateConstructorUsedError;
   WeatherCity? get weather => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $CityDetailsStateCopyWith<CityDetailsState> get copyWith =>
+  $CityDetailsDataCopyWith<CityDetailsData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CityDetailsStateCopyWith<$Res> {
-  factory $CityDetailsStateCopyWith(
-          CityDetailsState value, $Res Function(CityDetailsState) then) =
-      _$CityDetailsStateCopyWithImpl<$Res>;
+abstract class $CityDetailsDataCopyWith<$Res> {
+  factory $CityDetailsDataCopyWith(
+          CityDetailsData value, $Res Function(CityDetailsData) then) =
+      _$CityDetailsDataCopyWithImpl<$Res>;
   $Res call({Status status, WeatherCity? weather});
 
   $StatusCopyWith<$Res> get status;
 }
 
 /// @nodoc
-class _$CityDetailsStateCopyWithImpl<$Res>
-    implements $CityDetailsStateCopyWith<$Res> {
-  _$CityDetailsStateCopyWithImpl(this._value, this._then);
+class _$CityDetailsDataCopyWithImpl<$Res>
+    implements $CityDetailsDataCopyWith<$Res> {
+  _$CityDetailsDataCopyWithImpl(this._value, this._then);
 
-  final CityDetailsState _value;
+  final CityDetailsData _value;
   // ignore: unused_field
-  final $Res Function(CityDetailsState) _then;
+  final $Res Function(CityDetailsData) _then;
 
   @override
   $Res call({
@@ -84,11 +84,11 @@ class _$CityDetailsStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$CityDetailsStateCopyWith<$Res>
-    implements $CityDetailsStateCopyWith<$Res> {
-  factory _$CityDetailsStateCopyWith(
-          _CityDetailsState value, $Res Function(_CityDetailsState) then) =
-      __$CityDetailsStateCopyWithImpl<$Res>;
+abstract class _$CityDetailsDataCopyWith<$Res>
+    implements $CityDetailsDataCopyWith<$Res> {
+  factory _$CityDetailsDataCopyWith(
+          _CityDetailsData value, $Res Function(_CityDetailsData) then) =
+      __$CityDetailsDataCopyWithImpl<$Res>;
   @override
   $Res call({Status status, WeatherCity? weather});
 
@@ -97,22 +97,22 @@ abstract class _$CityDetailsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$CityDetailsStateCopyWithImpl<$Res>
-    extends _$CityDetailsStateCopyWithImpl<$Res>
-    implements _$CityDetailsStateCopyWith<$Res> {
-  __$CityDetailsStateCopyWithImpl(
-      _CityDetailsState _value, $Res Function(_CityDetailsState) _then)
-      : super(_value, (v) => _then(v as _CityDetailsState));
+class __$CityDetailsDataCopyWithImpl<$Res>
+    extends _$CityDetailsDataCopyWithImpl<$Res>
+    implements _$CityDetailsDataCopyWith<$Res> {
+  __$CityDetailsDataCopyWithImpl(
+      _CityDetailsData _value, $Res Function(_CityDetailsData) _then)
+      : super(_value, (v) => _then(v as _CityDetailsData));
 
   @override
-  _CityDetailsState get _value => super._value as _CityDetailsState;
+  _CityDetailsData get _value => super._value as _CityDetailsData;
 
   @override
   $Res call({
     Object? status = freezed,
     Object? weather = freezed,
   }) {
-    return _then(_CityDetailsState(
+    return _then(_CityDetailsData(
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -127,8 +127,8 @@ class __$CityDetailsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CityDetailsState implements _CityDetailsState {
-  const _$_CityDetailsState({this.status = const Status.init(), this.weather});
+class _$_CityDetailsData implements _CityDetailsData {
+  const _$_CityDetailsData({this.status = const Status.init(), this.weather});
 
   @JsonKey(defaultValue: const Status.init())
   @override
@@ -138,14 +138,14 @@ class _$_CityDetailsState implements _CityDetailsState {
 
   @override
   String toString() {
-    return 'CityDetailsState(status: $status, weather: $weather)';
+    return 'CityDetailsData(status: $status, weather: $weather)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _CityDetailsState &&
+            other is _CityDetailsData &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.weather, weather) || other.weather == weather));
   }
@@ -155,13 +155,13 @@ class _$_CityDetailsState implements _CityDetailsState {
 
   @JsonKey(ignore: true)
   @override
-  _$CityDetailsStateCopyWith<_CityDetailsState> get copyWith =>
-      __$CityDetailsStateCopyWithImpl<_CityDetailsState>(this, _$identity);
+  _$CityDetailsDataCopyWith<_CityDetailsData> get copyWith =>
+      __$CityDetailsDataCopyWithImpl<_CityDetailsData>(this, _$identity);
 }
 
-abstract class _CityDetailsState implements CityDetailsState {
-  const factory _CityDetailsState({Status status, WeatherCity? weather}) =
-      _$_CityDetailsState;
+abstract class _CityDetailsData implements CityDetailsData {
+  const factory _CityDetailsData({Status status, WeatherCity? weather}) =
+      _$_CityDetailsData;
 
   @override
   Status get status;
@@ -169,6 +169,6 @@ abstract class _CityDetailsState implements CityDetailsState {
   WeatherCity? get weather;
   @override
   @JsonKey(ignore: true)
-  _$CityDetailsStateCopyWith<_CityDetailsState> get copyWith =>
+  _$CityDetailsDataCopyWith<_CityDetailsData> get copyWith =>
       throw _privateConstructorUsedError;
 }

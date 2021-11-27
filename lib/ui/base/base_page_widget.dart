@@ -3,8 +3,8 @@ import 'package:flutter_base/di/di.dart';
 import 'package:flutter_base/ui/base/base_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-abstract class BasePageState<W extends StatefulWidget, C extends BaseCubit<S>,
-    S> extends State<W> {
+abstract class BasePageState<W extends StatefulWidget, C extends BaseCubit<D>,
+    D> extends State<W> {
   C cubit = getIt.get();
 
   @override
@@ -17,21 +17,21 @@ abstract class BasePageState<W extends StatefulWidget, C extends BaseCubit<S>,
 
   void onViewCreated() {}
 
-  void onStateChange(BuildContext context, S state) {}
+  void onDataChange(BuildContext context, D data) {}
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<C, S>(
+    return BlocListener<C, D>(
       bloc: cubit,
-      listener: onStateChange,
-      child: BlocBuilder<C, S>(
+      listener: onDataChange,
+      child: BlocBuilder<C, D>(
         bloc: cubit,
         builder: buildPage,
       ),
     );
   }
 
-  Widget buildPage(BuildContext context, S state);
+  Widget buildPage(BuildContext context, D data);
 
   void showSnackMessage(String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(

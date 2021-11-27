@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'add_city_state.dart';
+part of 'home_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,53 +14,57 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$AddCityStateTearOff {
-  const _$AddCityStateTearOff();
+class _$HomeDataTearOff {
+  const _$HomeDataTearOff();
 
-  _AddCityState call(
-      {Status status = const Status.init(), List<City>? cities}) {
-    return _AddCityState(
+  _HomeData call(
+      {Status status = const Status.init(),
+      List<City>? cities,
+      List<WeatherCity>? weathers}) {
+    return _HomeData(
       status: status,
       cities: cities,
+      weathers: weathers,
     );
   }
 }
 
 /// @nodoc
-const $AddCityState = _$AddCityStateTearOff();
+const $HomeData = _$HomeDataTearOff();
 
 /// @nodoc
-mixin _$AddCityState {
+mixin _$HomeData {
   Status get status => throw _privateConstructorUsedError;
   List<City>? get cities => throw _privateConstructorUsedError;
+  List<WeatherCity>? get weathers => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $AddCityStateCopyWith<AddCityState> get copyWith =>
+  $HomeDataCopyWith<HomeData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AddCityStateCopyWith<$Res> {
-  factory $AddCityStateCopyWith(
-          AddCityState value, $Res Function(AddCityState) then) =
-      _$AddCityStateCopyWithImpl<$Res>;
-  $Res call({Status status, List<City>? cities});
+abstract class $HomeDataCopyWith<$Res> {
+  factory $HomeDataCopyWith(HomeData value, $Res Function(HomeData) then) =
+      _$HomeDataCopyWithImpl<$Res>;
+  $Res call({Status status, List<City>? cities, List<WeatherCity>? weathers});
 
   $StatusCopyWith<$Res> get status;
 }
 
 /// @nodoc
-class _$AddCityStateCopyWithImpl<$Res> implements $AddCityStateCopyWith<$Res> {
-  _$AddCityStateCopyWithImpl(this._value, this._then);
+class _$HomeDataCopyWithImpl<$Res> implements $HomeDataCopyWith<$Res> {
+  _$HomeDataCopyWithImpl(this._value, this._then);
 
-  final AddCityState _value;
+  final HomeData _value;
   // ignore: unused_field
-  final $Res Function(AddCityState) _then;
+  final $Res Function(HomeData) _then;
 
   @override
   $Res call({
     Object? status = freezed,
     Object? cities = freezed,
+    Object? weathers = freezed,
   }) {
     return _then(_value.copyWith(
       status: status == freezed
@@ -71,6 +75,10 @@ class _$AddCityStateCopyWithImpl<$Res> implements $AddCityStateCopyWith<$Res> {
           ? _value.cities
           : cities // ignore: cast_nullable_to_non_nullable
               as List<City>?,
+      weathers: weathers == freezed
+          ? _value.weathers
+          : weathers // ignore: cast_nullable_to_non_nullable
+              as List<WeatherCity>?,
     ));
   }
 
@@ -83,34 +91,32 @@ class _$AddCityStateCopyWithImpl<$Res> implements $AddCityStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$AddCityStateCopyWith<$Res>
-    implements $AddCityStateCopyWith<$Res> {
-  factory _$AddCityStateCopyWith(
-          _AddCityState value, $Res Function(_AddCityState) then) =
-      __$AddCityStateCopyWithImpl<$Res>;
+abstract class _$HomeDataCopyWith<$Res> implements $HomeDataCopyWith<$Res> {
+  factory _$HomeDataCopyWith(_HomeData value, $Res Function(_HomeData) then) =
+      __$HomeDataCopyWithImpl<$Res>;
   @override
-  $Res call({Status status, List<City>? cities});
+  $Res call({Status status, List<City>? cities, List<WeatherCity>? weathers});
 
   @override
   $StatusCopyWith<$Res> get status;
 }
 
 /// @nodoc
-class __$AddCityStateCopyWithImpl<$Res> extends _$AddCityStateCopyWithImpl<$Res>
-    implements _$AddCityStateCopyWith<$Res> {
-  __$AddCityStateCopyWithImpl(
-      _AddCityState _value, $Res Function(_AddCityState) _then)
-      : super(_value, (v) => _then(v as _AddCityState));
+class __$HomeDataCopyWithImpl<$Res> extends _$HomeDataCopyWithImpl<$Res>
+    implements _$HomeDataCopyWith<$Res> {
+  __$HomeDataCopyWithImpl(_HomeData _value, $Res Function(_HomeData) _then)
+      : super(_value, (v) => _then(v as _HomeData));
 
   @override
-  _AddCityState get _value => super._value as _AddCityState;
+  _HomeData get _value => super._value as _HomeData;
 
   @override
   $Res call({
     Object? status = freezed,
     Object? cities = freezed,
+    Object? weathers = freezed,
   }) {
-    return _then(_AddCityState(
+    return _then(_HomeData(
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -119,55 +125,70 @@ class __$AddCityStateCopyWithImpl<$Res> extends _$AddCityStateCopyWithImpl<$Res>
           ? _value.cities
           : cities // ignore: cast_nullable_to_non_nullable
               as List<City>?,
+      weathers: weathers == freezed
+          ? _value.weathers
+          : weathers // ignore: cast_nullable_to_non_nullable
+              as List<WeatherCity>?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_AddCityState implements _AddCityState {
-  const _$_AddCityState({this.status = const Status.init(), this.cities});
+class _$_HomeData implements _HomeData {
+  const _$_HomeData(
+      {this.status = const Status.init(), this.cities, this.weathers});
 
   @JsonKey(defaultValue: const Status.init())
   @override
   final Status status;
   @override
   final List<City>? cities;
+  @override
+  final List<WeatherCity>? weathers;
 
   @override
   String toString() {
-    return 'AddCityState(status: $status, cities: $cities)';
+    return 'HomeData(status: $status, cities: $cities, weathers: $weathers)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AddCityState &&
+            other is _HomeData &&
             (identical(other.status, status) || other.status == status) &&
-            const DeepCollectionEquality().equals(other.cities, cities));
+            const DeepCollectionEquality().equals(other.cities, cities) &&
+            const DeepCollectionEquality().equals(other.weathers, weathers));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, status, const DeepCollectionEquality().hash(cities));
+      runtimeType,
+      status,
+      const DeepCollectionEquality().hash(cities),
+      const DeepCollectionEquality().hash(weathers));
 
   @JsonKey(ignore: true)
   @override
-  _$AddCityStateCopyWith<_AddCityState> get copyWith =>
-      __$AddCityStateCopyWithImpl<_AddCityState>(this, _$identity);
+  _$HomeDataCopyWith<_HomeData> get copyWith =>
+      __$HomeDataCopyWithImpl<_HomeData>(this, _$identity);
 }
 
-abstract class _AddCityState implements AddCityState {
-  const factory _AddCityState({Status status, List<City>? cities}) =
-      _$_AddCityState;
+abstract class _HomeData implements HomeData {
+  const factory _HomeData(
+      {Status status,
+      List<City>? cities,
+      List<WeatherCity>? weathers}) = _$_HomeData;
 
   @override
   Status get status;
   @override
   List<City>? get cities;
   @override
+  List<WeatherCity>? get weathers;
+  @override
   @JsonKey(ignore: true)
-  _$AddCityStateCopyWith<_AddCityState> get copyWith =>
+  _$HomeDataCopyWith<_HomeData> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -5,7 +5,7 @@ import 'package:flutter_base/ui/base/status.dart';
 import 'package:flutter_base/ui/citydetails/city_details_widget.dart';
 import 'package:flutter_base/ui/home/components/weather_widget.dart';
 import 'package:flutter_base/ui/home/home_cubit.dart';
-import 'package:flutter_base/ui/home/home_state.dart';
+import 'package:flutter_base/ui/home/home_data.dart';
 import 'package:flutter_base/ui/splash/splash_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -16,7 +16,7 @@ class HomeWidget extends StatefulWidget {
   }
 }
 
-class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeState> {
+class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
@@ -33,15 +33,15 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeState> {
   }
 
   @override
-  void onStateChange(BuildContext context, HomeState state) {
-    super.onStateChange(context, state);
-    if (!(state.status is Loading)) {
+  void onDataChange(BuildContext context, HomeData data) {
+    super.onDataChange(context, data);
+    if (!(data.status is Loading)) {
       _refreshController.refreshCompleted();
     }
   }
 
   @override
-  Widget buildPage(BuildContext context, HomeState state) {
+  Widget buildPage(BuildContext context, HomeData data) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -55,12 +55,12 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeState> {
         },
         child: Icon(Icons.add),
       ),
-      body: _buildContent(state),
+      body: _buildContent(data),
     );
   }
 
-  Widget _buildContent(HomeState state) {
-    final weathers = state.weathers ?? [];
+  Widget _buildContent(HomeData data) {
+    final weathers = data.weathers ?? [];
     return SmartRefresher(
       controller: _refreshController,
       enablePullDown: true,

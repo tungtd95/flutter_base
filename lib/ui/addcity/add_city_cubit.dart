@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/repo/weather_repo.dart';
 import 'package:flutter_base/data/utils/exception_handler.dart';
-import 'package:flutter_base/ui/addcity/add_city_state.dart';
+import 'package:flutter_base/ui/addcity/add_city_data.dart';
 import 'package:flutter_base/ui/base/base_cubit.dart';
 import 'package:flutter_base/ui/base/status.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
 @injectable
-class AddCityCubit extends BaseCubit<AddCityState> {
+class AddCityCubit extends BaseCubit<AddCityData> {
   WeatherRepo _weatherRepo;
   ErrorHandler _errorHandler;
   final _queryController = StreamController<String>();
@@ -20,7 +20,7 @@ class AddCityCubit extends BaseCubit<AddCityState> {
     required ErrorHandler errorHandler,
   })  : this._weatherRepo = weatherRepo,
         this._errorHandler = errorHandler,
-        super(AddCityState()) {
+        super(AddCityData()) {
     _queryController.stream
         .debounce((_) => TimerStream(true, Duration(milliseconds: 300)))
         .listen(_searchCity);

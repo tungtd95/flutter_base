@@ -4,7 +4,7 @@ import 'package:flutter_base/data/models/weather.dart';
 import 'package:flutter_base/ui/base/base_page_widget.dart';
 import 'package:flutter_base/ui/base/status.dart';
 import 'package:flutter_base/ui/citydetails/city_details_cubit.dart';
-import 'package:flutter_base/ui/citydetails/city_details_state.dart';
+import 'package:flutter_base/ui/citydetails/city_details_data.dart';
 import 'package:flutter_base/ui/common/models.dart';
 
 class CityDetailsWidget extends StatefulWidget {
@@ -19,7 +19,7 @@ class CityDetailsWidget extends StatefulWidget {
 }
 
 class _CityDetailsWidgetState extends BasePageState<CityDetailsWidget,
-    CityDetailsCubit, CityDetailsState> {
+    CityDetailsCubit, CityDetailsData> {
   @override
   void onViewCreated() {
     super.onViewCreated();
@@ -27,23 +27,23 @@ class _CityDetailsWidgetState extends BasePageState<CityDetailsWidget,
   }
 
   @override
-  void onStateChange(BuildContext context, CityDetailsState state) {
-    super.onStateChange(context, state);
-    final status = state.status;
+  void onDataChange(BuildContext context, CityDetailsData data) {
+    super.onDataChange(context, data);
+    final status = data.status;
     if (status is Error) {
       showSnackMessage(status.error.message);
     }
   }
 
   @override
-  Widget buildPage(BuildContext context, CityDetailsState state) {
+  Widget buildPage(BuildContext context, CityDetailsData data) {
     return Scaffold(
-      body: _buildContent(state),
+      body: _buildContent(data),
     );
   }
 
-  Widget _buildContent(CityDetailsState state) {
-    final WeatherCity? weatherCity = state.weather;
+  Widget _buildContent(CityDetailsData data) {
+    final WeatherCity? weatherCity = data.weather;
     if (weatherCity == null) return Container();
 
     final City city = weatherCity.city;
