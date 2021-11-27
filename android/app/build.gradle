@@ -42,7 +42,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.sekiro"
+        applicationId "com.sekiro_flutter"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
@@ -69,12 +69,19 @@ android {
     }
 
     buildTypes {
-        debug {
+        debug {}
+        release {}
+    }
+
+    flavorDimensions "app"
+    productFlavors {
+        dev {
             resValue "string", "APPLICATION_NAME", "Weather Dev"
 
+            applicationIdSuffix ".dev"
             signingConfig signingConfigs.debug
         }
-        release {
+        prod {
             resValue "string", "APPLICATION_NAME", "Weather"
 
             signingConfig signingConfigs.release
@@ -84,8 +91,14 @@ android {
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
             def formattedDate = new Date().format('yyyyMMddHHmm')
-            def buildType = variant.buildType.name
+            def buildType = variant.getFlavorName()
             outputFileName = "sekiro-" + android.defaultConfig.versionName + "-" + buildType + "-" + formattedDate + ".apk"
+        }
+    }
+
+    android {
+        lintOptions {
+            checkReleaseBuilds false
         }
     }
 }

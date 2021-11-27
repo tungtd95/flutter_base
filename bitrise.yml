@@ -17,7 +17,7 @@ workflows:
       - cache-pull@2: {}
       - flutter-build@0:
           inputs:
-            - android_additional_params: "--dart-define=Env=dev --release"
+            - android_additional_params: "--dart-define=Env=dev --release --flavor dev"
             - platform: android
       - deploy-to-bitrise-io@2: {}
       - create-install-page-qr-code@1: {}
