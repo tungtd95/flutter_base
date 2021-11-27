@@ -39,9 +39,6 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
     if (!(status is Loading)) {
       _refreshController.refreshCompleted();
     }
-    if (status is Error) {
-      showSnackMessage(status.err.message);
-    }
   }
 
   @override

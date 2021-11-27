@@ -27,15 +27,6 @@ class _CityDetailsWidgetState extends BasePageState<CityDetailsWidget,
   }
 
   @override
-  void onDataChange(BuildContext context, CityDetailsData data) {
-    super.onDataChange(context, data);
-    final status = data.status;
-    if (status is Error) {
-      showSnackMessage(status.err.message);
-    }
-  }
-
-  @override
   Widget buildPage(BuildContext context, CityDetailsData data) {
     return Scaffold(
       body: _buildContent(data),
