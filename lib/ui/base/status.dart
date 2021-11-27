@@ -1,21 +1,27 @@
 import 'package:flutter_base/data/utils/base_exception.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'status.freezed.dart';
+abstract class Status {}
 
-@freezed
-class Status with _$Status {
-  const factory Status.init() = Init;
+class Init extends Status {
+  Init();
+}
 
-  const factory Status.loading({@Default(0) int id}) = Loading;
+class Loading extends Status {
+  final int id;
 
-  const factory Status.idle() = Idle;
+  Loading({this.id = 0});
+}
 
-  const factory Status.submitting() = Submmiting;
+class Error extends Status {
+  final BaseException err;
 
-  const factory Status.error(BaseException error) = Error;
+  Error(this.err);
+}
 
-  const factory Status.success() = Success;
+class Success extends Status {
+  Success();
+}
 
-  const factory Status.completed() = Completed;
+class Completed extends Status {
+  Completed();
 }

@@ -1,15 +1,19 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter_base/data/models/city.dart';
+import 'package:flutter_base/ui/base/base_data.dart';
 import 'package:flutter_base/ui/base/status.dart';
 import 'package:flutter_base/ui/common/models.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'home_data.freezed.dart';
+part 'home_data.g.dart';
 
-@freezed
-class HomeData with _$HomeData {
-  const factory HomeData({
-    @Default(Status.init()) Status status,
-    List<City>? cities,
-    List<WeatherCity>? weathers,
-  }) = _HomeData;
+@CopyWith()
+class HomeData extends BaseData {
+  final List<City>? cities;
+  final List<WeatherCity>? weathers;
+
+  HomeData({
+    Status? status,
+    this.cities,
+    this.weathers,
+  }) : super(status ?? Init());
 }

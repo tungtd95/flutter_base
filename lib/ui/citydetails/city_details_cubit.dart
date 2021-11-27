@@ -25,7 +25,7 @@ class CityDetailsCubit extends BaseCubit<CityDetailsData> {
         emit(state.copyWith(weather: WeatherCity(city: city, weather: value)));
       },
       onError: (e) {
-        emit(state.copyWith(status: Status.error(_errorHandler.parse(e))));
+        emit(state.copyWith(status: Error(_errorHandler.parse(e))));
       },
     );
   }

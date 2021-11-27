@@ -2,6 +2,7 @@ import 'package:flutter_base/data/local/pref.dart';
 import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/models/weather.dart';
 import 'package:flutter_base/data/repo/weather_repo.dart';
+import 'package:flutter_base/data/utils/exception_handler.dart';
 import 'package:flutter_base/ui/base/base_cubit.dart';
 import 'package:flutter_base/ui/base/status.dart';
 import 'package:flutter_base/ui/common/models.dart';
@@ -14,10 +15,15 @@ import 'package:rxdart/src/transformers/backpressure/debounce.dart';
 class HomeCubit extends BaseCubit<HomeData> {
   WeatherRepo _weatherRepo;
   Pref _pref;
+  ErrorHandler _errorHandler;
 
-  HomeCubit({required WeatherRepo weatherRepo, required Pref pref})
-      : this._weatherRepo = weatherRepo,
+  HomeCubit({
+    required WeatherRepo weatherRepo,
+    required Pref pref,
+    required ErrorHandler errorHandler,
+  })  : this._weatherRepo = weatherRepo,
         this._pref = pref,
+        this._errorHandler = errorHandler,
         super(HomeData());
 
   void subscribeCitiesStream() {
@@ -31,22 +37,25 @@ class HomeCubit extends BaseCubit<HomeData> {
     if (cities.isEmpty) {
       emit(state.copyWith(
         weathers: null,
-        status: Status.success(),
+        status: Success(),
       ));
       return;
     }
     emit(state.copyWith(
       cities: cities,
-      status: Status.loading(),
+      status: Loading(),
     ));
     final List<WeatherCity> weathers = [];
+    var error;
     for (var i = 0; i < cities.length; i++) {
       Weather? weather;
       await _weatherRepo.getWeatherByCity(cities[i]).then(
         (value) {
           weather = value;
         },
-        onError: (e) {},
+        onError: (e) {
+          error = e;
+        },
       );
       if (weather != null) {
         weathers.add(WeatherCity(city: cities[i], weather: weather!));
@@ -54,7 +63,7 @@ class HomeCubit extends BaseCubit<HomeData> {
     }
     emit(state.copyWith(
       weathers: weathers,
-      status: Status.success(),
+      status: error != null ? Error(_errorHandler.parse(error)) : Success(),
     ));
   }
 

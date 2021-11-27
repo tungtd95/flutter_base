@@ -28,28 +28,28 @@ class AddCityCubit extends BaseCubit<AddCityData> {
 
   void searchCity(String query) {
     if (query.length <= 1) {
-      emit(state.copyWith(cities: []));
+      emit(state.copyWith(cities: [], status: Init()));
       return;
     }
     _queryController.add(query);
   }
 
   void _searchCity(String query) {
-    emit(state.copyWith(status: Status.loading()));
+    emit(state.copyWith(status: Loading()));
     _weatherRepo.searchCitiesByName(query).then((cities) {
       emit(state.copyWith(
         cities: cities,
-        status: Status.success(),
+        status: Success(),
       ));
     }, onError: (e) {
-      emit(state.copyWith(status: Status.error(_errorHandler.parse(e))));
+      emit(state.copyWith(status: Error(_errorHandler.parse(e))));
     });
   }
 
   void addCityToFav(City city) {
     _weatherRepo.addCity(city).then(
       (value) {
-        emit(state.copyWith(status: Status.completed()));
+        emit(state.copyWith(status: Completed()));
       },
       onError: (e) {},
     );

@@ -30,7 +30,7 @@ class _AddCityWidgetState
     if (status is Completed) {
       Navigator.of(context).pop();
     } else if (status is Error) {
-      showSnackMessage(status.error.message);
+      showSnackMessage(status.err.message);
     }
   }
 
