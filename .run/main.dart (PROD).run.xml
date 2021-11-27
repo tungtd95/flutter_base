@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="main.dart (PROD)" type="FlutterRunConfigurationType" factoryName="Flutter">
+  <configuration default="false" name="main.dart (android - prod)" type="FlutterRunConfigurationType" factoryName="Flutter">
     <option name="additionalArgs" value="--dart-define=Env=prod --flavor prod" />
     <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
     <method v="2" />

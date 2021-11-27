@@ -42,7 +42,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.sekiro_flutter"
+        applicationId "com.sekiroflutter"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()

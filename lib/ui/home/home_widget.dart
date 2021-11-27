@@ -56,7 +56,7 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
         },
         child: Icon(Icons.add),
       ),
-      body: _buildContent(data),
+      body: SafeArea(child: _buildContent(data)),
     );
   }
 
