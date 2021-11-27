@@ -14,17 +14,20 @@ class _WeatherService implements WeatherService {
   String? baseUrl;
 
   @override
-  Future<Weather> getWeatherByCityLatLng(lat, lon) async {
+  Future<Weather> getWeatherByCityLatLng(lat, lon, appid) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'lat': lat, r'lon': lon};
+    final queryParameters = <String, dynamic>{
+      r'lat': lat,
+      r'lon': lon,
+      r'appid': appid
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Weather>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options,
-                    '/data/2.5/weather?appid=1f930c31692eff97a92281d72455c44a',
+                .compose(_dio.options, '/data/2.5/weather',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = Weather.fromJson(_result.data!);
@@ -32,15 +35,18 @@ class _WeatherService implements WeatherService {
   }
 
   @override
-  Future<List<City>> getCitiesByName(cityName, {limit = 5}) async {
+  Future<List<City>> getCitiesByName(cityName, appid, {limit = 5}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'q': cityName, r'limit': limit};
+    final queryParameters = <String, dynamic>{
+      r'q': cityName,
+      r'appid': appid,
+      r'limit': limit
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(_setStreamType<List<City>>(
         Options(method: 'GET', headers: _headers, extra: _extra)
-            .compose(_dio.options,
-                '/geo/1.0/direct?appid=1f930c31692eff97a92281d72455c44a',
+            .compose(_dio.options, '/geo/1.0/direct',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!

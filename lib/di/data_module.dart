@@ -1,8 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_base/data/service/weather_service.dart';
 import 'package:flutter_base/data/utils/exception_handler.dart';
 import 'package:flutter_base/di/di.dart';
+import 'package:flutter_base/env_config.dart';
 import 'package:injectable/injectable.dart';
-import 'package:dio/dio.dart';
 
 @module
 abstract class DataModule {
@@ -22,7 +23,7 @@ abstract class DataModule {
   WeatherService get weatherService {
     return WeatherService(
       getIt<Dio>(),
-      baseUrl: "https://api.openweathermap.org",
+      baseUrl: getIt<Env>().getOpenWeatherUrl(),
     );
   }
 }

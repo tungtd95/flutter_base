@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/models/weather.dart';
 import 'package:flutter_base/ui/base/base_page_widget.dart';
-import 'package:flutter_base/ui/base/status.dart';
 import 'package:flutter_base/ui/citydetails/city_details_cubit.dart';
 import 'package:flutter_base/ui/citydetails/city_details_data.dart';
 import 'package:flutter_base/ui/common/models.dart';

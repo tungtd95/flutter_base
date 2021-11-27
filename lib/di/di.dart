@@ -2,6 +2,7 @@ import 'package:flutter_base/data/local/weather_database.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'di.config.dart';
 
 final getIt = GetIt.instance;
@@ -11,10 +12,10 @@ final getIt = GetIt.instance;
   preferRelativeImports: true, // default
   asExtension: false, // default
 )
-Future<void> configureDependencies() async {
+Future<void> configureDependencies({required String env}) async {
   await configDatabase();
   await configPref();
-  $initGetIt(getIt);
+  $initGetIt(getIt, environment: env);
 }
 
 Future<void> configDatabase() async {

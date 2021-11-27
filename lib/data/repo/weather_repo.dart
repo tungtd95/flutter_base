@@ -2,25 +2,36 @@ import 'package:flutter_base/data/local/weather_database.dart';
 import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/models/weather.dart';
 import 'package:flutter_base/data/service/weather_service.dart';
+import 'package:flutter_base/env_config.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class WeatherRepo {
   WeatherService _service;
   WeatherDatabase _weatherDatabase;
+  Env _env;
 
   WeatherRepo({
     required WeatherService service,
     required WeatherDatabase weatherDatabase,
+    required Env env,
   })  : this._service = service,
-        this._weatherDatabase = weatherDatabase;
+        this._weatherDatabase = weatherDatabase,
+        this._env = env;
 
   Future<List<City>> searchCitiesByName(String query) {
-    return _service.getCitiesByName(query);
+    return _service.getCitiesByName(
+      query,
+      _env.getOpenWeatherAppID(),
+    );
   }
 
   Future<Weather> getWeatherByCity(City city) {
-    return _service.getWeatherByCityLatLng(city.lat, city.lon);
+    return _service.getWeatherByCityLatLng(
+      city.lat,
+      city.lon,
+      _env.getOpenWeatherAppID(),
+    );
   }
 
   Stream<List<City>> getCitiesStream() {
