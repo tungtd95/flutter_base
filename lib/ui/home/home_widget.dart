@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/ui/addcity/add_city_widget.dart';
 import 'package:flutter_base/ui/base/base_page_widget.dart';
-import 'package:flutter_base/ui/base/screen_state.dart';
+import 'package:flutter_base/ui/base/status.dart';
 import 'package:flutter_base/ui/citydetails/city_details_widget.dart';
 import 'package:flutter_base/ui/home/components/weather_widget.dart';
 import 'package:flutter_base/ui/home/home_cubit.dart';
@@ -35,7 +35,7 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeState> {
   @override
   void onStateChange(BuildContext context, HomeState state) {
     super.onStateChange(context, state);
-    if (!(state.screenState is Loading)) {
+    if (!(state.status is Loading)) {
       _refreshController.refreshCompleted();
     }
   }

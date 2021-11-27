@@ -18,10 +18,9 @@ class _$CityDetailsStateTearOff {
   const _$CityDetailsStateTearOff();
 
   _CityDetailsState call(
-      {ScreenState screenState = const ScreenState.init(),
-      WeatherCity? weather}) {
+      {Status status = const Status.init(), WeatherCity? weather}) {
     return _CityDetailsState(
-      screenState: screenState,
+      status: status,
       weather: weather,
     );
   }
@@ -32,7 +31,7 @@ const $CityDetailsState = _$CityDetailsStateTearOff();
 
 /// @nodoc
 mixin _$CityDetailsState {
-  ScreenState get screenState => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
   WeatherCity? get weather => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -45,9 +44,9 @@ abstract class $CityDetailsStateCopyWith<$Res> {
   factory $CityDetailsStateCopyWith(
           CityDetailsState value, $Res Function(CityDetailsState) then) =
       _$CityDetailsStateCopyWithImpl<$Res>;
-  $Res call({ScreenState screenState, WeatherCity? weather});
+  $Res call({Status status, WeatherCity? weather});
 
-  $ScreenStateCopyWith<$Res> get screenState;
+  $StatusCopyWith<$Res> get status;
 }
 
 /// @nodoc
@@ -61,14 +60,14 @@ class _$CityDetailsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? screenState = freezed,
+    Object? status = freezed,
     Object? weather = freezed,
   }) {
     return _then(_value.copyWith(
-      screenState: screenState == freezed
-          ? _value.screenState
-          : screenState // ignore: cast_nullable_to_non_nullable
-              as ScreenState,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
       weather: weather == freezed
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
@@ -77,9 +76,9 @@ class _$CityDetailsStateCopyWithImpl<$Res>
   }
 
   @override
-  $ScreenStateCopyWith<$Res> get screenState {
-    return $ScreenStateCopyWith<$Res>(_value.screenState, (value) {
-      return _then(_value.copyWith(screenState: value));
+  $StatusCopyWith<$Res> get status {
+    return $StatusCopyWith<$Res>(_value.status, (value) {
+      return _then(_value.copyWith(status: value));
     });
   }
 }
@@ -91,10 +90,10 @@ abstract class _$CityDetailsStateCopyWith<$Res>
           _CityDetailsState value, $Res Function(_CityDetailsState) then) =
       __$CityDetailsStateCopyWithImpl<$Res>;
   @override
-  $Res call({ScreenState screenState, WeatherCity? weather});
+  $Res call({Status status, WeatherCity? weather});
 
   @override
-  $ScreenStateCopyWith<$Res> get screenState;
+  $StatusCopyWith<$Res> get status;
 }
 
 /// @nodoc
@@ -110,14 +109,14 @@ class __$CityDetailsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? screenState = freezed,
+    Object? status = freezed,
     Object? weather = freezed,
   }) {
     return _then(_CityDetailsState(
-      screenState: screenState == freezed
-          ? _value.screenState
-          : screenState // ignore: cast_nullable_to_non_nullable
-              as ScreenState,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
       weather: weather == freezed
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
@@ -129,18 +128,17 @@ class __$CityDetailsStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CityDetailsState implements _CityDetailsState {
-  const _$_CityDetailsState(
-      {this.screenState = const ScreenState.init(), this.weather});
+  const _$_CityDetailsState({this.status = const Status.init(), this.weather});
 
-  @JsonKey(defaultValue: const ScreenState.init())
+  @JsonKey(defaultValue: const Status.init())
   @override
-  final ScreenState screenState;
+  final Status status;
   @override
   final WeatherCity? weather;
 
   @override
   String toString() {
-    return 'CityDetailsState(screenState: $screenState, weather: $weather)';
+    return 'CityDetailsState(status: $status, weather: $weather)';
   }
 
   @override
@@ -148,13 +146,12 @@ class _$_CityDetailsState implements _CityDetailsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _CityDetailsState &&
-            (identical(other.screenState, screenState) ||
-                other.screenState == screenState) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.weather, weather) || other.weather == weather));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, screenState, weather);
+  int get hashCode => Object.hash(runtimeType, status, weather);
 
   @JsonKey(ignore: true)
   @override
@@ -163,11 +160,11 @@ class _$_CityDetailsState implements _CityDetailsState {
 }
 
 abstract class _CityDetailsState implements CityDetailsState {
-  const factory _CityDetailsState(
-      {ScreenState screenState, WeatherCity? weather}) = _$_CityDetailsState;
+  const factory _CityDetailsState({Status status, WeatherCity? weather}) =
+      _$_CityDetailsState;
 
   @override
-  ScreenState get screenState;
+  Status get status;
   @override
   WeatherCity? get weather;
   @override

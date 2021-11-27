@@ -4,7 +4,7 @@ import 'package:flutter_base/ui/addcity/add_city_state.dart';
 import 'package:flutter_base/ui/addcity/components/city_widget.dart';
 import 'package:flutter_base/ui/addcity/components/search_bar_widget.dart';
 import 'package:flutter_base/ui/base/base_page_widget.dart';
-import 'package:flutter_base/ui/base/screen_state.dart';
+import 'package:flutter_base/ui/base/status.dart';
 
 class AddCityWidget extends StatefulWidget {
   @override
@@ -26,11 +26,11 @@ class _AddCityWidgetState
   @override
   void onStateChange(BuildContext context, AddCityState state) {
     super.onStateChange(context, state);
-    final screenState = state.screenState;
-    if (screenState is Completed) {
+    final status = state.status;
+    if (status is Completed) {
       Navigator.of(context).pop();
-    } else if (screenState is Error) {
-      showSnackMessage(screenState.message);
+    } else if (status is Error) {
+      showSnackMessage(status.error.message);
     }
   }
 
@@ -44,7 +44,7 @@ class _AddCityWidgetState
             child: SearchBarWidget(
               onSearch: cubit.searchCity,
               focusNode: _searchFocusNode,
-              loading: state.screenState is Loading,
+              loading: state.status is Loading,
             ),
             margin: EdgeInsets.symmetric(horizontal: 16),
           ),

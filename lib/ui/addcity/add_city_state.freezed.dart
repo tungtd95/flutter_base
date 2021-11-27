@@ -18,10 +18,9 @@ class _$AddCityStateTearOff {
   const _$AddCityStateTearOff();
 
   _AddCityState call(
-      {ScreenState screenState = const ScreenState.init(),
-      List<City>? cities}) {
+      {Status status = const Status.init(), List<City>? cities}) {
     return _AddCityState(
-      screenState: screenState,
+      status: status,
       cities: cities,
     );
   }
@@ -32,7 +31,7 @@ const $AddCityState = _$AddCityStateTearOff();
 
 /// @nodoc
 mixin _$AddCityState {
-  ScreenState get screenState => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
   List<City>? get cities => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -45,9 +44,9 @@ abstract class $AddCityStateCopyWith<$Res> {
   factory $AddCityStateCopyWith(
           AddCityState value, $Res Function(AddCityState) then) =
       _$AddCityStateCopyWithImpl<$Res>;
-  $Res call({ScreenState screenState, List<City>? cities});
+  $Res call({Status status, List<City>? cities});
 
-  $ScreenStateCopyWith<$Res> get screenState;
+  $StatusCopyWith<$Res> get status;
 }
 
 /// @nodoc
@@ -60,14 +59,14 @@ class _$AddCityStateCopyWithImpl<$Res> implements $AddCityStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? screenState = freezed,
+    Object? status = freezed,
     Object? cities = freezed,
   }) {
     return _then(_value.copyWith(
-      screenState: screenState == freezed
-          ? _value.screenState
-          : screenState // ignore: cast_nullable_to_non_nullable
-              as ScreenState,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
       cities: cities == freezed
           ? _value.cities
           : cities // ignore: cast_nullable_to_non_nullable
@@ -76,9 +75,9 @@ class _$AddCityStateCopyWithImpl<$Res> implements $AddCityStateCopyWith<$Res> {
   }
 
   @override
-  $ScreenStateCopyWith<$Res> get screenState {
-    return $ScreenStateCopyWith<$Res>(_value.screenState, (value) {
-      return _then(_value.copyWith(screenState: value));
+  $StatusCopyWith<$Res> get status {
+    return $StatusCopyWith<$Res>(_value.status, (value) {
+      return _then(_value.copyWith(status: value));
     });
   }
 }
@@ -90,10 +89,10 @@ abstract class _$AddCityStateCopyWith<$Res>
           _AddCityState value, $Res Function(_AddCityState) then) =
       __$AddCityStateCopyWithImpl<$Res>;
   @override
-  $Res call({ScreenState screenState, List<City>? cities});
+  $Res call({Status status, List<City>? cities});
 
   @override
-  $ScreenStateCopyWith<$Res> get screenState;
+  $StatusCopyWith<$Res> get status;
 }
 
 /// @nodoc
@@ -108,14 +107,14 @@ class __$AddCityStateCopyWithImpl<$Res> extends _$AddCityStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? screenState = freezed,
+    Object? status = freezed,
     Object? cities = freezed,
   }) {
     return _then(_AddCityState(
-      screenState: screenState == freezed
-          ? _value.screenState
-          : screenState // ignore: cast_nullable_to_non_nullable
-              as ScreenState,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
       cities: cities == freezed
           ? _value.cities
           : cities // ignore: cast_nullable_to_non_nullable
@@ -127,18 +126,17 @@ class __$AddCityStateCopyWithImpl<$Res> extends _$AddCityStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AddCityState implements _AddCityState {
-  const _$_AddCityState(
-      {this.screenState = const ScreenState.init(), this.cities});
+  const _$_AddCityState({this.status = const Status.init(), this.cities});
 
-  @JsonKey(defaultValue: const ScreenState.init())
+  @JsonKey(defaultValue: const Status.init())
   @override
-  final ScreenState screenState;
+  final Status status;
   @override
   final List<City>? cities;
 
   @override
   String toString() {
-    return 'AddCityState(screenState: $screenState, cities: $cities)';
+    return 'AddCityState(status: $status, cities: $cities)';
   }
 
   @override
@@ -146,14 +144,13 @@ class _$_AddCityState implements _AddCityState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _AddCityState &&
-            (identical(other.screenState, screenState) ||
-                other.screenState == screenState) &&
+            (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other.cities, cities));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, screenState, const DeepCollectionEquality().hash(cities));
+      runtimeType, status, const DeepCollectionEquality().hash(cities));
 
   @JsonKey(ignore: true)
   @override
@@ -162,11 +159,11 @@ class _$_AddCityState implements _AddCityState {
 }
 
 abstract class _AddCityState implements AddCityState {
-  const factory _AddCityState({ScreenState screenState, List<City>? cities}) =
+  const factory _AddCityState({Status status, List<City>? cities}) =
       _$_AddCityState;
 
   @override
-  ScreenState get screenState;
+  Status get status;
   @override
   List<City>? get cities;
   @override

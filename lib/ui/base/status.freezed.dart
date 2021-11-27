@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'screen_state.dart';
+part of 'status.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,15 +14,17 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$ScreenStateTearOff {
-  const _$ScreenStateTearOff();
+class _$StatusTearOff {
+  const _$StatusTearOff();
 
   Init init() {
     return const Init();
   }
 
-  Loading loading() {
-    return const Loading();
+  Loading loading({int id = 0}) {
+    return Loading(
+      id: id,
+    );
   }
 
   Idle idle() {
@@ -33,9 +35,9 @@ class _$ScreenStateTearOff {
     return const Submmiting();
   }
 
-  Error error(String message) {
+  Error error(BaseException error) {
     return Error(
-      message,
+      error,
     );
   }
 
@@ -49,17 +51,17 @@ class _$ScreenStateTearOff {
 }
 
 /// @nodoc
-const $ScreenState = _$ScreenStateTearOff();
+const $Status = _$StatusTearOff();
 
 /// @nodoc
-mixin _$ScreenState {
+mixin _$Status {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() loading,
+    required TResult Function(int id) loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function(String message) error,
+    required TResult Function(BaseException error) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) =>
@@ -67,10 +69,10 @@ mixin _$ScreenState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) =>
@@ -78,10 +80,10 @@ mixin _$ScreenState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
@@ -124,19 +126,18 @@ mixin _$ScreenState {
 }
 
 /// @nodoc
-abstract class $ScreenStateCopyWith<$Res> {
-  factory $ScreenStateCopyWith(
-          ScreenState value, $Res Function(ScreenState) then) =
-      _$ScreenStateCopyWithImpl<$Res>;
+abstract class $StatusCopyWith<$Res> {
+  factory $StatusCopyWith(Status value, $Res Function(Status) then) =
+      _$StatusCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$ScreenStateCopyWithImpl<$Res> implements $ScreenStateCopyWith<$Res> {
-  _$ScreenStateCopyWithImpl(this._value, this._then);
+class _$StatusCopyWithImpl<$Res> implements $StatusCopyWith<$Res> {
+  _$StatusCopyWithImpl(this._value, this._then);
 
-  final ScreenState _value;
+  final Status _value;
   // ignore: unused_field
-  final $Res Function(ScreenState) _then;
+  final $Res Function(Status) _then;
 }
 
 /// @nodoc
@@ -146,7 +147,7 @@ abstract class $InitCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$InitCopyWithImpl<$Res> extends _$ScreenStateCopyWithImpl<$Res>
+class _$InitCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
     implements $InitCopyWith<$Res> {
   _$InitCopyWithImpl(Init _value, $Res Function(Init) _then)
       : super(_value, (v) => _then(v as Init));
@@ -162,7 +163,7 @@ class _$Init implements Init {
 
   @override
   String toString() {
-    return 'ScreenState.init()';
+    return 'Status.init()';
   }
 
   @override
@@ -178,10 +179,10 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() loading,
+    required TResult Function(int id) loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function(String message) error,
+    required TResult Function(BaseException error) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) {
@@ -192,10 +193,10 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) {
@@ -206,10 +207,10 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
@@ -267,7 +268,7 @@ class _$Init implements Init {
   }
 }
 
-abstract class Init implements ScreenState {
+abstract class Init implements Status {
   const factory Init() = _$Init;
 }
 
@@ -275,79 +276,103 @@ abstract class Init implements ScreenState {
 abstract class $LoadingCopyWith<$Res> {
   factory $LoadingCopyWith(Loading value, $Res Function(Loading) then) =
       _$LoadingCopyWithImpl<$Res>;
+  $Res call({int id});
 }
 
 /// @nodoc
-class _$LoadingCopyWithImpl<$Res> extends _$ScreenStateCopyWithImpl<$Res>
+class _$LoadingCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
     implements $LoadingCopyWith<$Res> {
   _$LoadingCopyWithImpl(Loading _value, $Res Function(Loading) _then)
       : super(_value, (v) => _then(v as Loading));
 
   @override
   Loading get _value => super._value as Loading;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(Loading(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$Loading implements Loading {
-  const _$Loading();
+  const _$Loading({this.id = 0});
+
+  @JsonKey(defaultValue: 0)
+  @override
+  final int id;
 
   @override
   String toString() {
-    return 'ScreenState.loading()';
+    return 'Status.loading(id: $id)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is Loading);
+        (other.runtimeType == runtimeType &&
+            other is Loading &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  $LoadingCopyWith<Loading> get copyWith =>
+      _$LoadingCopyWithImpl<Loading>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() loading,
+    required TResult Function(int id) loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function(String message) error,
+    required TResult Function(BaseException error) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) {
-    return loading();
+    return loading(id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) {
-    return loading?.call();
+    return loading?.call(id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(id);
     }
     return orElse();
   }
@@ -399,8 +424,12 @@ class _$Loading implements Loading {
   }
 }
 
-abstract class Loading implements ScreenState {
-  const factory Loading() = _$Loading;
+abstract class Loading implements Status {
+  const factory Loading({int id}) = _$Loading;
+
+  int get id;
+  @JsonKey(ignore: true)
+  $LoadingCopyWith<Loading> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -410,7 +439,7 @@ abstract class $IdleCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$IdleCopyWithImpl<$Res> extends _$ScreenStateCopyWithImpl<$Res>
+class _$IdleCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
     implements $IdleCopyWith<$Res> {
   _$IdleCopyWithImpl(Idle _value, $Res Function(Idle) _then)
       : super(_value, (v) => _then(v as Idle));
@@ -426,7 +455,7 @@ class _$Idle implements Idle {
 
   @override
   String toString() {
-    return 'ScreenState.idle()';
+    return 'Status.idle()';
   }
 
   @override
@@ -442,10 +471,10 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() loading,
+    required TResult Function(int id) loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function(String message) error,
+    required TResult Function(BaseException error) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) {
@@ -456,10 +485,10 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) {
@@ -470,10 +499,10 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
@@ -531,7 +560,7 @@ class _$Idle implements Idle {
   }
 }
 
-abstract class Idle implements ScreenState {
+abstract class Idle implements Status {
   const factory Idle() = _$Idle;
 }
 
@@ -543,7 +572,7 @@ abstract class $SubmmitingCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SubmmitingCopyWithImpl<$Res> extends _$ScreenStateCopyWithImpl<$Res>
+class _$SubmmitingCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
     implements $SubmmitingCopyWith<$Res> {
   _$SubmmitingCopyWithImpl(Submmiting _value, $Res Function(Submmiting) _then)
       : super(_value, (v) => _then(v as Submmiting));
@@ -559,7 +588,7 @@ class _$Submmiting implements Submmiting {
 
   @override
   String toString() {
-    return 'ScreenState.submitting()';
+    return 'Status.submitting()';
   }
 
   @override
@@ -575,10 +604,10 @@ class _$Submmiting implements Submmiting {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() loading,
+    required TResult Function(int id) loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function(String message) error,
+    required TResult Function(BaseException error) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) {
@@ -589,10 +618,10 @@ class _$Submmiting implements Submmiting {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) {
@@ -603,10 +632,10 @@ class _$Submmiting implements Submmiting {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
@@ -664,7 +693,7 @@ class _$Submmiting implements Submmiting {
   }
 }
 
-abstract class Submmiting implements ScreenState {
+abstract class Submmiting implements Status {
   const factory Submmiting() = _$Submmiting;
 }
 
@@ -672,11 +701,11 @@ abstract class Submmiting implements ScreenState {
 abstract class $ErrorCopyWith<$Res> {
   factory $ErrorCopyWith(Error value, $Res Function(Error) then) =
       _$ErrorCopyWithImpl<$Res>;
-  $Res call({String message});
+  $Res call({BaseException error});
 }
 
 /// @nodoc
-class _$ErrorCopyWithImpl<$Res> extends _$ScreenStateCopyWithImpl<$Res>
+class _$ErrorCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
     implements $ErrorCopyWith<$Res> {
   _$ErrorCopyWithImpl(Error _value, $Res Function(Error) _then)
       : super(_value, (v) => _then(v as Error));
@@ -686,13 +715,13 @@ class _$ErrorCopyWithImpl<$Res> extends _$ScreenStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? message = freezed,
+    Object? error = freezed,
   }) {
     return _then(Error(
-      message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
+      error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as BaseException,
     ));
   }
 }
@@ -700,14 +729,14 @@ class _$ErrorCopyWithImpl<$Res> extends _$ScreenStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Error implements Error {
-  const _$Error(this.message);
+  const _$Error(this.error);
 
   @override
-  final String message;
+  final BaseException error;
 
   @override
   String toString() {
-    return 'ScreenState.error(message: $message)';
+    return 'Status.error(error: $error)';
   }
 
   @override
@@ -715,11 +744,11 @@ class _$Error implements Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Error &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, error);
 
   @JsonKey(ignore: true)
   @override
@@ -730,44 +759,44 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() loading,
+    required TResult Function(int id) loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function(String message) error,
+    required TResult Function(BaseException error) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) {
-    return error(message);
+    return error(this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) {
-    return error?.call(message);
+    return error?.call(this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(message);
+      return error(this.error);
     }
     return orElse();
   }
@@ -819,10 +848,10 @@ class _$Error implements Error {
   }
 }
 
-abstract class Error implements ScreenState {
-  const factory Error(String message) = _$Error;
+abstract class Error implements Status {
+  const factory Error(BaseException error) = _$Error;
 
-  String get message;
+  BaseException get error;
   @JsonKey(ignore: true)
   $ErrorCopyWith<Error> get copyWith => throw _privateConstructorUsedError;
 }
@@ -834,7 +863,7 @@ abstract class $SuccessCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SuccessCopyWithImpl<$Res> extends _$ScreenStateCopyWithImpl<$Res>
+class _$SuccessCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
     implements $SuccessCopyWith<$Res> {
   _$SuccessCopyWithImpl(Success _value, $Res Function(Success) _then)
       : super(_value, (v) => _then(v as Success));
@@ -850,7 +879,7 @@ class _$Success implements Success {
 
   @override
   String toString() {
-    return 'ScreenState.success()';
+    return 'Status.success()';
   }
 
   @override
@@ -866,10 +895,10 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() loading,
+    required TResult Function(int id) loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function(String message) error,
+    required TResult Function(BaseException error) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) {
@@ -880,10 +909,10 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) {
@@ -894,10 +923,10 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
@@ -955,7 +984,7 @@ class _$Success implements Success {
   }
 }
 
-abstract class Success implements ScreenState {
+abstract class Success implements Status {
   const factory Success() = _$Success;
 }
 
@@ -966,7 +995,7 @@ abstract class $CompletedCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CompletedCopyWithImpl<$Res> extends _$ScreenStateCopyWithImpl<$Res>
+class _$CompletedCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
     implements $CompletedCopyWith<$Res> {
   _$CompletedCopyWithImpl(Completed _value, $Res Function(Completed) _then)
       : super(_value, (v) => _then(v as Completed));
@@ -982,7 +1011,7 @@ class _$Completed implements Completed {
 
   @override
   String toString() {
-    return 'ScreenState.completed()';
+    return 'Status.completed()';
   }
 
   @override
@@ -998,10 +1027,10 @@ class _$Completed implements Completed {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() loading,
+    required TResult Function(int id) loading,
     required TResult Function() idle,
     required TResult Function() submitting,
-    required TResult Function(String message) error,
+    required TResult Function(BaseException error) error,
     required TResult Function() success,
     required TResult Function() completed,
   }) {
@@ -1012,10 +1041,10 @@ class _$Completed implements Completed {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
   }) {
@@ -1026,10 +1055,10 @@ class _$Completed implements Completed {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? loading,
+    TResult Function(int id)? loading,
     TResult Function()? idle,
     TResult Function()? submitting,
-    TResult Function(String message)? error,
+    TResult Function(BaseException error)? error,
     TResult Function()? success,
     TResult Function()? completed,
     required TResult orElse(),
@@ -1087,6 +1116,6 @@ class _$Completed implements Completed {
   }
 }
 
-abstract class Completed implements ScreenState {
+abstract class Completed implements Status {
   const factory Completed() = _$Completed;
 }

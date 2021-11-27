@@ -3,7 +3,7 @@ import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/models/weather.dart';
 import 'package:flutter_base/data/repo/weather_repo.dart';
 import 'package:flutter_base/ui/base/base_cubit.dart';
-import 'package:flutter_base/ui/base/screen_state.dart';
+import 'package:flutter_base/ui/base/status.dart';
 import 'package:flutter_base/ui/common/models.dart';
 import 'package:flutter_base/ui/home/home_state.dart';
 import 'package:injectable/injectable.dart';
@@ -31,13 +31,13 @@ class HomeCubit extends BaseCubit<HomeState> {
     if (cities.isEmpty) {
       emit(state.copyWith(
         weathers: null,
-        screenState: ScreenState.success(),
+        status: Status.success(),
       ));
       return;
     }
     emit(state.copyWith(
       cities: cities,
-      screenState: ScreenState.loading(),
+      status: Status.loading(),
     ));
     final List<WeatherCity> weathers = [];
     for (var i = 0; i < cities.length; i++) {
@@ -54,7 +54,7 @@ class HomeCubit extends BaseCubit<HomeState> {
     }
     emit(state.copyWith(
       weathers: weathers,
-      screenState: ScreenState.success(),
+      status: Status.success(),
     ));
   }
 
