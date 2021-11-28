@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_base/data/local/weather_database.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
@@ -15,6 +16,9 @@ final getIt = GetIt.instance;
 Future<void> configureDependencies({required String env}) async {
   await configDatabase();
   await configPref();
+  getIt.registerSingleton<RouteObserver<ModalRoute<void>>>(
+    RouteObserver<ModalRoute<void>>(),
+  );
   $initGetIt(getIt, environment: env);
 }
 

@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomeWidget(),
+      navigatorObservers: [getIt<RouteObserver<ModalRoute<void>>>()],
       onGenerateRoute: Routes.generateRoute,
     );
   }
