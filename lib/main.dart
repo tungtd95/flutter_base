@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/di/di.dart';
+import 'package:flutter_base/routes.dart';
 import 'package:flutter_base/ui/home/home_widget.dart';
 import 'package:injectable/injectable.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomeWidget(),
+      onGenerateRoute: Routes.generateRoute,
     );
   }
 }

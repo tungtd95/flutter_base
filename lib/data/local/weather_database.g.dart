@@ -162,6 +162,19 @@ class _$WeatherDao extends WeatherDao {
   }
 
   @override
+  Future<City?> getCityById(int cityId) async {
+    return _queryAdapter.query('SELECT * FROM city WHERE id=?1',
+        mapper: (Map<String, Object?> row) => City(
+            id: row['id'] as int?,
+            name: row['name'] as String?,
+            country: row['country'] as String?,
+            state: row['state'] as String?,
+            lat: row['lat'] as double?,
+            lon: row['lon'] as double?),
+        arguments: [cityId]);
+  }
+
+  @override
   Future<void> add(City city) async {
     await _cityInsertionAdapter.insert(city, OnConflictStrategy.abort);
   }

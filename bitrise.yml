@@ -11,13 +11,21 @@ workflows:
       - activate-ssh-key@4:
           run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
       - git-clone@6: {}
+      - cache-pull@2: {}
       - flutter-installer@0:
           inputs:
             - is_update: 'false'
-      - cache-pull@2: {}
+      - script@1:
+          title: Clean & Pub get
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -x
+
+                bash clean.sh
       - flutter-build@0:
           inputs:
-            - android_additional_params: "--dart-define=Env=dev --release --flavor dev"
+            - android_additional_params: "--dart-define=Env=dev --flavor dev --no-pub --release"
             - platform: android
       - deploy-to-bitrise-io@2: {}
       - create-install-page-qr-code@1: {}

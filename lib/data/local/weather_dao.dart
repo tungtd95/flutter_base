@@ -10,6 +10,9 @@ abstract class WeatherDao {
   @Query("SELECT * FROM city")
   Future<List<City>> getCitiesOneShot();
 
+  @Query("SELECT * FROM city WHERE id=:cityId")
+  Future<City?> getCityById(int cityId);
+
   @insert
   Future<void> add(City city);
 

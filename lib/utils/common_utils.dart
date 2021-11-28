@@ -24,3 +24,27 @@ class HexColor extends Color {
 
   HexColor(final String? hexColor) : super(_getColorFromHex(hexColor));
 }
+
+class DeepLinkParser {
+  String path;
+  Map<String, String>? args;
+
+  DeepLinkParser({
+    required this.path,
+    this.args,
+  });
+
+  factory DeepLinkParser.parse(String deepLink) {
+    final Uri? uri = Uri.tryParse(deepLink);
+
+    if (uri == null) {
+      // return back input because of invalid uri format
+      return DeepLinkParser(path: deepLink);
+    }
+    Map<String, String>? args;
+    if (uri.queryParameters.isNotEmpty) {
+      args = uri.queryParameters;
+    }
+    return DeepLinkParser(path: uri.path, args: args);
+  }
+}

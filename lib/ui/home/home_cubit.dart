@@ -5,7 +5,7 @@ import 'package:flutter_base/data/repo/weather_repo.dart';
 import 'package:flutter_base/data/utils/exception_handler.dart';
 import 'package:flutter_base/ui/base/base_cubit.dart';
 import 'package:flutter_base/ui/base/status.dart';
-import 'package:flutter_base/ui/common/models.dart';
+import 'package:flutter_base/data/models/weather_city.dart';
 import 'package:flutter_base/ui/home/home_data.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';

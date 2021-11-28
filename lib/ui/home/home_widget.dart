@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/ui/addcity/add_city_widget.dart';
+import 'package:flutter_base/routes.dart';
 import 'package:flutter_base/ui/base/base_page_widget.dart';
 import 'package:flutter_base/ui/base/status.dart';
-import 'package:flutter_base/ui/citydetails/city_details_widget.dart';
 import 'package:flutter_base/ui/home/components/weather_widget.dart';
 import 'package:flutter_base/ui/home/home_cubit.dart';
 import 'package:flutter_base/ui/home/home_data.dart';
-import 'package:flutter_base/ui/splash/splash_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -26,9 +24,7 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
     cubit.subscribeCitiesStream();
     if (cubit.checkFirstTimeStartUp()) {
       cubit.markFirstTimeStartUp();
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-        return SplashWidget();
-      }));
+      Navigator.of(context).pushNamed(Routes.SPLASH);
     }
   }
 
@@ -46,13 +42,7 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) {
-                return AddCityWidget();
-              },
-            ),
-          );
+          Navigator.of(context).pushNamed(Routes.ADD_CITY);
         },
         child: Icon(Icons.add),
       ),
@@ -76,10 +66,9 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
               cubit.removeCity(weather.city);
             },
             onSelected: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) {
-                  return CityDetailsWidget(city: weather.city);
-                }),
+              Navigator.of(context).pushNamed(
+                Routes.CITY_DETAIL,
+                arguments: weather.city,
               );
             },
           );

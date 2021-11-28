@@ -4,12 +4,12 @@ import 'package:flutter_base/data/models/weather.dart';
 import 'package:flutter_base/ui/base/base_page_widget.dart';
 import 'package:flutter_base/ui/citydetails/city_details_cubit.dart';
 import 'package:flutter_base/ui/citydetails/city_details_data.dart';
-import 'package:flutter_base/ui/common/models.dart';
+import 'package:flutter_base/data/models/weather_city.dart';
 
 class CityDetailsWidget extends StatefulWidget {
-  final City city;
+  final CityDetailsArg arg;
 
-  CityDetailsWidget({required this.city});
+  CityDetailsWidget({required this.arg});
 
   @override
   State<StatefulWidget> createState() {
@@ -22,7 +22,8 @@ class _CityDetailsWidgetState extends BasePageState<CityDetailsWidget,
   @override
   void onViewCreated() {
     super.onViewCreated();
-    cubit.getWeatherByCity(widget.city);
+    cubit.getWeatherByCity(widget.arg.city);
+    cubit.getWeatherByCityId(widget.arg.cityId);
   }
 
   @override
@@ -75,5 +76,26 @@ class _CityDetailsWidgetState extends BasePageState<CityDetailsWidget,
         ],
       ),
     );
+  }
+}
+
+class CityDetailsArg {
+  final City? city;
+  final int? cityId;
+
+  CityDetailsArg({
+    this.city,
+    this.cityId,
+  });
+
+  factory CityDetailsArg.from(dynamic args) {
+    if (args is City) {
+      return CityDetailsArg(city: args);
+    }
+    if (args is Map<String, String>) {
+      int? cityId = int.tryParse(args["cityId"] ?? '');
+      return CityDetailsArg(cityId: cityId);
+    }
+    return CityDetailsArg();
   }
 }

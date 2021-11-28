@@ -4,7 +4,7 @@ import 'package:flutter_base/data/utils/exception_handler.dart';
 import 'package:flutter_base/ui/base/base_cubit.dart';
 import 'package:flutter_base/ui/base/status.dart';
 import 'package:flutter_base/ui/citydetails/city_details_data.dart';
-import 'package:flutter_base/ui/common/models.dart';
+import 'package:flutter_base/data/models/weather_city.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -19,7 +19,8 @@ class CityDetailsCubit extends BaseCubit<CityDetailsData> {
         this._errorHandler = errorHandler,
         super(CityDetailsData());
 
-  void getWeatherByCity(City city) {
+  void getWeatherByCity(City? city) {
+    if (city == null) return;
     _weatherRepo.getWeatherByCity(city).then(
       (value) {
         emit(state.copyWith(weather: WeatherCity(city: city, weather: value)));
@@ -30,7 +31,17 @@ class CityDetailsCubit extends BaseCubit<CityDetailsData> {
     );
   }
 
-  void getWeatherByCityId(int cityId) {}
+  void getWeatherByCityId(int? cityId) {
+    if (cityId == null) return;
+    _weatherRepo.getWeatherByCityId(cityId).then(
+      (value) {
+        emit(state.copyWith(weather: value, status: Success()));
+      },
+      onError: (e) {
+        emit(state.copyWith(status: Error(_errorHandler.parse(e))));
+      },
+    );
+  }
 
   @override
   void dispose() {

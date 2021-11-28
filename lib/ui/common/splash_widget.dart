@@ -39,15 +39,6 @@ class SplashWidget extends StatelessWidget {
             top: 44,
             right: 24,
           ),
-          Positioned(
-            bottom: 4,
-            right: 4,
-            child: Image.asset(
-              Assets.imgSekiro,
-              width: 20,
-              height: 20,
-            ),
-          )
         ],
       ),
     );
