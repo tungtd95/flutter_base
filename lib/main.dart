@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/di/data_module.dart';
 import 'package:flutter_base/di/di.dart';
 import 'package:flutter_base/routes.dart';
 import 'package:flutter_base/ui/home/home_widget.dart';
 import 'package:injectable/injectable.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 const env = String.fromEnvironment("Env", defaultValue: Environment.dev);
 
@@ -17,10 +19,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomeWidget(),
-      navigatorObservers: [getIt<RouteObserver<ModalRoute<void>>>()],
-      onGenerateRoute: Routes.generateRoute,
+    return OverlaySupport(
+      child: MaterialApp(
+        home: HomeWidget(),
+        navigatorKey: getIt<AliceWrapper>().alice?.getNavigatorKey(),
+        navigatorObservers: [getIt<RouteObserver<ModalRoute<void>>>()],
+        onGenerateRoute: Routes.generateRoute,
+      ),
     );
   }
 }

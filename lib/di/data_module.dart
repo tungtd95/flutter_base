@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_alice/alice.dart';
 import 'package:flutter_base/data/service/weather_service.dart';
 import 'package:flutter_base/data/utils/exception_handler.dart';
 import 'package:flutter_base/di/di.dart';
@@ -31,6 +32,10 @@ abstract class DataModule {
       requestHeader: false,
       responseHeader: false,
     ));
+    final aliceInterceptor = getIt<AliceWrapper>().alice?.getDioInterceptor();
+    if (aliceInterceptor != null) {
+      interceptors.add(aliceInterceptor);
+    }
     return interceptors;
   }
 
@@ -43,5 +48,28 @@ class ErrorHandlerInterceptor extends Interceptor {
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     getIt.get<ErrorHandler>().dioErrorParser(err);
+  }
+}
+
+abstract class AliceWrapper {
+  Alice? get alice;
+}
+
+@Singleton(as: AliceWrapper, env: [Environment.prod])
+class AliceProd extends AliceWrapper {
+  @override
+  Alice? get alice => null;
+}
+
+@Singleton(as: AliceWrapper, env: [Environment.dev])
+class AliceDev extends AliceWrapper {
+  Alice? _alice;
+
+  @override
+  Alice? get alice {
+    if (this._alice == null) {
+      _alice = Alice();
+    }
+    return _alice;
   }
 }
