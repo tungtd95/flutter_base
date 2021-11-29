@@ -4,7 +4,7 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: flutter
 trigger_map:
   - push_branch: master
-    workflow: android
+    workflow: build-test
 workflows:
   android:
     steps:
@@ -25,14 +25,15 @@ workflows:
                 bash clean.sh
       - flutter-build@0:
           inputs:
-            - android_additional_params: "--dart-define=Env=dev --flavor dev --no-pub --release"
+            - android_additional_params: "--dart-define=Env=$BUILD_ENV --flavor $BUILD_ENV
+            --no-pub --release"
             - platform: android
       - deploy-to-bitrise-io@2: {}
       - create-install-page-qr-code@1: {}
       - slack@3:
           inputs:
             - image_url: "$BITRISE_PUBLIC_INSTALL_PAGE_QR_CODE_IMAGE_URL"
-            - pretext: "*Build ANDROID-DEV Succeeded!*"
+            - pretext: "*Build ANDROID-$BUILD_ENV Succeeded!*"
             - channel: "#flutter-build"
             - text: "@tungtd95"
             - from_username: Sekiro BOT
@@ -45,6 +46,93 @@ workflows:
                 View Build|${BITRISE_BUILD_URL}
                 Install Page|${BITRISE_PUBLIC_INSTALL_PAGE_URL}
             - color: "#0bde4a"
+            - pretext_on_error: "*Build Android-$BUILD_ENV Failed!*"
+            - webhook_url: "$SLACK_WEBHOOK"
+      - cache-push@2: {}
+  build-prod:
+    steps:
+      - script@1:
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -x
+
+                envman add --key BUILD_ENV --value "prod"
+      - trigger-bitrise-workflow@0:
+          inputs:
+            - workflow_id: android
+            - exported_environment_variable_names: BUILD_ENV
+            - api_token: "$BITRISE_TRIGGER_TOKEN"
+          title: Trigger build android
+      - trigger-bitrise-workflow@0:
+          inputs:
+            - workflow_id: ios
+            - exported_environment_variable_names: BUILD_ENV
+            - api_token: "$BITRISE_TRIGGER_TOKEN"
+          title: Trigger build ios
+  build-test:
+    steps:
+      - script@1:
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -x
+
+                envman add --key BUILD_ENV --value "dev"
+      - trigger-bitrise-workflow@0:
+          inputs:
+            - workflow_id: android
+            - exported_environment_variable_names: BUILD_ENV
+            - api_token: "$BITRISE_TRIGGER_TOKEN"
+          title: Trigger build android
+      - trigger-bitrise-workflow@0:
+          inputs:
+            - workflow_id: ios
+            - exported_environment_variable_names: BUILD_ENV
+            - api_token: "$BITRISE_TRIGGER_TOKEN"
+          title: Trigger build ios
+  ios:
+    steps:
+      - activate-ssh-key@4:
+          run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+      - git-clone@6: {}
+      - cache-pull@2: {}
+      - flutter-installer@0:
+          inputs:
+            - is_update: 'false'
+      - script@1:
+          title: Clean & config ios
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -x
+
+                bash clean.sh
+                bash config_ios.sh $BUILD_ENV
+      - flutter-build@0:
+          inputs:
+            - android_additional_params: ''
+            - ios_additional_params: "--dart-define=Env=$BUILD_ENV --no-pub --release
+            --no-codesign"
+            - platform: ios
+      - deploy-to-bitrise-io@2: {}
+      - slack@3:
+          inputs:
+            - image_url: "$BITRISE_PUBLIC_INSTALL_PAGE_QR_CODE_IMAGE_URL"
+            - pretext: "*Build IOS-$BUILD_ENV Succeeded!*"
+            - channel: "#flutter-build"
+            - text: "@tungtd95"
+            - from_username: Sekiro BOT
+            - icon_url: https://cdn0.iconfinder.com/data/icons/flat-round-system/512/apple-512.png
+            - author_name: ''
+            - footer: Scan *QRCode* or click *Install Page* to download
+            - footer_icon: https://upload.wikimedia.org/wikipedia/commons/a/a0/APK_format_icon.png
+            - fields: ''
+            - buttons: |
+                View Build|${BITRISE_BUILD_URL}
+                Install Page|${BITRISE_PUBLIC_INSTALL_PAGE_URL}
+            - color: "#0bde4a"
+            - pretext_on_error: "*Build IOS-$BUILD_ENV Failed!*"
             - webhook_url: "$SLACK_WEBHOOK"
       - cache-push@2: {}
 meta:
