@@ -23,7 +23,7 @@ class WeatherRepo {
   Future<List<City>> searchCitiesByName(String query) {
     return _service.getCitiesByName(
       query,
-      _env.getOpenWeatherAppID(),
+      _env.weatherAppID,
     );
   }
 
@@ -31,7 +31,7 @@ class WeatherRepo {
     return _service.getWeatherByCityLatLng(
       city.lat,
       city.lon,
-      _env.getOpenWeatherAppID(),
+      _env.weatherAppID,
     );
   }
 
@@ -41,7 +41,7 @@ class WeatherRepo {
     final Weather? weather = await _service.getWeatherByCityLatLng(
       city.lat,
       city.lon,
-      _env.getOpenWeatherAppID(),
+      _env.weatherAppID,
     );
     if (weather != null) {
       return WeatherCity(city: city, weather: weather);

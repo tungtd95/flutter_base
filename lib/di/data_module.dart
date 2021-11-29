@@ -10,12 +10,8 @@ abstract class DataModule {
   @lazySingleton
   Dio get dio {
     final Dio dio = Dio();
-    dio.interceptors.add(LogInterceptor(
-      responseBody: true,
-      requestHeader: false,
-      responseHeader: false,
-    ));
-    dio.interceptors.add(ErrorHandlerInterceptor());
+    dio.interceptors.addAll(getIt<List<Interceptor>>());
+    dio.interceptors.add(getIt<ErrorHandlerInterceptor>());
     return dio;
   }
 
@@ -23,11 +19,26 @@ abstract class DataModule {
   WeatherService get weatherService {
     return WeatherService(
       getIt<Dio>(),
-      baseUrl: getIt<Env>().getOpenWeatherUrl(),
+      baseUrl: getIt<Env>().weatherUrl,
     );
   }
+
+  @Injectable(env: [Environment.dev])
+  List<Interceptor> get loggingInterceptorDev {
+    List<Interceptor> interceptors = [];
+    interceptors.add(LogInterceptor(
+      responseBody: true,
+      requestHeader: false,
+      responseHeader: false,
+    ));
+    return interceptors;
+  }
+
+  @Injectable(env: [Environment.prod])
+  List<Interceptor> get loggingInterceptorProd => [];
 }
 
+@injectable
 class ErrorHandlerInterceptor extends Interceptor {
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {

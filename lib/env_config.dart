@@ -1,25 +1,25 @@
 import 'package:injectable/injectable.dart';
 
 abstract class Env {
-  String getOpenWeatherUrl();
+  String get weatherUrl;
 
-  String getOpenWeatherAppID();
+  String get weatherAppID;
 }
 
 @Injectable(as: Env, env: [Environment.dev])
 class EnvDEV extends Env {
   @override
-  String getOpenWeatherUrl() => "https://api.openweathermap.org";
+  String get weatherUrl => "https://api.openweathermap.org";
 
   @override
-  String getOpenWeatherAppID() => "1f930c31692eff97a92281d72455c44a";
+  String get weatherAppID => "1f930c31692eff97a92281d72455c44a";
 }
 
 @Injectable(as: Env, env: [Environment.prod])
 class EnvPROD extends Env {
   @override
-  String getOpenWeatherUrl() => "https://api.openweathermap.org/prod";
+  String get weatherUrl => "https://api.openweathermap.org";
 
   @override
-  String getOpenWeatherAppID() => "1f930c31692eff97a92281d72455c44a-prod";
+  String get weatherAppID => "1f930c31692eff97a92281d72455c44a";
 }
