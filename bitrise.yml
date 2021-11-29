@@ -33,20 +33,24 @@ workflows:
       - slack@3:
           inputs:
             - image_url: "$BITRISE_PUBLIC_INSTALL_PAGE_QR_CODE_IMAGE_URL"
-            - pretext: "*Build ANDROID-$BUILD_ENV Succeeded!*"
+            - pretext: ''
             - channel: "#flutter-build"
-            - text: "@tungtd95"
+            - text: "Build ANDROID-$BUILD_ENV Succeeded! @here"
             - from_username: Sekiro BOT
             - icon_url: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR99UzpCE5djM64xEfK-XfVP2Dy5G1bPVIlyg&usqp=CAU
             - author_name: ''
-            - footer: Scan *QRCode* or click *Install Page* to download
-            - footer_icon: https://upload.wikimedia.org/wikipedia/commons/a/a0/APK_format_icon.png
+            - footer: ''
+            - footer_icon: ''
+            - timestamp: 'no'
             - fields: ''
             - buttons: |
                 View Build|${BITRISE_BUILD_URL}
                 Install Page|${BITRISE_PUBLIC_INSTALL_PAGE_URL}
             - color: "#0bde4a"
-            - pretext_on_error: "*Build Android-$BUILD_ENV Failed!*"
+            - icon_url_on_error: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR99UzpCE5djM64xEfK-XfVP2Dy5G1bPVIlyg&usqp=CAU
+            - pretext_on_error: ''
+            - from_username_on_error: Sekiro BOT
+            - text_on_error: "Build Android-$BUILD_ENV Failed! @tungtd95"
             - webhook_url: "$SLACK_WEBHOOK"
       - cache-push@2: {}
   build-prod:
@@ -119,20 +123,24 @@ workflows:
       - slack@3:
           inputs:
             - image_url: "$BITRISE_PUBLIC_INSTALL_PAGE_QR_CODE_IMAGE_URL"
-            - pretext: "*Build IOS-$BUILD_ENV Succeeded!*"
+            - pretext: ''
             - channel: "#flutter-build"
-            - text: "@tungtd95"
+            - text: "Build IOS-$BUILD_ENV Succeeded! @here"
             - from_username: Sekiro BOT
             - icon_url: https://cdn0.iconfinder.com/data/icons/flat-round-system/512/apple-512.png
             - author_name: ''
-            - footer: Scan *QRCode* or click *Install Page* to download
-            - footer_icon: https://upload.wikimedia.org/wikipedia/commons/a/a0/APK_format_icon.png
+            - footer: ''
+            - footer_icon: ''
+            - timestamp: 'no'
             - fields: ''
             - buttons: |
                 View Build|${BITRISE_BUILD_URL}
                 Install Page|${BITRISE_PUBLIC_INSTALL_PAGE_URL}
             - color: "#0bde4a"
-            - pretext_on_error: "*Build IOS-$BUILD_ENV Failed!*"
+            - icon_url_on_error: https://cdn0.iconfinder.com/data/icons/flat-round-system/512/apple-512.png
+            - pretext_on_error: ''
+            - from_username_on_error: Sekiro BOT
+            - text_on_error: "Build IOS-$BUILD_ENV Failed! @tungtd95"
             - webhook_url: "$SLACK_WEBHOOK"
       - cache-push@2: {}
 meta:
