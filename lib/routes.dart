@@ -8,15 +8,16 @@ import 'package:flutter_base/ui/home/home_widget.dart';
 import 'package:flutter_base/utils/common_utils.dart';
 
 class Routes {
-  static const String DOMAIN = "sekiro://weather.sekiro.com";
+  static const String SCHEME = "sekiro";
+  static const String DOMAIN = "$SCHEME://weather.sekiro.com";
 
-  static const String HOME = "/";
+  static const String HOME = "";
   static const String CITY_DETAIL = "/city";
   static const String ADD_CITY = "/add_city";
   static const String SPLASH = "/splash";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final deepLink = DeepLinkParser.parse("$DOMAIN${settings.name ?? HOME}");
+    final deepLink = DeepLinkParser.parse(settings.name ?? HOME);
     dynamic args = deepLink.args ?? settings.arguments;
     String path = deepLink.path;
 

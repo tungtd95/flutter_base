@@ -24,6 +24,7 @@ if (flutterVersionName == null) {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 31
@@ -43,7 +44,7 @@ android {
 
     defaultConfig {
         applicationId "com.sekiroflutter"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -78,12 +79,13 @@ android {
         dev {
             resValue "string", "APPLICATION_NAME", "Weather Dev"
 
-            applicationIdSuffix ".dev"
+            applicationIdSuffix ".weather_dev"
             signingConfig signingConfigs.debug
         }
         prod {
             resValue "string", "APPLICATION_NAME", "Weather"
 
+            applicationIdSuffix ".weather"
             signingConfig signingConfigs.release
         }
     }
@@ -109,4 +111,8 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // firebase
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }

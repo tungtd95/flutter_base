@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter_base/routes.dart';
 import 'package:logger/logger.dart';
 
 var logger = Logger(
@@ -34,7 +35,11 @@ class DeepLinkParser {
     this.args,
   });
 
-  factory DeepLinkParser.parse(String deepLink) {
+  factory DeepLinkParser.parse(String? input) {
+    String deepLink = (input ?? Routes.HOME).trim();
+    if (!deepLink.startsWith(Routes.DOMAIN)) {
+      deepLink = "${Routes.DOMAIN}$deepLink";
+    }
     final Uri? uri = Uri.tryParse(deepLink);
 
     if (uri == null) {

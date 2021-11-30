@@ -5,6 +5,7 @@ import 'package:flutter_base/ui/base/status.dart';
 import 'package:flutter_base/ui/home/components/weather_widget.dart';
 import 'package:flutter_base/ui/home/home_cubit.dart';
 import 'package:flutter_base/ui/home/home_data.dart';
+import 'package:flutter_base/utils/notification_utils.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -26,6 +27,7 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
       cubit.markFirstTimeStartUp();
       Navigator.of(context).pushNamed(Routes.SPLASH);
     }
+    NotificationUtils.subscribePayload(context);
   }
 
   @override
@@ -80,5 +82,11 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
         padding: EdgeInsets.symmetric(vertical: 64),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    NotificationUtils.clear();
+    super.dispose();
   }
 }
