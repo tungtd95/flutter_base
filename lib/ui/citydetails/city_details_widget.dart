@@ -5,6 +5,7 @@ import 'package:flutter_base/ui/base/base_page_widget.dart';
 import 'package:flutter_base/ui/citydetails/city_details_cubit.dart';
 import 'package:flutter_base/ui/citydetails/city_details_data.dart';
 import 'package:flutter_base/data/models/weather_city.dart';
+import 'package:flutter_base/utils/common_utils.dart';
 
 class CityDetailsWidget extends StatefulWidget {
   final CityDetailsArg arg;
@@ -55,7 +56,7 @@ class _CityDetailsWidgetState extends BasePageState<CityDetailsWidget,
           Image.network(iconUrl, height: 80, width: 80),
           SizedBox(height: 16),
           Text(
-            city.getFullName(),
+            LingoUtils.unSign(city.getFullName()),
             style: TextStyle(fontSize: 20),
           ),
           SizedBox(height: 24),
