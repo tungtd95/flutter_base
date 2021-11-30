@@ -22,7 +22,7 @@ abstract class BasePageState<W extends StatefulWidget, C extends BaseCubit<D>,
   }
 
   void onViewCreated() {
-    print("${objectRuntimeType(this, "")} onViewCreated");
+    debugPrint("${objectRuntimeType(this, "")} onViewCreated");
   }
 
   void onDataChange(BuildContext context, D data) {
@@ -61,7 +61,7 @@ abstract class BasePageState<W extends StatefulWidget, C extends BaseCubit<D>,
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    print("${objectRuntimeType(this, "")} ${state.toString()}");
+    debugPrint("${objectRuntimeType(this, "")} ${state.toString()}");
   }
 
   @override
@@ -73,7 +73,7 @@ abstract class BasePageState<W extends StatefulWidget, C extends BaseCubit<D>,
 
   @override
   void dispose() {
-    print("${objectRuntimeType(this, "")} dispose");
+    debugPrint("${objectRuntimeType(this, "")} dispose");
     cubit.dispose();
     getIt<RouteObserver<ModalRoute<void>>>().unsubscribe(this);
     WidgetsBinding.instance?.removeObserver(this);
@@ -82,25 +82,25 @@ abstract class BasePageState<W extends StatefulWidget, C extends BaseCubit<D>,
 
   @override
   void didPop() {
-    print("${objectRuntimeType(this, "")} didPop");
+    debugPrint("${objectRuntimeType(this, "")} didPop");
     super.didPop();
   }
 
   @override
   void didPopNext() {
-    print("${objectRuntimeType(this, "")} didPopNext");
+    debugPrint("${objectRuntimeType(this, "")} didPopNext");
     super.didPopNext();
   }
 
   @override
   void didPush() {
-    print("${objectRuntimeType(this, "")} didPush");
+    debugPrint("${objectRuntimeType(this, "")} didPush");
     super.didPush();
   }
 
   @override
   void didPushNext() {
-    print("${objectRuntimeType(this, "")} didPushNext");
+    debugPrint("${objectRuntimeType(this, "")} didPushNext");
     super.didPushNext();
   }
 
