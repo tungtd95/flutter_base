@@ -35,7 +35,7 @@ workflows:
             - image_url: "$BITRISE_PUBLIC_INSTALL_PAGE_QR_CODE_IMAGE_URL"
             - pretext: ''
             - channel: "#flutter-build"
-            - text: "Build ANDROID-$BUILD_ENV Succeeded! @here"
+            - text: "Build *`ANDROID-$BUILD_ENV`* Succeeded! @here"
             - from_username: Sekiro BOT
             - icon_url: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR99UzpCE5djM64xEfK-XfVP2Dy5G1bPVIlyg&usqp=CAU
             - author_name: ''
@@ -50,7 +50,7 @@ workflows:
             - icon_url_on_error: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR99UzpCE5djM64xEfK-XfVP2Dy5G1bPVIlyg&usqp=CAU
             - pretext_on_error: ''
             - from_username_on_error: Sekiro BOT
-            - text_on_error: "Build Android-$BUILD_ENV Failed! @tungtd95"
+            - text_on_error: "Build *`Android-$BUILD_ENV`* Failed! @tungtd95"
             - webhook_url: "$SLACK_WEBHOOK"
       - cache-push@2: {}
   build-prod:
@@ -74,6 +74,7 @@ workflows:
             - exported_environment_variable_names: BUILD_ENV
             - api_token: "$BITRISE_TRIGGER_TOKEN"
           title: Trigger build ios
+          run_if: false
   build-test:
     steps:
       - script@1:
@@ -95,6 +96,7 @@ workflows:
             - exported_environment_variable_names: BUILD_ENV
             - api_token: "$BITRISE_TRIGGER_TOKEN"
           title: Trigger build ios
+          run_if: false
   ios:
     steps:
       - activate-ssh-key@4:
@@ -125,7 +127,7 @@ workflows:
             - image_url: "$BITRISE_PUBLIC_INSTALL_PAGE_QR_CODE_IMAGE_URL"
             - pretext: ''
             - channel: "#flutter-build"
-            - text: "Build IOS-$BUILD_ENV Succeeded! @here"
+            - text: "Build *`IOS-$BUILD_ENV`* Succeeded! @here"
             - from_username: Sekiro BOT
             - icon_url: https://cdn0.iconfinder.com/data/icons/flat-round-system/512/apple-512.png
             - author_name: ''
@@ -140,7 +142,7 @@ workflows:
             - icon_url_on_error: https://cdn0.iconfinder.com/data/icons/flat-round-system/512/apple-512.png
             - pretext_on_error: ''
             - from_username_on_error: Sekiro BOT
-            - text_on_error: "Build IOS-$BUILD_ENV Failed! @tungtd95"
+            - text_on_error: "Build *`IOS-$BUILD_ENV`* Failed! @tungtd95"
             - webhook_url: "$SLACK_WEBHOOK"
       - cache-push@2: {}
 meta:

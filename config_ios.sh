@@ -12,4 +12,4 @@ then
 env="prod"
 fi
 
-ios/Pods/Natrium/bin/natrium -e $env -c Release -t Runner
+ios/Pods/Natrium/Natrium/natrium -e $env -c Release -t Runner
