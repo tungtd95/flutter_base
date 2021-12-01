@@ -52,7 +52,10 @@ workflows:
             - from_username_on_error: Sekiro BOT
             - text_on_error: "Build *`Android-$BUILD_ENV`* Failed! @tungtd95"
             - webhook_url: "$SLACK_WEBHOOK"
-      - cache-push@2: {}
+      - cache-push@2:
+          inputs:
+            - ignore_check_on_paths: "!/Users/vagrant/.pub-cache/*"
+            - cache_paths: "$BITRISE_FLUTTER_PROJECT_LOCATION/ios/Pods"
   build-prod:
     steps:
       - script@1:
@@ -113,6 +116,10 @@ workflows:
 
                 bash clean.sh
                 bash config_ios.sh $BUILD_ENV
+      - cache-push@2:
+          inputs:
+            - ignore_check_on_paths: "!/Users/vagrant/.pub-cache/*"
+            - cache_paths: "$BITRISE_FLUTTER_PROJECT_LOCATION/ios/Pods"
       - flutter-build@0:
           inputs:
             - android_additional_params: ''
@@ -142,7 +149,6 @@ workflows:
             - from_username_on_error: Sekiro BOT
             - text_on_error: "Build *`IOS-$BUILD_ENV`* Failed! @tungtd95"
             - webhook_url: "$SLACK_WEBHOOK"
-      - cache-push@2: {}
 meta:
   bitrise.io:
     stack: osx-xcode-13.1.x
