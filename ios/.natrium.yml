@@ -34,10 +34,10 @@ appicon:
     dev: "dev"
     prod: ""
 
-#files:
-#  Runner/GoogleService-Info.plist:
-#    DEV: Runner/GoogleService-Info-DEV.plist
-#    Production: Runner/GoogleService-Info-PROD.plist
+files:
+  Runner/GoogleService-Info.plist:
+    dev: Runner/GoogleService-Info-dev.plist
+    prod: Runner/GoogleService-Info-prod.plist
 #
 #  Runner/AppDelegate.swift:
 #    DEV: Runner/AppDelegate-DEV.swift

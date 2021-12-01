@@ -69,6 +69,7 @@ class HomeCubit extends BaseCubit<HomeData> {
 
   void refreshWeathers() {
     _getWeathers(state.cities ?? []);
+    checkRemoteFlavor();
   }
 
   void removeCity(City city) {
@@ -86,6 +87,12 @@ class HomeCubit extends BaseCubit<HomeData> {
 
   void markFirstTimeStartUp() {
     _pref.markFirstTimeStartUp();
+  }
+
+  void checkRemoteFlavor() {
+    _weatherRepo.getRemoteFlavor().then((value) {
+      emit(state.copyWith(remoteFlavor: value));
+    }, onError: (e) {});
   }
 
   @override

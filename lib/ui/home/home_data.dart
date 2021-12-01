@@ -10,10 +10,12 @@ part 'home_data.g.dart';
 class HomeData extends BaseData {
   final List<City>? cities;
   final List<WeatherCity>? weathers;
+  final String? remoteFlavor;
 
   HomeData({
     Status? status,
     this.cities,
     this.weathers,
+    this.remoteFlavor,
   }) : super(status ?? Init());
 }
