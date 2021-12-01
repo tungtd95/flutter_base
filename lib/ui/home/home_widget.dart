@@ -57,7 +57,7 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
               child: _buildContent(data),
             ),
             Container(
-              child: Text("Flavor from firebase: ${data.remoteFlavor}"),
+              child: Text("Remote Flavor: ${data.remoteFlavor}"),
               margin: EdgeInsets.only(left: 30),
             ),
           ],
