@@ -57,8 +57,15 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
               child: _buildContent(data),
             ),
             Container(
-              child: Text("Remote Flavor: ${data.remoteFlavor}"),
-              margin: EdgeInsets.only(left: 30),
+              child: Text(
+                "Remote Flavor: ${data.remoteFlavor}",
+                style: TextStyle(
+                  color: Colors.black45,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 12,
+                ),
+              ),
+              margin: EdgeInsets.only(left: 24, bottom: 8),
             ),
           ],
         ),
