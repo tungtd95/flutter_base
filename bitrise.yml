@@ -74,7 +74,6 @@ workflows:
             - exported_environment_variable_names: BUILD_ENV
             - api_token: "$BITRISE_TRIGGER_TOKEN"
           title: Trigger build ios
-          run_if: false
   build-test:
     steps:
       - script@1:
@@ -96,7 +95,6 @@ workflows:
             - exported_environment_variable_names: BUILD_ENV
             - api_token: "$BITRISE_TRIGGER_TOKEN"
           title: Trigger build ios
-          run_if: false
   ios:
     steps:
       - activate-ssh-key@4:
