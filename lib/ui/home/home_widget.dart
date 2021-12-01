@@ -23,6 +23,7 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
   void onViewCreated() {
     super.onViewCreated();
     cubit.subscribeCitiesStream();
+    cubit.checkRemoteFlavor();
     if (cubit.checkFirstTimeStartUp()) {
       cubit.markFirstTimeStartUp();
       Navigator.of(context).pushNamed(Routes.SPLASH);
@@ -48,7 +49,20 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
         },
         child: Icon(Icons.add),
       ),
-      body: SafeArea(child: _buildContent(data)),
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: _buildContent(data),
+            ),
+            Container(
+              child: Text("Flavor from firebase: ${data.remoteFlavor}"),
+              margin: EdgeInsets.only(left: 30),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
