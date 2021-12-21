@@ -1,0 +1,168 @@
+---
+format_version: '11'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: flutter
+trigger_map:
+  - push_branch: master
+    workflow: build-test
+workflows:
+  android:
+    steps:
+      - activate-ssh-key@4:
+          run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+      - git-clone@6: {}
+      - cache-pull@2: {}
+      - flutter-installer@0:
+          inputs:
+            - is_update: 'false'
+      - script@1:
+          title: Clean & Pub get
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -x
+
+                bash clean.sh
+      - flutter-build@0:
+          inputs:
+            - android_additional_params: "--dart-define=Env=$BUILD_ENV --flavor $BUILD_ENV
+            --no-pub --release"
+            - platform: android
+      - deploy-to-bitrise-io@2: {}
+      - create-install-page-qr-code@1: {}
+      - slack@3:
+          inputs:
+            - image_url: "$BITRISE_PUBLIC_INSTALL_PAGE_QR_CODE_IMAGE_URL"
+            - pretext: ''
+            - channel: "#flutter-build"
+            - text: "Build *`ANDROID-$BUILD_ENV`* Succeeded! @here"
+            - from_username: Sekiro BOT
+            - icon_url: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR99UzpCE5djM64xEfK-XfVP2Dy5G1bPVIlyg&usqp=CAU
+            - author_name: ''
+            - footer: ''
+            - footer_icon: ''
+            - timestamp: 'no'
+            - fields: ''
+            - buttons: |
+                View Build|${BITRISE_BUILD_URL}
+                Install Page|${BITRISE_PUBLIC_INSTALL_PAGE_URL}
+            - color: "#0bde4a"
+            - icon_url_on_error: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR99UzpCE5djM64xEfK-XfVP2Dy5G1bPVIlyg&usqp=CAU
+            - pretext_on_error: ''
+            - from_username_on_error: Sekiro BOT
+            - text_on_error: "Build *`Android-$BUILD_ENV`* Failed! @tungtd95"
+            - webhook_url: "$SLACK_WEBHOOK"
+      - cache-push@2:
+          inputs:
+            - ignore_check_on_paths: "!/Users/vagrant/.pub-cache/*"
+            - cache_paths: "$BITRISE_FLUTTER_PROJECT_LOCATION/ios/Pods"
+  build-prod:
+    steps:
+      - script@1:
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -x
+
+                envman add --key BUILD_ENV --value "prod"
+      - trigger-bitrise-workflow@0:
+          inputs:
+            - workflow_id: android
+            - exported_environment_variable_names: BUILD_ENV
+            - api_token: "$BITRISE_TRIGGER_TOKEN"
+          title: Trigger build android
+      - trigger-bitrise-workflow@0:
+          inputs:
+            - workflow_id: ios
+            - exported_environment_variable_names: BUILD_ENV
+            - api_token: "$BITRISE_TRIGGER_TOKEN"
+          title: Trigger build ios
+  build-test:
+    steps:
+      - script@1:
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -x
+
+                envman add --key BUILD_ENV --value "dev"
+      - trigger-bitrise-workflow@0:
+          inputs:
+            - workflow_id: android
+            - exported_environment_variable_names: BUILD_ENV
+            - api_token: "$BITRISE_TRIGGER_TOKEN"
+          title: Trigger build android
+      - trigger-bitrise-workflow@0:
+          inputs:
+            - workflow_id: ios
+            - exported_environment_variable_names: BUILD_ENV
+            - api_token: "$BITRISE_TRIGGER_TOKEN"
+          title: Trigger build ios
+  ios:
+    steps:
+      - activate-ssh-key@4:
+          run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+      - git-clone@6: {}
+      - cache-pull@2: {}
+      - flutter-installer@0:
+          inputs:
+            - is_update: 'false'
+      - script@1:
+          title: Clean & config ios
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -x
+
+                bash clean.sh
+                bash config_ios.sh $BUILD_ENV
+      - cache-push@2:
+          inputs:
+            - ignore_check_on_paths: "!/Users/vagrant/.pub-cache/*"
+            - cache_paths: "$BITRISE_FLUTTER_PROJECT_LOCATION/ios/Pods"
+      - flutter-build@0:
+          inputs:
+            - android_additional_params: ''
+            - ios_additional_params: "--dart-define=Env=$BUILD_ENV --no-pub --release
+            --no-codesign"
+            - platform: ios
+      - deploy-to-bitrise-io@2: {}
+      - slack@3:
+          inputs:
+            - image_url: "$BITRISE_PUBLIC_INSTALL_PAGE_QR_CODE_IMAGE_URL"
+            - pretext: ''
+            - channel: "#flutter-build"
+            - text: "Build *`IOS-$BUILD_ENV`* Succeeded! @here"
+            - from_username: Sekiro BOT
+            - icon_url: https://cdn0.iconfinder.com/data/icons/flat-round-system/512/apple-512.png
+            - author_name: ''
+            - footer: ''
+            - footer_icon: ''
+            - timestamp: 'no'
+            - fields: ''
+            - buttons: |
+                View Build|${BITRISE_BUILD_URL}
+                Install Page|${BITRISE_PUBLIC_INSTALL_PAGE_URL}
+            - color: "#0bde4a"
+            - icon_url_on_error: https://cdn0.iconfinder.com/data/icons/flat-round-system/512/apple-512.png
+            - pretext_on_error: ''
+            - from_username_on_error: Sekiro BOT
+            - text_on_error: "Build *`IOS-$BUILD_ENV`* Failed! @tungtd95"
+            - webhook_url: "$SLACK_WEBHOOK"
+meta:
+  bitrise.io:
+    stack: osx-xcode-13.1.x
+app:
+  envs:
+    - opts:
+        is_expand: false
+      BITRISE_FLUTTER_PROJECT_LOCATION: "."
+    - opts:
+        is_expand: false
+      BITRISE_PROJECT_PATH: ios/Runner.xcworkspace
+    - opts:
+        is_expand: false
+      BITRISE_SCHEME: Runner
+    - opts:
+        is_expand: false
+      BITRISE_DISTRIBUTION_METHOD: ad-hoc

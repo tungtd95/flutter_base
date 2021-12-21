@@ -1,0 +1,59 @@
+name: flutter_base
+description: A Flutter base project.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.15.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # networking
+  retrofit: any
+  logger: any
+  json_serializable: ^6.1.3
+  json_annotation: ^4.4.0
+
+  # di
+  injectable: any
+  get_it: any
+
+  # bloc
+  flutter_bloc: ^8.0.0
+
+  # local db
+  floor: ^1.2.0
+
+  # firebase
+  firebase_core: ^1.10.6
+  firebase_analytics: ^9.0.4
+  firebase_messaging: ^11.2.4
+  cloud_firestore: ^3.1.5
+
+  # others
+  rxdart: ^0.27.3
+  rive: ^0.7.33
+  shared_preferences: ^2.0.11
+  pull_to_refresh: ^2.0.0
+  copy_with_extension: ^2.0.2
+  flutter_alice: ^1.0.2
+  overlay_support: ^1.2.1
+  flutter_local_notifications: ^9.1.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  retrofit_generator: any
+  build_runner: any
+  injectable_generator: any
+  floor_generator: ^1.2.0
+  copy_with_extension_gen: ^2.0.3
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/anim/
