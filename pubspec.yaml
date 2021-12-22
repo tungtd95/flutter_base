@@ -44,8 +44,13 @@ dependencies:
   flutter_local_notifications: ^9.1.5
 
 dev_dependencies:
+  # test
   flutter_test:
     sdk: flutter
+  test: any
+  mockito: ^5.0.17
+
+  # generator
   retrofit_generator: any
   build_runner: any
   injectable_generator: any
