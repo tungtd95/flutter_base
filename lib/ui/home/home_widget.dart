@@ -4,9 +4,7 @@ import 'package:flutter_base/ui/base/base_page_widget.dart';
 import 'package:flutter_base/ui/home/components/weather_widget.dart';
 import 'package:flutter_base/ui/home/home_cubit.dart';
 import 'package:flutter_base/ui/home/home_data.dart';
-import 'package:flutter_base/ui/sample/learn/keys.dart';
 import 'package:flutter_base/ui/sample/learn/learn_entry_widget.dart';
-import 'package:flutter_base/ui/sample/learn/shrink_wrap_example.dart';
 import 'package:flutter_base/utils/notification_utils.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 

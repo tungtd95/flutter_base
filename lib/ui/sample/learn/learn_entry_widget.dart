@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/ui/sample/learn/heavy_computation.dart';
 import 'package:flutter_base/ui/sample/learn/keys.dart';
 import 'package:flutter_base/ui/sample/learn/shrink_wrap_example.dart';
 
@@ -22,6 +23,11 @@ class LearnEntryWidget extends StatelessWidget {
               context,
               title: 'Keys',
               child: KeyExample(),
+            ),
+            entry(
+              context,
+              title: 'Heavy Computation',
+              child: HeavyComputation(),
             )
           ],
         ),
