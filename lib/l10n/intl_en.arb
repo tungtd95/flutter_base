@@ -1,0 +1,4 @@
+{
+  "helloWorld": "Hello World!",
+  "helloAny": "Hello {name}, I am from {where}"
+}

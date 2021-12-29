@@ -1,0 +1,4 @@
+{
+  "helloWorld": "Xin chào!",
+  "helloAny": "Xin chào {name}, Tôi đến từ {where}"
+}

@@ -10,6 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
 
   # networking
   retrofit: any
@@ -56,6 +59,14 @@ dev_dependencies:
   injectable_generator: any
   floor_generator: ^1.2.0
   copy_with_extension_gen: ^2.0.3
+  intl_utils: ^2.6.0
+
+flutter_intl:
+  enabled: true
+  class_name: Strings
+  main_locale: en
+  arb_dir: lib/l10n
+  output_dir: lib/l10n
 
 flutter:
   uses-material-design: true

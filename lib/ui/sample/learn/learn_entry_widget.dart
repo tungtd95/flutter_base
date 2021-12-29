@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/l10n/l10n.dart';
 import 'package:flutter_base/ui/sample/learn/heavy_computation.dart';
 import 'package:flutter_base/ui/sample/learn/keys.dart';
 import 'package:flutter_base/ui/sample/learn/shrink_wrap_example.dart';
@@ -8,12 +9,16 @@ class LearnEntryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Learning Entry'),
+        title: Text(
+          'Learning Entry',
+        ),
       ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Text(Strings.of(context).helloAny('Alice', 'Vietnam')),
+            SizedBox(height: 12),
             entry(
               context,
               title: 'Custom scroll view',
