@@ -3,6 +3,7 @@ import 'package:flutter_base/l10n/l10n.dart';
 import 'package:flutter_base/ui/sample/learn/heavy_computation.dart';
 import 'package:flutter_base/ui/sample/learn/keys.dart';
 import 'package:flutter_base/ui/sample/learn/shrink_wrap_example.dart';
+import 'package:flutter_base/ui/sample/learn/sorting_native.dart';
 
 class LearnEntryWidget extends StatelessWidget {
   @override
@@ -33,6 +34,11 @@ class LearnEntryWidget extends StatelessWidget {
               context,
               title: 'Heavy Computation',
               child: HeavyComputation(),
+            ),
+            entry(
+              context,
+              title: 'Sorting native',
+              child: SortingNativeWidget(),
             )
           ],
         ),
