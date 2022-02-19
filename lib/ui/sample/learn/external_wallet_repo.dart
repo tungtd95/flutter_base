@@ -39,6 +39,8 @@ class ExternalWalletRepo {
             WalletConnectSession.fromJson(dataJson[i]);
         ExternalWallet wallet = ExternalWallet();
         SessionStatus? status = await wallet.reconnectSession(session);
+        debugPrint(
+            '$runtimeType connected to ${session.peerMeta?.name} >> ${session.connected} >> ${status?.accounts}');
         if (status != null) {
           wallets.add(wallet);
           wallet.dataSubject.stream.listen(_handleWalletEvent);
@@ -53,7 +55,14 @@ class ExternalWalletRepo {
   }
 
   void reconnectNetwork() {
-    // TODO: handle reconnecting to network
+    _clearRepo();
+    _reviveSavedWallet();
+  }
+
+  void _clearRepo() {
+    _wallets.forEach((element) {
+      element.closeSocket();
+    });
   }
 
   void _handleWalletEvent(ExternalWalletData data) {

@@ -82,6 +82,10 @@ class ExternalWallet {
       },
     );
   }
+
+  void closeSocket() {
+    _connector.transport.close();
+  }
 }
 
 class ExternalWalletData {

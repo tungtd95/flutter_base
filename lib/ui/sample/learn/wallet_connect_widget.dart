@@ -118,7 +118,7 @@ class WalletConnectWidgetState extends State<WalletConnectWidget> {
                 });
               });
             },
-            child: Text('create new connection'),
+            child: Text('create'),
           ),
           SizedBox(width: 16),
           ElevatedButton(
