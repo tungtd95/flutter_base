@@ -4,6 +4,7 @@ import 'package:flutter_base/ui/sample/learn/heavy_computation.dart';
 import 'package:flutter_base/ui/sample/learn/keys.dart';
 import 'package:flutter_base/ui/sample/learn/shrink_wrap_example.dart';
 import 'package:flutter_base/ui/sample/learn/sorting_native.dart';
+import 'package:flutter_base/ui/sample/learn/wallet_connect_widget.dart';
 
 class LearnEntryWidget extends StatelessWidget {
   @override
@@ -39,6 +40,11 @@ class LearnEntryWidget extends StatelessWidget {
               context,
               title: 'Sorting native',
               child: SortingNativeWidget(),
+            ),
+            entry(
+              context,
+              title: 'WalletConnect',
+              child: WalletConnectWidget(),
             )
           ],
         ),
