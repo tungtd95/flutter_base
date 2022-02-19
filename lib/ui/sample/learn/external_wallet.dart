@@ -44,11 +44,6 @@ class ExternalWallet {
     return _sessionStatus;
   }
 
-  Future<void> reconnect() async {
-    _sessionStatus = await _connector.connect();
-    testConnection();
-  }
-
   void _subscribeWalletEvent() {
     _connector.on(
       'connect',
@@ -85,13 +80,6 @@ class ExternalWallet {
           ),
         );
       },
-    );
-  }
-
-  void testConnection() async {
-    await _connector.sendCustomRequest(
-      method: 'eth_requestAccounts',
-      params: [],
     );
   }
 }

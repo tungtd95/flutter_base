@@ -53,9 +53,7 @@ class ExternalWalletRepo {
   }
 
   void reconnectNetwork() {
-    _wallets.forEach((element) {
-      element.reconnect();
-    });
+    // TODO: handle reconnecting to network
   }
 
   void _handleWalletEvent(ExternalWalletData data) {
