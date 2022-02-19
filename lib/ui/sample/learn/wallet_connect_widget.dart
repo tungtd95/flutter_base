@@ -92,9 +92,12 @@ class WalletConnectWidgetState extends State<WalletConnectWidget> {
             if (uriForNewWallet.isNotEmpty)
               QrImage(
                 data: uriForNewWallet,
-                size: 300,
+                size: 280,
               ),
-            Text(uriForNewWallet),
+            Text(
+              uriForNewWallet,
+              style: TextStyle(fontSize: 8),
+            ),
           ],
         ),
       ),
