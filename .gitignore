@@ -48,3 +48,6 @@ app.*.map.json
 
 ## IOS related
 /ios/Podfile.lock
+
+## test related
+/coverage
