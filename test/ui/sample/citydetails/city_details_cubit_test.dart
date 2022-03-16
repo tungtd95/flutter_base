@@ -4,7 +4,6 @@ import 'package:flutter_base/data/models/weather.dart';
 import 'package:flutter_base/data/models/weather_city.dart';
 import 'package:flutter_base/data/repo/weather_repo.dart';
 import 'package:flutter_base/data/utils/exception_handler.dart';
-import 'package:flutter_base/ui/base/status.dart';
 import 'package:flutter_base/ui/sample/citydetails/city_details_cubit.dart';
 import 'package:flutter_base/ui/sample/citydetails/city_details_data.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -35,8 +34,9 @@ void main() {
       weatherRepo: weatherRepo,
     ),
     act: (cubit) => cubit.getWeatherByCityId(1),
-    expect: () => <CityDetailsData>[
-      CityDetailsData(status: Success(), weather: weatherCityResult)
-    ],
+    verify: (bloc) {
+      expect(weatherCityResult, equals(bloc.state.weather));
+      verify(weatherRepo.getWeatherByCityId(1)).called(1);
+    }
   );
 }

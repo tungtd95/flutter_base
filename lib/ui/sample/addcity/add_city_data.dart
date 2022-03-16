@@ -13,7 +13,4 @@ class AddCityData extends BaseData {
     Status? status,
     this.cities,
   }) : super(status ?? Init());
-
-  @override
-  List<Object?> get props => [cities];
 }
