@@ -7,10 +7,13 @@ part 'add_city_data.g.dart';
 
 @CopyWith()
 class AddCityData extends BaseData {
-  List<City>? cities;
+  final List<City>? cities;
 
   AddCityData({
     Status? status,
     this.cities,
   }) : super(status ?? Init());
+
+  @override
+  List<Object?> get props => [cities];
 }

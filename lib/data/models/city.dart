@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:floor/floor.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -5,14 +6,14 @@ part 'city.g.dart';
 
 @JsonSerializable()
 @entity
-class City {
+class City extends Equatable {
   @PrimaryKey(autoGenerate: true)
-  int? id;
-  String? name;
-  String? country;
-  String? state;
-  double? lat;
-  double? lon;
+  final int? id;
+  final String? name;
+  final String? country;
+  final String? state;
+  final double? lat;
+  final double? lon;
 
   City({this.id, this.name, this.country, this.state, this.lat, this.lon});
 
@@ -33,4 +34,7 @@ class City {
   factory City.fromJson(Map<String, dynamic> json) => _$CityFromJson(json);
 
   Map<String, dynamic> toJson() => _$CityToJson(this);
+
+  @override
+  List<Object?> get props => [id, name, country, state, lat, lon];
 }

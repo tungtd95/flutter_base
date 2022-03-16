@@ -1,12 +1,13 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'weather.g.dart';
 
 @JsonSerializable()
-class Weather {
-  WeatherMain? main;
+class Weather extends Equatable {
+  final WeatherMain? main;
   @JsonKey(name: 'weather')
-  List<WeatherInfo>? weathers;
+  final List<WeatherInfo>? weathers;
 
   Weather({this.main, this.weathers});
 
@@ -14,13 +15,16 @@ class Weather {
       _$WeatherFromJson(json);
 
   Map<String, dynamic> toJson() => _$WeatherToJson(this);
+
+  @override
+  List<Object?> get props => [main, weathers];
 }
 
 @JsonSerializable()
-class WeatherMain {
-  double? temp;
-  double? pressure;
-  double? humidity;
+class WeatherMain extends Equatable {
+  final double? temp;
+  final double? pressure;
+  final double? humidity;
 
   WeatherMain({this.temp, this.pressure, this.humidity});
 
@@ -28,13 +32,16 @@ class WeatherMain {
       _$WeatherMainFromJson(json);
 
   Map<String, dynamic> toJson() => _$WeatherMainToJson(this);
+
+  @override
+  List<Object?> get props => [temp, pressure, humidity];
 }
 
 @JsonSerializable()
-class WeatherInfo {
-  String? main;
-  String? description;
-  String? icon;
+class WeatherInfo extends Equatable {
+  final String? main;
+  final String? description;
+  final String? icon;
 
   WeatherInfo({this.main, this.description, this.icon});
 
@@ -50,4 +57,7 @@ class WeatherInfo {
       return 'https://openweathermap.org/img/wn/$icon@2x.png';
     }
   }
+
+  @override
+  List<Object?> get props => [main, description, icon];
 }
