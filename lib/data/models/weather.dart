@@ -4,9 +4,9 @@ part 'weather.g.dart';
 
 @JsonSerializable()
 class Weather {
-  WeatherMain? main;
+  final WeatherMain? main;
   @JsonKey(name: 'weather')
-  List<WeatherInfo>? weathers;
+  final List<WeatherInfo>? weathers;
 
   Weather({this.main, this.weathers});
 
@@ -18,9 +18,9 @@ class Weather {
 
 @JsonSerializable()
 class WeatherMain {
-  double? temp;
-  double? pressure;
-  double? humidity;
+  final double? temp;
+  final double? pressure;
+  final double? humidity;
 
   WeatherMain({this.temp, this.pressure, this.humidity});
 
@@ -32,9 +32,9 @@ class WeatherMain {
 
 @JsonSerializable()
 class WeatherInfo {
-  String? main;
-  String? description;
-  String? icon;
+  final String? main;
+  final String? description;
+  final String? icon;
 
   WeatherInfo({this.main, this.description, this.icon});
 

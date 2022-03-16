@@ -63,6 +63,7 @@ dev_dependencies:
     sdk: flutter
   test: any
   mockito: ^5.0.17
+  bloc_test: any
 
   # generator
   retrofit_generator: any

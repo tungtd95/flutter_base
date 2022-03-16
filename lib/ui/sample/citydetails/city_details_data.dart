@@ -7,7 +7,7 @@ part 'city_details_data.g.dart';
 
 @CopyWith()
 class CityDetailsData extends BaseData {
-  WeatherCity? weather;
+  final WeatherCity? weather;
 
   CityDetailsData({
     Status? status,

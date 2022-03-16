@@ -7,12 +7,12 @@ part 'city.g.dart';
 @entity
 class City {
   @PrimaryKey(autoGenerate: true)
-  int? id;
-  String? name;
-  String? country;
-  String? state;
-  double? lat;
-  double? lon;
+  final int? id;
+  final String? name;
+  final String? country;
+  final String? state;
+  final double? lat;
+  final double? lon;
 
   City({this.id, this.name, this.country, this.state, this.lat, this.lon});
 
