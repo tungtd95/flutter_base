@@ -13,7 +13,4 @@ class CityDetailsData extends BaseData {
     Status? status,
     this.weather,
   }) : super(status ?? Init());
-
-  @override
-  List<Object?> get props => [weather];
 }

@@ -18,7 +18,4 @@ class HomeData extends BaseData {
     this.weathers,
     this.remoteFlavor,
   }) : super(status ?? Init());
-
-  @override
-  List<Object?> get props => [cities, weathers, remoteFlavor];
 }
