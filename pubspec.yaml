@@ -72,6 +72,10 @@ dev_dependencies:
   floor_generator: ^1.2.0
   copy_with_extension_gen: ^2.0.3
   intl_utils: ^2.6.0
+  flutter_flavorizr:
+    git:
+      url: https://github.com/tungtd95/flutter_flavorizr.git
+      ref: v2.2.0
 
 flutter_intl:
   enabled: true
@@ -85,3 +89,38 @@ flutter:
   assets:
     - assets/images/
     - assets/anim/
+
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "app"
+    ios:
+
+  flavors:
+    dev:
+      app:
+        name: "Weather Dev"
+
+      android:
+        applicationId: "com.sekiroflutter.weather_dev"
+        firebase:
+          config: ".firebase/dev/google-services.json"
+
+      ios:
+        bundleId: "com.sekiroflutter.dev"
+        firebase:
+          config: ".firebase/dev/GoogleService-Info.plist"
+
+    prod:
+      app:
+        name: "Weather"
+
+      android:
+        applicationId: "com.sekiroflutter.weather"
+        firebase:
+          config: ".firebase/prod/google-services.json"
+
+      ios:
+        bundleId: "com.sekiroflutter"
+        firebase:
+          config: ".firebase/prod/GoogleService-Info.plist"
