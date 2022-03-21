@@ -115,7 +115,6 @@ workflows:
                 set -x
 
                 bash clean.sh
-                bash config_ios.sh $BUILD_ENV
       - cache-push@2:
           inputs:
             - ignore_check_on_paths: "!/Users/vagrant/.pub-cache/*"
@@ -123,8 +122,8 @@ workflows:
       - flutter-build@0:
           inputs:
             - android_additional_params: ''
-            - ios_additional_params: "--dart-define=Env=$BUILD_ENV --no-pub --release
-            --no-codesign"
+            - ios_additional_params: "--dart-define=Env=$BUILD_ENV --flavor $BUILD_ENV
+            --no-pub --release --no-codesign"
             - platform: ios
       - deploy-to-bitrise-io@2: {}
       - slack@3:

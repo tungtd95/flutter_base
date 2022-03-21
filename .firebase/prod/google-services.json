@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "189393495583",
+    "project_id": "weather-prod-d266e",
+    "storage_bucket": "weather-prod-d266e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189393495583:android:892350359e3e383da9572a",
+        "android_client_info": {
+          "package_name": "com.sekiro.weather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189393495583-j9k36dpis5sn7h0ah6nqo7fm8k5ce4s8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChhBjxrc89D4GCeftwu6YPw0rvwAUhitI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189393495583-j9k36dpis5sn7h0ah6nqo7fm8k5ce4s8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189393495583:android:0308bcca5f919bc2a9572a",
+        "android_client_info": {
+          "package_name": "com.sekiroflutter.weather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189393495583-j9k36dpis5sn7h0ah6nqo7fm8k5ce4s8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChhBjxrc89D4GCeftwu6YPw0rvwAUhitI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189393495583-j9k36dpis5sn7h0ah6nqo7fm8k5ce4s8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
