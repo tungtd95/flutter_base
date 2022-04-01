@@ -21,6 +21,8 @@ class _AddCityWidgetState
   void onViewCreated() {
     super.onViewCreated();
     _searchFocusNode.requestFocus();
+    cubit.subscribeAllTickerStream();
+    cubit.subscribeBTCStream();
   }
 
   @override
@@ -47,6 +49,10 @@ class _AddCityWidgetState
                   loading: data.status.isLoading(),
                 ),
                 margin: EdgeInsets.symmetric(horizontal: 16),
+              ),
+              Padding(
+                padding: EdgeInsets.all(8),
+                child: Text('BTC Price:\n${DateTime.now()}\n${data.btcCandle?.close}'),
               ),
               Expanded(
                 child: _buildCities(data),

@@ -23,6 +23,8 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
   void onViewCreated() {
     super.onViewCreated();
     cubit.subscribeCitiesStream();
+    cubit.subscribeAllTickerStream();
+    cubit.subscribeBTCStream();
     cubit.checkRemoteFlavor();
     if (cubit.checkFirstTimeStartUp()) {
       cubit.markFirstTimeStartUp();
@@ -68,13 +70,18 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
               child: Container(
                 child: blocBuilder(
                   builder: (context, data) {
-                    return Text(
-                      "Remote Flavor: ${data.remoteFlavor}",
-                      style: TextStyle(
-                        color: Colors.black45,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 12,
-                      ),
+                    return Column(
+                      children: [
+                        Text('BTC Price:\n${DateTime.now()}\n${data.btcCandle?.close}'),
+                        Text(
+                          "Remote Flavor: ${data.remoteFlavor}",
+                          style: TextStyle(
+                            color: Colors.black45,
+                            fontStyle: FontStyle.italic,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
                     );
                   },
                 ),

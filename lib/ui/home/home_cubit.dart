@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter_base/data/local/pref.dart';
 import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/models/weather.dart';
+import 'package:flutter_base/data/repo/ticker_repo.dart';
 import 'package:flutter_base/data/repo/weather_repo.dart';
 import 'package:flutter_base/data/utils/exception_handler.dart';
 import 'package:flutter_base/ui/base/base_cubit.dart';
@@ -16,15 +19,39 @@ class HomeCubit extends BaseCubit<HomeData> {
   WeatherRepo _weatherRepo;
   Pref _pref;
   ErrorHandler _errorHandler;
+  TickerRepo _tickerRepo;
+
+  StreamSubscription? _streamSubscription;
+  StreamSubscription? _btcSubscription;
+  StreamSubscription? _btcSubscription2;
 
   HomeCubit({
     required WeatherRepo weatherRepo,
     required Pref pref,
     required ErrorHandler errorHandler,
+    required TickerRepo tickerRepo,
   })  : this._weatherRepo = weatherRepo,
         this._pref = pref,
         this._errorHandler = errorHandler,
+        _tickerRepo = tickerRepo,
         super(HomeData());
+
+  void subscribeAllTickerStream() {
+    _streamSubscription = _tickerRepo.allTickerStream.listen((event) {
+      print("${DateTime.now()} >> $runtimeType >> 24hTicker >> event = $event");
+    });
+  }
+
+  void subscribeBTCStream() {
+    _btcSubscription =
+        _tickerRepo.getCandle('BTCBUSD', tag: "HomeCubit").listen((event) {
+      emit(state.copyWith(btcCandle: event));
+    });
+    _btcSubscription2 =
+        _tickerRepo.getCandle('CHIENBUSD', tag: "HomeCubit", createHandler: false).listen((event) {
+          emit(state.copyWith(btcCandle: event));
+        });
+  }
 
   void subscribeCitiesStream() {
     _weatherRepo
@@ -97,6 +124,8 @@ class HomeCubit extends BaseCubit<HomeData> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    _streamSubscription?.cancel();
+    _btcSubscription?.cancel();
+    _btcSubscription2?.cancel();
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_base/data/utils/exception_handler.dart';
 import 'package:flutter_base/di/di.dart';
 import 'package:flutter_base/env_config.dart';
 import 'package:injectable/injectable.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 
 @module
 abstract class DataModule {
@@ -22,6 +23,12 @@ abstract class DataModule {
       getIt<Dio>(),
       baseUrl: getIt<Env>().weatherUrl,
     );
+  }
+
+  @singleton
+  Socket get socketIO {
+    return io(getIt<Env>().socketIOUrl,
+        OptionBuilder().setTransports(['websocket']).build());
   }
 
   @Injectable(env: [Environment.dev])
