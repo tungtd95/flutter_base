@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_base/data/local/pref.dart';
 import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/models/weather.dart';
@@ -38,19 +39,17 @@ class HomeCubit extends BaseCubit<HomeData> {
 
   void subscribeAllTickerStream() {
     _streamSubscription = _tickerRepo.allTickerStream.listen((event) {
-      print("${DateTime.now()} >> $runtimeType >> 24hTicker >> event = $event");
+      // print("${DateTime.now()} >> $runtimeType >> 24hTicker >> event = $event");
     });
   }
 
   void subscribeBTCStream() {
-    _btcSubscription =
-        _tickerRepo.getCandle('BTCBUSD', tag: "HomeCubit").listen((event) {
-      emit(state.copyWith(btcCandle: event));
+    _tickerRepo.getCandle('BTCBUSD').listen((event) {
+      debugPrint('$runtimeType price of BTCBUSD ${event.open}');
     });
-    _btcSubscription2 =
-        _tickerRepo.getCandle('CHIENBUSD', tag: "HomeCubit", createHandler: false).listen((event) {
-          emit(state.copyWith(btcCandle: event));
-        });
+    _tickerRepo.getCandle('CHIENBUSD').listen((event) {
+      debugPrint('$runtimeType price of CHIENBUSD ${event.open}');
+    });
   }
 
   void subscribeCitiesStream() {

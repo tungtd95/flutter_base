@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/repo/ticker_repo.dart';
 import 'package:flutter_base/data/repo/weather_repo.dart';
@@ -40,9 +41,8 @@ class AddCityCubit extends BaseCubit<AddCityData> {
   }
 
   void subscribeBTCStream() {
-    _btcSubscription =
-        _tickerRepo.getCandle('BTCBUSD', tag: "AddCityCubit").listen((event) {
-      emit(state.copyWith(btcCandle: event));
+    _btcSubscription = _tickerRepo.getCandle('CAKEBUSD').listen((event) {
+      debugPrint('$runtimeType price of CAKEBUSD ${event.open}');
     });
   }
 

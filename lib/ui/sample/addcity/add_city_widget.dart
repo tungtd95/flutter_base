@@ -21,7 +21,7 @@ class _AddCityWidgetState
   void onViewCreated() {
     super.onViewCreated();
     _searchFocusNode.requestFocus();
-    cubit.subscribeAllTickerStream();
+    // cubit.subscribeAllTickerStream();
     cubit.subscribeBTCStream();
   }
 

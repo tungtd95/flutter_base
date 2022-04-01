@@ -1,25 +1,34 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_base/data/models/candle.dart';
 import 'package:flutter_base/data/models/ticker.dart';
-import 'package:flutter_base/data/utils/socket_io_utils.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 @singleton
 class TickerRepo {
-  final SocketIOHelper _socketIOHelper;
   final Socket _socketIO;
-  late BehaviorSubject<List<Ticker>> _allTickerStream = BehaviorSubject();
+  BehaviorSubject<List<Ticker>> _allTickerStream = BehaviorSubject();
+  Map<String, BehaviorSubject<Candle>> _pairCandle = {};
+  Map<String, int> _roomCandleJoint = {};
 
   TickerRepo({
-    required SocketIOHelper socketIOHelper,
     required Socket socketIO,
-  })  : _socketIOHelper = socketIOHelper,
-        _socketIO = socketIO {
+  })  : _socketIO = socketIO {
+    _socketIO.onConnect((_) {
+      print('$runtimeType socketIO connected');
+      print('$runtimeType socketIO reconnecting if needed');
+      _socketIO.emit('join', 'ticker@all');
+      print("WTF on reconnect: ${_roomCandleJoint}");
+      _roomCandleJoint.keys.forEach((element) {
+        if ((_roomCandleJoint[element] ?? 0) > 0) {
+          _socketIO.emit('join', element);
+        }
+      });
+    });
     _socketIO.emit('join', 'ticker@all');
     _socketIO.on('24hTicker', (data) {
-      print("${DateTime.now()} >>>>>>>>>>>>>>>> $runtimeType >> 24hTicker >> data = $data");
+      // print(
+      //     "${DateTime.now()} >>>>>>>>>>>>>>>> $runtimeType >> 24hTicker >> data = $data");
       List<Ticker> tickers = [];
       if (data is List<Map<String, dynamic>>) {
         data.forEach((element) {
@@ -29,38 +38,47 @@ class TickerRepo {
       _allTickerStream.add(tickers);
     });
 
-    // _socketIO.on('kline', (data) => null)
+    _socketIO.on('kline', (data) {
+      // debugPrint('${DateTime.now()} >> runtimeType >> kline event >> $data');
+      final candle = Candle.fromJson(data);
+      // TODO: this logic is just for testing, will be replaced with the corrected one
+      if (candle.open == "420") {
+        _pairCandle['BTCBUSD']?.add(candle);
+      } else if (candle.open == '5') {
+        _pairCandle['CHIENBUSD']?.add(candle);
+      } else if (candle.open == "0") {
+        _pairCandle['CAKEBUSD']?.add(candle);
+      }
+    });
   }
 
   Stream<List<Ticker>> get allTickerStream {
     return _allTickerStream.stream;
   }
 
-  // TODO: maybe replace by stream
-  Stream<Candle> getCandle(String pair, {String interval = '1m', String? tag, bool createHandler = true}) {
-    final subject = BehaviorSubject<Candle>();
-
+  Stream<Candle> getCandle(
+    String pair, {
+    String interval = '1m',
+  }) {
     final String room = '$pair@kline_$interval';
-    final String eventListen = 'kline';
-
     _socketIO.emit('join', room);
-
-    if (createHandler) {
-      final handler = (data) {
-        debugPrint(
-            '${DateTime.now()} >> ${tag ??
-                runtimeType} >> get candle >> $pair - $interval >> $data');
-        // if (data is Map<String, dynamic>) {
-        //   final candle = Candle.fromJson(data);
-        //   subject.add(candle);
-        // }
-      };
-      _socketIO.on(eventListen, handler);
+    BehaviorSubject<Candle>? subject = _pairCandle[pair];
+    if (subject == null) {
+      subject = BehaviorSubject();
+      _pairCandle[pair] = subject;
     }
-
+    int currentListenerInRoom = _roomCandleJoint[room] ?? 0;
+    _roomCandleJoint[room] = currentListenerInRoom + 1;
+    print("WTF $pair joint ${_roomCandleJoint}");
     return subject.stream.doOnCancel(() {
-      // _socketIO.off(eventListen, handler);
-      // _socketIO.emit('leave', room);
+      int currentListenerInRoom = _roomCandleJoint[room] ?? 0;
+      if (currentListenerInRoom > 0) {
+        _roomCandleJoint[room] = currentListenerInRoom - 1;
+      }
+      if ((_roomCandleJoint[room] ?? 0) == 0) {
+        _socketIO.emit('leave', room);
+      }
+      print("WTF $pair on cancel ${_roomCandleJoint}");
     });
   }
 }
