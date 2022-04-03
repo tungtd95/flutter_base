@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>65991407436-fgfqq3dphffdnd2uli4hkt6ge3b76d49.apps.googleusercontent.com</string>
+	<string>189393495583-vuho7i3vbm4ts2fqaq8t1libonmdak50.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.65991407436-fgfqq3dphffdnd2uli4hkt6ge3b76d49</string>
+	<string>com.googleusercontent.apps.189393495583-vuho7i3vbm4ts2fqaq8t1libonmdak50</string>
 	<key>API_KEY</key>
-	<string>AIzaSyA6yu1pq26sMcKGlT85m1MQ_YICk_LGoJg</string>
+	<string>AIzaSyBenSKvhROm9RIWsJwPhcCUC3AIxoDAOz0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>65991407436</string>
+	<string>189393495583</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.sekiroflutter.dev</string>
+	<string>com.sekiroflutter</string>
 	<key>PROJECT_ID</key>
-	<string>weather-dev-ba8d1</string>
+	<string>weather-prod-d266e</string>
 	<key>STORAGE_BUCKET</key>
-	<string>weather-dev-ba8d1.appspot.com</string>
+	<string>weather-prod-d266e.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:65991407436:ios:da4254962deebf49ec01e9</string>
+	<string>1:189393495583:ios:0cf0fef47f6054dba9572a</string>
 </dict>
 </plist>
