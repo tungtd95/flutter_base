@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_base/data/models/city.dart';
+import 'package:flutter_base/data/repo/ticker_repo.dart';
 import 'package:flutter_base/data/repo/weather_repo.dart';
 import 'package:flutter_base/data/utils/exception_handler.dart';
 import 'package:flutter_base/ui/sample/addcity/add_city_data.dart';
@@ -13,17 +15,35 @@ import 'package:rxdart/rxdart.dart';
 class AddCityCubit extends BaseCubit<AddCityData> {
   WeatherRepo _weatherRepo;
   ErrorHandler _errorHandler;
+  TickerRepo _tickerRepo;
+
   final _queryController = StreamController<String>();
+  StreamSubscription? _streamSubscription;
+  StreamSubscription? _btcSubscription;
 
   AddCityCubit({
     required WeatherRepo weatherRepo,
     required ErrorHandler errorHandler,
+    required TickerRepo tickerRepo,
   })  : this._weatherRepo = weatherRepo,
         this._errorHandler = errorHandler,
+        _tickerRepo = tickerRepo,
         super(AddCityData()) {
     _queryController.stream
         .debounce((_) => TimerStream(true, Duration(milliseconds: 300)))
         .listen(_searchCity);
+  }
+
+  void subscribeAllTickerStream() {
+    _streamSubscription = _tickerRepo.allTickerStream.listen((event) {
+      print("${DateTime.now()} >> $runtimeType >> 24hTicker >> event = $event");
+    });
+  }
+
+  void subscribeBTCStream() {
+    _btcSubscription = _tickerRepo.getCandle('CAKEBUSD').listen((event) {
+      debugPrint('$runtimeType price of CAKEBUSD ${event.open}');
+    });
   }
 
   void searchCity(String query) {
@@ -58,5 +78,7 @@ class AddCityCubit extends BaseCubit<AddCityData> {
   @override
   void dispose() {
     _queryController.close();
+    _streamSubscription?.cancel();
+    _btcSubscription?.cancel();
   }
 }
