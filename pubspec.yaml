@@ -2,7 +2,7 @@ name: flutter_base
 description: A Flutter base project.
 
 publish_to: 'none'
-version: 1.0.0+2
+version: 1.0.1+5
 
 environment:
   sdk: ">=2.15.0 <3.0.0"
@@ -112,6 +112,20 @@ flavorizr:
           config: ".firebase/dev/GoogleService-Info.plist"
 
     prod:
+      app:
+        name: "Weather"
+
+      android:
+        applicationId: "com.sekiroflutter.weather"
+        firebase:
+          config: ".firebase/prod/google-services.json"
+
+      ios:
+        bundleId: "com.sekiroflutter"
+        firebase:
+          config: ".firebase/prod/GoogleService-Info.plist"
+
+    publish:
       app:
         name: "Weather"
 
