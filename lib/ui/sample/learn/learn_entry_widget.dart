@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/l10n/l10n.dart';
+import 'package:flutter_base/ui/sample/learn/complex_sliver.dart';
 import 'package:flutter_base/ui/sample/learn/heavy_computation.dart';
 import 'package:flutter_base/ui/sample/learn/keys.dart';
 import 'package:flutter_base/ui/sample/learn/shrink_wrap_example.dart';
@@ -23,8 +24,13 @@ class LearnEntryWidget extends StatelessWidget {
             SizedBox(height: 12),
             entry(
               context,
-              title: 'Custom scroll view',
+              title: 'Simple slivers',
               child: ShrinkWrapSlivers(),
+            ),
+            entry(
+              context,
+              title: 'Complex slivers/tabview/infinite content/pin bar',
+              child: ComplexSlivers(),
             ),
             entry(
               context,

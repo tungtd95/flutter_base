@@ -52,6 +52,7 @@ dependencies:
       ref: ethereum
   flutter_secure_storage: ^5.0.2
   qr_flutter: ^4.0.0
+  custom_refresh_indicator: ^1.2.1
 #  sorting_native:
 #    git:
 #      url: https://github.com/tungtd95/sorting-native.git
