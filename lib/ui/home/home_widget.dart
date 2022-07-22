@@ -6,6 +6,7 @@ import 'package:flutter_base/ui/home/home_cubit.dart';
 import 'package:flutter_base/ui/home/home_data.dart';
 import 'package:flutter_base/ui/sample/learn/learn_entry_widget.dart';
 import 'package:flutter_base/utils/notification_utils.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -18,9 +19,10 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+  String log = '';
 
   @override
-  void onViewCreated() {
+  void onViewCreated() async {
     super.onViewCreated();
     cubit.subscribeCitiesStream();
     cubit.checkRemoteFlavor();
@@ -29,6 +31,17 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
       Navigator.of(context).pushNamed(Routes.SPLASH);
     }
     NotificationUtils.subscribePayload(context);
+    initIAP();
+  }
+
+  void initIAP() async {
+    await FlutterInappPurchase.instance.initialize();
+    final result = await FlutterInappPurchase.instance.getPurchaseHistory();
+    log += 'purchase history length: ${result?.length}\n';
+    result?.forEach((element) {
+      log += "${element.productId} >> ${element.transactionDate}\n";
+    });
+    setState(() {});
   }
 
   @override
@@ -55,6 +68,18 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
             Expanded(
               child: _buildContent(),
             ),
+            Container(
+              margin: EdgeInsets.only(left: 24, bottom: 8),
+              child: Text(
+                log,
+                style: TextStyle(
+                  color: Colors.black45,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 12,
+                ),
+              ),
+            ),
+            SizedBox(height: 40),
             GestureDetector(
               onTap: () {
                 Navigator.of(context).push(

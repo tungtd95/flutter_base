@@ -2,7 +2,7 @@ name: flutter_base
 description: A Flutter base project.
 
 publish_to: 'none'
-version: 1.0.1+5
+version: 1.0.3+10
 
 environment:
   sdk: ">=2.15.0 <3.0.0"
@@ -52,6 +52,8 @@ dependencies:
       ref: ethereum
   flutter_secure_storage: ^5.0.2
   qr_flutter: ^4.0.0
+  flutter_inapp_purchase: ^5.3.1
+#  in_app_purchase: ^3.0.6
 #  sorting_native:
 #    git:
 #      url: https://github.com/tungtd95/sorting-native.git
