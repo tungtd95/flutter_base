@@ -4,6 +4,7 @@ import 'package:flutter_base/ui/sample/learn/heavy_computation.dart';
 import 'package:flutter_base/ui/sample/learn/keys.dart';
 import 'package:flutter_base/ui/sample/learn/shrink_wrap_example.dart';
 import 'package:flutter_base/ui/sample/learn/sorting_native.dart';
+import 'package:flutter_base/ui/sample/learn/wallet_connect_wallet.dart';
 import 'package:flutter_base/ui/sample/learn/wallet_connect_widget.dart';
 
 class LearnEntryWidget extends StatelessWidget {
@@ -43,8 +44,13 @@ class LearnEntryWidget extends StatelessWidget {
             ),
             entry(
               context,
-              title: 'WalletConnect',
+              title: 'WalletConnect Dapp',
               child: WalletConnectWidget(),
+            ),
+            entry(
+              context,
+              title: 'WalletConnect Wallet',
+              child: WalletConnectWallet(),
             )
           ],
         ),

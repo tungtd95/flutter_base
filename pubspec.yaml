@@ -46,10 +46,8 @@ dependencies:
   overlay_support: ^1.2.1
   flutter_local_notifications: ^9.1.5
   sorting_native: ^0.0.1
-  walletconnect_dart:
-    git:
-      url: https://github.com/tungtd95/walletconnect-dart-sdk.git
-      ref: ethereum
+  walletconnect_dart: ^0.0.11
+  walletconnect_secure_storage: ^1.0.0
   flutter_secure_storage: ^5.0.2
   qr_flutter: ^4.0.0
   flutter_inapp_purchase: ^5.3.1

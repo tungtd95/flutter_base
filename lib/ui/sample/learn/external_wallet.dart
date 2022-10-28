@@ -84,7 +84,7 @@ class ExternalWallet {
   }
 
   void closeSocket() {
-    _connector.transport.close();
+    // _connector.transport.close();
   }
 }
 
