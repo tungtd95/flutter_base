@@ -1,3 +1,4 @@
+import 'package:flutter_base_config/utils/firebase_utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
@@ -11,4 +12,5 @@ Future<void> configureBaseConfigDependencies({
   required String env,
 }) async {
   $initGetIt(getIt, environment: env);
+  await setupFirebase();
 }

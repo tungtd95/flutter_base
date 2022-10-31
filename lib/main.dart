@@ -4,8 +4,7 @@ import 'package:flutter_base/di/di.dart';
 import 'package:flutter_base/l10n/l10n.dart';
 import 'package:flutter_base/routes.dart';
 import 'package:flutter_base/ui/home/home_widget.dart';
-import 'package:flutter_base/utils/firebase_utils.dart';
-import 'package:flutter_base/utils/notification_utils.dart';
+import 'package:flutter_base_config/utils/notification_utils.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:injectable/injectable.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -15,7 +14,6 @@ const env = String.fromEnvironment("Env", defaultValue: Environment.dev);
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await setupFirebase();
   await configureDependencies(env: env);
   NotificationUtils.handleNotificationAppLaunch();
 

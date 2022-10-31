@@ -6,10 +6,11 @@ import 'package:flutter_base/ui/home/components/weather_widget.dart';
 import 'package:flutter_base/ui/home/home_cubit.dart';
 import 'package:flutter_base/ui/home/home_data.dart';
 import 'package:flutter_base/ui/sample/learn/learn_entry_widget.dart';
-import 'package:flutter_base/utils/notification_utils.dart';
+import 'package:flutter_base_config/utils/notification_utils.dart';
 import 'package:flutter_base_core_module_1/data/models/weather_core_model.dart';
 import 'package:flutter_base_core_module_1/manager/weather_manager.dart';
 import 'package:flutter_base_core_module_1/ui/weather_core_screen.dart';
+import 'package:flutter_base_module_1/ui/flutter_base_module_1_screen.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -93,12 +94,20 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
             icon: Icon(Icons.wallet),
             label: 'Core',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard),
+            label: 'Module 1',
+          ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
-      body: _selectedIndex == 0 ? _homeBody() : WeatherCoreScreen(),
+      body: _selectedIndex == 0
+          ? _homeBody()
+          : _selectedIndex == 1
+              ? WeatherCoreScreen()
+              : FlutterBaseModule1Screen(),
     );
   }
 

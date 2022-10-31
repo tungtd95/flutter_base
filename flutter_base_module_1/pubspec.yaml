@@ -1,6 +1,6 @@
 name: flutter_base_module_1
 description: A new Flutter project.
-
+publish_to: none
 version: 1.0.0+1
 
 environment:
@@ -26,6 +26,12 @@ dependencies:
 
   # local db
   floor: ^1.2.0
+
+  # core
+  flutter_base_config:
+    path: ../flutter_base_config
+  flutter_base_core_module_1:
+    path: ../flutter_base_core_module_1
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,7 @@
 name: flutter_base_core_module_1
 description: A new Flutter project.
 version: 1.0.0+1
+publish_to: none
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
@@ -28,6 +29,10 @@ dependencies:
 
   # other
   rxdart: ^0.27.3
+
+  # other module
+  flutter_base_config:
+    path: ../flutter_base_config
 
 dev_dependencies:
   flutter_test:

@@ -5,6 +5,7 @@
 // **************************************************************************
 
 import 'package:dio/dio.dart' as _i4;
+import 'package:flutter_base_config/data/core_repo.dart' as _i17;
 import 'package:flutter_base_config/env_config.dart' as _i12;
 import 'package:flutter_base_core_module_1/manager/weather_manager.dart'
     as _i16;
@@ -59,7 +60,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       weatherRepo: get<_i10.WeatherRepo>(),
       pref: get<_i7.Pref>(),
       errorHandler: get<_i5.ErrorHandler>(),
-      weatherManager: get<_i16.WeatherManager>()));
+      weatherManager: get<_i16.WeatherManager>(),
+      coreRepo: get<_i17.CoreRepo>()));
   return get;
 }
 

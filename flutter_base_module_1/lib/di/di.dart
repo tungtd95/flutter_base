@@ -4,6 +4,8 @@ import 'package:injectable/injectable.dart';
 
 import 'di.config.dart';
 
+GetIt? getItModule1;
+
 @InjectableInit(initializerName: r'$initGetIt')
 Future<void> configureBaseModule1Dependencies({
   required GetIt getIt,
@@ -11,6 +13,7 @@ Future<void> configureBaseModule1Dependencies({
 }) async {
   _configDatabase(getIt: getIt);
   $initGetIt(getIt, environment: env);
+  getItModule1 = getIt;
 }
 
 Future<void> _configDatabase({required GetIt getIt}) async {

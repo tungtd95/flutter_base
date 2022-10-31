@@ -8,7 +8,8 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../env_config.dart' as _i3;
+import '../data/core_repo.dart' as _i3;
+import '../env_config.dart' as _i4;
 
 const String _dev = 'dev';
 const String _prod = 'prod';
@@ -25,12 +26,13 @@ _i1.GetIt $initGetIt(
     environment,
     environmentFilter,
   );
-  gh.factory<_i3.Env>(
-    () => _i3.EnvDEV(),
+  gh.factory<_i3.CoreRepo>(() => _i3.CoreRepo());
+  gh.factory<_i4.Env>(
+    () => _i4.EnvDEV(),
     registerFor: {_dev},
   );
-  gh.factory<_i3.Env>(
-    () => _i3.EnvPROD(),
+  gh.factory<_i4.Env>(
+    () => _i4.EnvPROD(),
     registerFor: {_prod},
   );
   return get;

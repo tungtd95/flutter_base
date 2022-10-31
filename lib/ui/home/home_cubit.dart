@@ -11,10 +11,12 @@ import 'package:flutter_base_core_module_1/manager/weather_manager.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/src/transformers/backpressure/debounce.dart';
+import 'package:flutter_base_config/data/core_repo.dart';
 
 @injectable
 class HomeCubit extends BaseCubit<HomeData> {
   WeatherRepo _weatherRepo;
+  CoreRepo _coreRepo;
   Pref _pref;
   ErrorHandler _errorHandler;
   WeatherManager _weatherManager;
@@ -24,10 +26,12 @@ class HomeCubit extends BaseCubit<HomeData> {
     required Pref pref,
     required ErrorHandler errorHandler,
     required WeatherManager weatherManager,
+    required CoreRepo coreRepo,
   })  : this._weatherRepo = weatherRepo,
         this._pref = pref,
         this._errorHandler = errorHandler,
         this._weatherManager = weatherManager,
+        this._coreRepo = coreRepo,
         super(HomeData());
 
   void subscribeCitiesStream() {
@@ -97,7 +101,7 @@ class HomeCubit extends BaseCubit<HomeData> {
   }
 
   void checkRemoteFlavor() {
-    _weatherRepo.getRemoteFlavor().then((value) {
+    _coreRepo.getRemoteFlavor().then((value) {
       emit(state.copyWith(remoteFlavor: value));
     }, onError: (e) {});
   }

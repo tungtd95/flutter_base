@@ -83,8 +83,4 @@ class MockWeatherRepo extends _i1.Mock implements _i6.WeatherRepo {
       (super.noSuchMethod(Invocation.method(#removeCity, [city]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i7.Future<void>);
-  @override
-  _i7.Future<String> getRemoteFlavor() =>
-      (super.noSuchMethod(Invocation.method(#getRemoteFlavor, []),
-          returnValue: Future<String>.value('')) as _i7.Future<String>);
 }
