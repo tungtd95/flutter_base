@@ -1,4 +1,4 @@
-name: flutter_base_module_1
+name: flutter_base_config
 description: A new Flutter project.
 
 version: 1.0.0+1
@@ -39,9 +39,11 @@ dev_dependencies:
   floor_generator: ^1.2.0
   copy_with_extension_gen: ^2.0.3
 
+
 flutter:
   uses-material-design: true
+
   module:
     androidX: true
-    androidPackage: com.example.flutter_base_module_1.flutter_base_module_1
-    iosBundleIdentifier: com.example.flutterbasemodule1.flutterBaseModule1
+    androidPackage: com.example.flutter_base_config
+    iosBundleIdentifier: com.example.flutterBaseConfig

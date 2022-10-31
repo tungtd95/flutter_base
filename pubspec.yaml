@@ -57,6 +57,14 @@ dependencies:
 #      url: https://github.com/tungtd95/sorting-native.git
 #      ref: master
 
+  # sub-module
+  flutter_base_config:
+    path: ./flutter_base_config
+  flutter_base_core_module_1:
+    path: ./flutter_base_core_module_1
+  flutter_base_module_1:
+    path: ./flutter_base_module_1
+
 dev_dependencies:
   # test
   flutter_test:

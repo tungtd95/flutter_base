@@ -7,6 +7,7 @@ import 'package:flutter_base/ui/base/base_cubit.dart';
 import 'package:flutter_base/ui/base/status.dart';
 import 'package:flutter_base/data/models/weather_city.dart';
 import 'package:flutter_base/ui/home/home_data.dart';
+import 'package:flutter_base_core_module_1/manager/weather_manager.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/src/transformers/backpressure/debounce.dart';
@@ -16,14 +17,17 @@ class HomeCubit extends BaseCubit<HomeData> {
   WeatherRepo _weatherRepo;
   Pref _pref;
   ErrorHandler _errorHandler;
+  WeatherManager _weatherManager;
 
   HomeCubit({
     required WeatherRepo weatherRepo,
     required Pref pref,
     required ErrorHandler errorHandler,
+    required WeatherManager weatherManager,
   })  : this._weatherRepo = weatherRepo,
         this._pref = pref,
         this._errorHandler = errorHandler,
+        this._weatherManager = weatherManager,
         super(HomeData());
 
   void subscribeCitiesStream() {
@@ -31,6 +35,9 @@ class HomeCubit extends BaseCubit<HomeData> {
         .getCitiesStream()
         .debounceTime(Duration(milliseconds: 500))
         .listen((event) => _getWeathers(event));
+    _weatherManager.weatherStateSubject.listen((value) {
+      print('weather state subject ${value.name}');
+    });
   }
 
   void _getWeathers(List<City> cities) async {

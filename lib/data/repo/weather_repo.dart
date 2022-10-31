@@ -4,7 +4,7 @@ import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/models/weather.dart';
 import 'package:flutter_base/data/models/weather_city.dart';
 import 'package:flutter_base/data/service/weather_service.dart';
-import 'package:flutter_base/env_config.dart';
+import 'package:flutter_base_config/env_config.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
