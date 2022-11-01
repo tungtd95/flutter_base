@@ -7,7 +7,7 @@ import 'package:sqflite/sqflite.dart' as sqflite;
 
 part 'weather_database.g.dart';
 
-@Database(version: 1, entities: [City])
+@Database(version: 2, entities: [City])
 abstract class WeatherDatabase extends FloorDatabase {
   WeatherDao get weatherDao;
 }

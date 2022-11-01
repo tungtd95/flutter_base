@@ -24,6 +24,7 @@ class _FlutterBaseModule1ScreenState extends State<FlutterBaseModule1Screen> {
   WeatherCoreModel? weatherCoreModel;
   String flavor = '';
   int historyLength = 0;
+  List<WeatherModule1Model> weathers = [];
 
   StreamSubscription? _streamSubscription1;
   StreamSubscription? _streamSubscription2;
@@ -41,9 +42,9 @@ class _FlutterBaseModule1ScreenState extends State<FlutterBaseModule1Screen> {
         try {
           weatherCoreModel = weatherManager.getWeatherInfo();
           if (weatherCoreModel != null) {
-            weatherModule1Repo.saveWeather(
-              WeatherModule1Model.fromCore(weatherCoreModel!),
-            );
+            // weatherModule1Repo.saveWeather(
+            //   WeatherModule1Model.fromCore(weatherCoreModel!),
+            // );
           }
           setState(() {});
         } catch (e) {
@@ -54,6 +55,7 @@ class _FlutterBaseModule1ScreenState extends State<FlutterBaseModule1Screen> {
 
       _streamSubscription2 = weatherModule1Repo.getWeathers().listen((event) {
         historyLength = event.length;
+        weathers = event;
         setState(() {});
       });
     });
@@ -69,12 +71,29 @@ class _FlutterBaseModule1ScreenState extends State<FlutterBaseModule1Screen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Expanded(
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  final weather = weathers[index];
+                  return ListTile(
+                    key: ValueKey(weather.id),
+                    title: Text(weather.location),
+                    subtitle: Text(
+                      '${weather.status} - temp: ${weather.temp} - humi: ${weather.humidity}',
+                    ),
+                  );
+                },
+                itemCount: weathers.length,
+              ),
+            ),
+            const SizedBox(height: 12),
             Text(
               '${weatherCoreModel?.location}\n${weatherCoreModel?.status}\n${weatherCoreModel?.temp}',
             ),
             const SizedBox(height: 12),
             Text(flavor),
             Text('history length = $historyLength'),
+            const SizedBox(height: 12),
           ],
         ),
       ),

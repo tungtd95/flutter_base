@@ -22,6 +22,7 @@ class _WeatherCoreScreenState extends State<WeatherCoreScreen> {
   WeatherCoreModel? weatherCoreModel;
   String flavor = '';
   int historyLength = 0;
+  List<WeatherCoreModel> weathers = [];
 
   StreamSubscription? _streamSubscription1;
   StreamSubscription? _streamSubscription2;
@@ -33,12 +34,6 @@ class _WeatherCoreScreenState extends State<WeatherCoreScreen> {
       _streamSubscription1 = weatherManager.weatherStateSubject.listen((value) {
         try {
           weatherCoreModel = weatherManager.getWeatherInfo();
-          setState(() {
-            if (weatherCoreModel != null && weatherCoreModel!.id % 2 != 0) {
-              weatherCoreModel!.id = DateTime.now().millisecondsSinceEpoch;
-              coreModuleRepo.saveLastCity(weatherCoreModel!);
-            }
-          });
         } catch (e) {
           // ignore
         }
@@ -46,6 +41,7 @@ class _WeatherCoreScreenState extends State<WeatherCoreScreen> {
       _getRemoteConfig();
       _streamSubscription2 = coreModuleRepo.getWeathers().listen((event) {
         historyLength = event.length;
+        weathers = event;
         setState(() {});
       });
     });
@@ -66,12 +62,29 @@ class _WeatherCoreScreenState extends State<WeatherCoreScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Expanded(
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  final weather = weathers[index];
+                  return ListTile(
+                    key: ValueKey(weather.id),
+                    title: Text(weather.location),
+                    subtitle: Text(
+                      '${weather.status} - temp: ${weather.temp} - humi: ${weather.humidity}',
+                    ),
+                  );
+                },
+                itemCount: weathers.length,
+              ),
+            ),
+            const SizedBox(height: 12),
             Text('history length >> $historyLength'),
             Text(flavor),
             const SizedBox(height: 12),
             Text(
               '${weatherCoreModel?.location}\n${weatherCoreModel?.status}\n${weatherCoreModel?.temp}',
             ),
+            const SizedBox(height: 12),
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/data/local/weather_database.dart';
+import 'package:flutter_base/di/data_migration.dart';
 import 'package:flutter_base_config/di/di.dart';
 import 'package:flutter_base_core_module_1/di/di.dart';
 import 'package:flutter_base_module_1/di/di.dart';
@@ -25,7 +26,9 @@ Future<void> configureDependencies({required String env}) async {
 }
 
 Future<void> configDatabase() async {
-  final db = await $FloorWeatherDatabase.databaseBuilder("weather.db").build();
+  final db = await $FloorWeatherDatabase
+      .databaseBuilder("weather.db")
+      .addMigrations([DataMigration.migration1to2]).build();
   getIt.registerSingleton<WeatherDatabase>(db);
 }
 
