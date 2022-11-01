@@ -15,8 +15,8 @@ abstract class BasePageState<W extends StatefulWidget, C extends BaseCubit<D>,
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addObserver(this);
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       onViewCreated();
     });
   }
@@ -79,7 +79,7 @@ abstract class BasePageState<W extends StatefulWidget, C extends BaseCubit<D>,
     debugPrint("${objectRuntimeType(this, "")} dispose");
     cubit.dispose();
     getIt<RouteObserver<ModalRoute<void>>>().unsubscribe(this);
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 

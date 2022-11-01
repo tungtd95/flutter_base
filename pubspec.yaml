@@ -30,12 +30,6 @@ dependencies:
   # local db
   floor: ^1.2.0
 
-  # firebase
-  firebase_core: ^1.10.6
-  firebase_analytics: ^9.0.4
-  firebase_messaging: ^11.2.4
-  cloud_firestore: ^3.1.5
-
   # others
   rxdart: ^0.27.3
   rive: ^0.7.33
@@ -44,7 +38,6 @@ dependencies:
   copy_with_extension: ^2.0.2
   flutter_alice: ^1.0.2
   overlay_support: ^1.2.1
-  flutter_local_notifications: ^9.1.5
   sorting_native: ^0.0.1
   walletconnect_dart: ^0.0.11
   walletconnect_secure_storage: ^1.0.0
@@ -56,6 +49,14 @@ dependencies:
 #    git:
 #      url: https://github.com/tungtd95/sorting-native.git
 #      ref: master
+
+  # sub-module
+  flutter_base_config:
+    path: ./flutter_base_config
+  flutter_base_core_module_1:
+    path: ./flutter_base_core_module_1
+  flutter_base_module_1:
+    path: ./flutter_base_module_1
 
 dev_dependencies:
   # test

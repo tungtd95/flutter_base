@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/di/di.dart';
 import 'package:flutter_base/routes.dart';
 import 'package:flutter_base/ui/base/base_page_widget.dart';
 import 'package:flutter_base/ui/home/components/weather_widget.dart';
 import 'package:flutter_base/ui/home/home_cubit.dart';
 import 'package:flutter_base/ui/home/home_data.dart';
 import 'package:flutter_base/ui/sample/learn/learn_entry_widget.dart';
-import 'package:flutter_base/utils/notification_utils.dart';
+import 'package:flutter_base_config/utils/notification_utils.dart';
+import 'package:flutter_base_core_module_1/data/models/weather_core_model.dart';
+import 'package:flutter_base_core_module_1/manager/weather_manager.dart';
+import 'package:flutter_base_core_module_1/ui/weather_core_screen.dart';
+import 'package:flutter_base_module_1/ui/flutter_base_module_1_screen.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -20,6 +25,16 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   String log = '';
+  int _selectedIndex = 0;
+
+  final weatherManager = getIt<WeatherManager>();
+  WeatherCoreModel? weatherCoreModel;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   void onViewCreated() async {
@@ -32,6 +47,14 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
     }
     NotificationUtils.subscribePayload(context);
     initIAP();
+    weatherManager.weatherStateSubject.listen((value) {
+      try {
+        weatherCoreModel = weatherManager.getWeatherInfo();
+        setState(() {});
+      } catch (e) {
+        // ignore
+      }
+    });
   }
 
   void initIAP() async {
@@ -61,53 +84,80 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
         },
         child: Icon(Icons.add),
       ),
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: _buildContent(),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 24, bottom: 8),
-              child: Text(
-                log,
-                style: TextStyle(
-                  color: Colors.black45,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 12,
-                ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.wallet),
+            label: 'Core',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard),
+            label: 'Module 1',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+      ),
+      body: _selectedIndex == 0
+          ? _homeBody()
+          : _selectedIndex == 1
+              ? WeatherCoreScreen()
+              : FlutterBaseModule1Screen(),
+    );
+  }
+
+  Widget _homeBody() {
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: _buildContent(),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 24, bottom: 8),
+            child: Text(
+              '${weatherCoreModel?.location}\n${weatherCoreModel?.status}\n${weatherCoreModel?.temp}',
+              style: TextStyle(
+                color: Colors.black45,
+                fontStyle: FontStyle.italic,
+                fontSize: 12,
               ),
             ),
-            SizedBox(height: 40),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return LearnEntryWidget();
-                    },
-                  ),
-                );
-              },
-              child: Container(
-                child: blocBuilder(
-                  builder: (context, data) {
-                    return Text(
-                      "Remote Flavor: ${data.remoteFlavor}",
-                      style: TextStyle(
-                        color: Colors.black45,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 12,
-                      ),
-                    );
+          ),
+          SizedBox(height: 8),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return LearnEntryWidget();
                   },
                 ),
-                margin: EdgeInsets.only(left: 24, bottom: 8),
+              );
+            },
+            child: Container(
+              child: blocBuilder(
+                builder: (context, data) {
+                  return Text(
+                    "Remote Flavor: ${data.remoteFlavor}",
+                    style: TextStyle(
+                      color: Colors.black45,
+                      fontStyle: FontStyle.italic,
+                      fontSize: 12,
+                    ),
+                  );
+                },
               ),
+              margin: EdgeInsets.only(left: 24, bottom: 8),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

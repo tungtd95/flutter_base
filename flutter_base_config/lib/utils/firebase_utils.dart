@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_base/utils/notification_utils.dart';
+import 'package:flutter_base_config/utils/notification_utils.dart';
 
 Future setupFirebase() async {
   FirebaseMessaging.onBackgroundMessage(_handleBackgroundFCM);

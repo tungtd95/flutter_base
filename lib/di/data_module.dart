@@ -3,7 +3,7 @@ import 'package:flutter_alice/alice.dart';
 import 'package:flutter_base/data/service/weather_service.dart';
 import 'package:flutter_base/data/utils/exception_handler.dart';
 import 'package:flutter_base/di/di.dart';
-import 'package:flutter_base/env_config.dart';
+import 'package:flutter_base_config/env_config.dart';
 import 'package:injectable/injectable.dart';
 
 @module
