@@ -11,14 +11,10 @@ Future<void> configureBaseCore1Dependencies({
   required GetIt getIt,
   required String env,
 }) async {
-  _configDatabase(getIt: getIt);
-  $initGetIt(getIt, environment: env);
-  getItCoreModule = getIt;
-}
-
-Future<void> _configDatabase({required GetIt getIt}) async {
   final db = await $FloorWeatherCoreDatabase
       .databaseBuilder("weather_core.db")
       .build();
   getIt.registerSingleton<WeatherCoreDatabase>(db);
+  $initGetIt(getIt, environment: env);
+  getItCoreModule = getIt;
 }

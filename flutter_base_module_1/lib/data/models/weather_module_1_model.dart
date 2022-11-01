@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter_base_core_module_1/data/models/weather_core_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:floor/floor.dart';
 
@@ -29,6 +30,17 @@ class WeatherModule1Model {
       _$WeatherModule1ModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$WeatherModule1ModelToJson(this);
+
+  factory WeatherModule1Model.fromCore(WeatherCoreModel model) {
+    return WeatherModule1Model(
+      id: DateTime.now().millisecondsSinceEpoch,
+      location: model.location,
+      status: model.status,
+      icon: model.icon,
+      temp: model.temp,
+      humidity: model.humidity,
+    );
+  }
 
   factory WeatherModule1Model.random() {
     int newWeatherId = DateTime.now().millisecondsSinceEpoch;

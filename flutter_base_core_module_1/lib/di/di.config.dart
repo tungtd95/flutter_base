@@ -8,8 +8,10 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
+import '../data/local/weather_core_database.dart' as _i4;
+import '../data/repo/weather_core_repo.dart' as _i3;
 import '../manager/weather_manager.dart'
-    as _i3; // ignore_for_file: unnecessary_lambdas
+    as _i5; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -23,6 +25,9 @@ _i1.GetIt $initGetIt(
     environment,
     environmentFilter,
   );
-  gh.singleton<_i3.WeatherManager>(_i3.WeatherManager());
+  gh.singleton<_i3.WeatherCoreRepo>(
+      _i3.WeatherCoreRepo(coreDatabase: get<_i4.WeatherCoreDatabase>()));
+  gh.singleton<_i5.WeatherManager>(
+      _i5.WeatherManager(weatherCoreRepo: get<_i3.WeatherCoreRepo>()));
   return get;
 }

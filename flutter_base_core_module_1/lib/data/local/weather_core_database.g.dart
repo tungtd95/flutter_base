@@ -104,7 +104,7 @@ class _$WeatherCoreModelDao extends WeatherCoreModelDao {
   _$WeatherCoreModelDao(
     this.database,
     this.changeListener,
-  )   : _queryAdapter = QueryAdapter(database),
+  )   : _queryAdapter = QueryAdapter(database, changeListener),
         _weatherCoreModelInsertionAdapter = InsertionAdapter(
             database,
             'weather_core_model',
@@ -115,7 +115,8 @@ class _$WeatherCoreModelDao extends WeatherCoreModelDao {
                   'icon': item.icon,
                   'temp': item.temp,
                   'humidity': item.humidity
-                }),
+                },
+            changeListener),
         _weatherCoreModelDeletionAdapter = DeletionAdapter(
             database,
             'weather_core_model',
@@ -127,7 +128,8 @@ class _$WeatherCoreModelDao extends WeatherCoreModelDao {
                   'icon': item.icon,
                   'temp': item.temp,
                   'humidity': item.humidity
-                });
+                },
+            changeListener);
 
   final sqflite.DatabaseExecutor database;
 
@@ -140,8 +142,22 @@ class _$WeatherCoreModelDao extends WeatherCoreModelDao {
   final DeletionAdapter<WeatherCoreModel> _weatherCoreModelDeletionAdapter;
 
   @override
+  Stream<List<WeatherCoreModel>> getWeathersStream() {
+    return _queryAdapter.queryListStream('SELECT * FROM weather_core_model',
+        mapper: (Map<String, Object?> row) => WeatherCoreModel(
+            id: row['id'] as int,
+            location: row['location'] as String,
+            status: row['status'] as String,
+            icon: row['icon'] as String,
+            temp: row['temp'] as String,
+            humidity: row['humidity'] as String),
+        queryableName: 'weather_core_model',
+        isView: false);
+  }
+
+  @override
   Future<List<WeatherCoreModel>> getWeatherCoreModels() async {
-    return _queryAdapter.queryList('SELECT * FROM city',
+    return _queryAdapter.queryList('SELECT * FROM weather_core_model',
         mapper: (Map<String, Object?> row) => WeatherCoreModel(
             id: row['id'] as int,
             location: row['location'] as String,
@@ -152,13 +168,13 @@ class _$WeatherCoreModelDao extends WeatherCoreModelDao {
   }
 
   @override
-  Future<void> add(WeatherCoreModel city) async {
+  Future<void> add(WeatherCoreModel weatherCoreModel) async {
     await _weatherCoreModelInsertionAdapter.insert(
-        city, OnConflictStrategy.abort);
+        weatherCoreModel, OnConflictStrategy.abort);
   }
 
   @override
-  Future<void> remove(WeatherCoreModel city) async {
-    await _weatherCoreModelDeletionAdapter.delete(city);
+  Future<void> remove(WeatherCoreModel weatherCoreModel) async {
+    await _weatherCoreModelDeletionAdapter.delete(weatherCoreModel);
   }
 }
