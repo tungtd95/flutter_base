@@ -33,6 +33,26 @@ dependencies:
   # other module
   flutter_base_config:
     path: ../flutter_base_config
+  intl: ^0.17.0
+
+  # others
+  rive: ^0.7.33
+  shared_preferences: ^2.0.11
+  pull_to_refresh: ^2.0.0
+  copy_with_extension: ^2.0.2
+  flutter_alice: ^1.0.2
+  overlay_support: ^1.2.1
+  sorting_native: ^0.0.1
+  walletconnect_dart: ^0.0.11
+  walletconnect_secure_storage: ^1.0.0
+  flutter_secure_storage: ^5.0.2
+  qr_flutter: ^4.0.0
+  flutter_inapp_purchase: ^5.3.1
+#  in_app_purchase: ^3.0.6
+#  sorting_native:
+#    git:
+#      url: https://github.com/tungtd95/sorting-native.git
+#      ref: master
 
 dev_dependencies:
   flutter_test:
@@ -45,6 +65,15 @@ dev_dependencies:
   injectable_generator: any
   floor_generator: ^1.2.0
   copy_with_extension_gen: ^2.0.3
+
+  test: any
+  mockito: ^5.0.17
+  bloc_test: any
+  intl_utils: ^2.6.0
+  flutter_flavorizr:
+    git:
+      url: https://github.com/tungtd95/flutter_flavorizr.git
+      ref: v2.2.0
 
 flutter:
   uses-material-design: true
