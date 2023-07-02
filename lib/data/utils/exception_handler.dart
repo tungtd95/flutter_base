@@ -11,11 +11,11 @@ class ErrorHandler {
   ErrorHandler();
 
   BaseException parse(dynamic e) {
-    if (e is DioError && e.error is BaseException) {
-      return e.error;
-    } else {
-      return BaseException();
+    if (e is DioException) {
+      var error = e.error;
+      if (error is BaseException) return error;
     }
+    return BaseException();
   }
 
   void dioErrorParser(DioError err) {

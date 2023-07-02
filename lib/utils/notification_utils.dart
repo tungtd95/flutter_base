@@ -19,9 +19,9 @@ class NotificationUtils {
       InitializationSettings(
         android: AndroidInitializationSettings("ic_launcher"),
       ),
-      onSelectNotification: (String? payload) {
-        selectNotificationSubject.add(payload);
-      },
+      // onSelectNotification: (String? payload) {
+      //   selectNotificationSubject.add(payload);
+      // },
     );
 
     String title = message.data["title"] ?? '';
@@ -44,7 +44,7 @@ class NotificationUtils {
   static void handleNotificationAppLaunch() async {
     final NotificationAppLaunchDetails? data =
         await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-    selectNotificationSubject.add(data?.payload);
+    // selectNotificationSubject.add(data?.payload);
   }
 
   static void subscribePayload(BuildContext context) {
