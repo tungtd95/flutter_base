@@ -2,7 +2,7 @@ name: flutter_base
 description: A Flutter base project.
 
 publish_to: 'none'
-version: 1.0.3+11
+version: 1.0.5+17
 
 environment:
   sdk: ">=3.0.0"
@@ -35,6 +35,14 @@ dependencies:
   firebase_analytics: ^10.4.3
   firebase_messaging: ^14.6.4
   cloud_firestore: ^4.8.2
+
+  # wearOS
+  wear:
+    git:
+      url: https://github.com/NadinZeitoune/flutter_wear_plugin.git
+      ref: master
+  watch_connectivity: ^0.1.6
+  is_wear: ^0.0.1+2
 
   # others
   rxdart: ^0.27.7
