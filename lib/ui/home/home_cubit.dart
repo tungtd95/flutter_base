@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_base/data/local/pref.dart';
 import 'package:flutter_base/data/models/city.dart';
 import 'package:flutter_base/data/models/weather.dart';
@@ -10,12 +12,16 @@ import 'package:flutter_base/ui/home/home_data.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/src/transformers/backpressure/debounce.dart';
+import 'package:watch_connectivity/watch_connectivity.dart';
 
 @injectable
 class HomeCubit extends BaseCubit<HomeData> {
   WeatherRepo _weatherRepo;
   Pref _pref;
   ErrorHandler _errorHandler;
+  final _watch = WatchConnectivity();
+  StreamSubscription? contextSub;
+  StreamSubscription? msgSub;
 
   HomeCubit({
     required WeatherRepo weatherRepo,
@@ -24,7 +30,25 @@ class HomeCubit extends BaseCubit<HomeData> {
   })  : this._weatherRepo = weatherRepo,
         this._pref = pref,
         this._errorHandler = errorHandler,
-        super(HomeData());
+        super(HomeData()) {
+    checkWatch();
+  }
+
+  checkWatch() async {
+    final isPaired = await _watch.isPaired;
+    final isReachable = await _watch.isReachable;
+    final isSupported = await _watch.isSupported;
+    print("isPaired $isPaired");
+    print("isReachable $isReachable");
+    print("isSupported $isSupported");
+
+    contextSub = _watch.contextStream.listen((event) {
+      print('contextStream: ${event}');
+    });
+    msgSub = _watch.messageStream.listen((event) {
+      print('messageStream: ${event}');
+    });
+  }
 
   void subscribeCitiesStream() {
     _weatherRepo
@@ -39,6 +63,7 @@ class HomeCubit extends BaseCubit<HomeData> {
         weathers: null,
         status: Success(),
       ));
+      _watch.sendMessage({});
       return;
     }
     emit(state.copyWith(
@@ -61,6 +86,7 @@ class HomeCubit extends BaseCubit<HomeData> {
         weathers.add(WeatherCity(city: cities[i], weather: weather!));
       }
     }
+    _watch.sendMessage(weathers.firstOrNull?.toJson() ?? {});
     emit(state.copyWith(
       weathers: weathers,
       status: error != null ? Error(_errorHandler.parse(error)) : Success(),
@@ -81,6 +107,14 @@ class HomeCubit extends BaseCubit<HomeData> {
     _weatherRepo.removeCity(city);
   }
 
+  notifyWatch(WeatherCity weatherCity) {
+    _watch.sendMessage(weatherCity.toJson());
+  }
+
+  openWatch() {
+    _watch.startWatchApp();
+  }
+
   bool checkFirstTimeStartUp() {
     return _pref.isFirstTimeStartUp();
   }
@@ -97,6 +131,7 @@ class HomeCubit extends BaseCubit<HomeData> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    contextSub?.cancel();
+    msgSub?.cancel();
   }
 }

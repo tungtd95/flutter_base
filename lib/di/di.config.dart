@@ -15,21 +15,20 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:shared_preferences/shared_preferences.dart' as _i8;
 
 import '../data/local/pref.dart' as _i7;
-import '../data/local/weather_database.dart' as _i11;
-import '../data/repo/weather_repo.dart' as _i10;
-import '../data/service/weather_service.dart' as _i9;
+import '../data/local/weather_database.dart' as _i12;
+import '../data/repo/weather_repo.dart' as _i11;
+import '../data/service/weather_service.dart' as _i10;
 import '../data/utils/exception_handler.dart' as _i6;
 import '../env_config.dart' as _i5;
-import '../ui/home/home_cubit.dart' as _i14;
-import '../ui/sample/addcity/add_city_cubit.dart' as _i12;
-import '../ui/sample/citydetails/city_details_cubit.dart' as _i13;
+import '../ui/home/home_cubit.dart' as _i15;
+import '../ui/sample/addcity/add_city_cubit.dart' as _i13;
+import '../ui/sample/citydetails/city_details_cubit.dart' as _i14;
+import '../ui/watch_home/watch_home_cubit.dart' as _i9;
 import 'data_module.dart' as _i3;
 
-const String _dev = 'dev';
 const String _prod = 'prod';
+const String _dev = 'dev';
 
-// ignore_for_file: unnecessary_lambdas
-// ignore_for_file: lines_longer_than_80_chars
 // initializes the registration of main-scope dependencies inside of GetIt
 _i1.GetIt $initGetIt(
   _i1.GetIt getIt, {
@@ -71,22 +70,24 @@ _i1.GetIt $initGetIt(
   );
   gh.factory<_i7.Pref>(
       () => _i7.Pref(sharedPreferences: gh<_i8.SharedPreferences>()));
-  gh.factory<_i9.WeatherService>(() => dataModule.weatherService);
-  gh.factory<_i10.WeatherRepo>(() => _i10.WeatherRepo(
-        service: gh<_i9.WeatherService>(),
-        weatherDatabase: gh<_i11.WeatherDatabase>(),
+  gh.factory<_i9.WatchHomeCubit>(
+      () => _i9.WatchHomeCubit(errorHandler: gh<_i6.ErrorHandler>()));
+  gh.factory<_i10.WeatherService>(() => dataModule.weatherService);
+  gh.factory<_i11.WeatherRepo>(() => _i11.WeatherRepo(
+        service: gh<_i10.WeatherService>(),
+        weatherDatabase: gh<_i12.WeatherDatabase>(),
         env: gh<_i5.Env>(),
       ));
-  gh.factory<_i12.AddCityCubit>(() => _i12.AddCityCubit(
-        weatherRepo: gh<_i10.WeatherRepo>(),
+  gh.factory<_i13.AddCityCubit>(() => _i13.AddCityCubit(
+        weatherRepo: gh<_i11.WeatherRepo>(),
         errorHandler: gh<_i6.ErrorHandler>(),
       ));
-  gh.factory<_i13.CityDetailsCubit>(() => _i13.CityDetailsCubit(
-        weatherRepo: gh<_i10.WeatherRepo>(),
+  gh.factory<_i14.CityDetailsCubit>(() => _i14.CityDetailsCubit(
+        weatherRepo: gh<_i11.WeatherRepo>(),
         errorHandler: gh<_i6.ErrorHandler>(),
       ));
-  gh.factory<_i14.HomeCubit>(() => _i14.HomeCubit(
-        weatherRepo: gh<_i10.WeatherRepo>(),
+  gh.factory<_i15.HomeCubit>(() => _i15.HomeCubit(
+        weatherRepo: gh<_i11.WeatherRepo>(),
         pref: gh<_i7.Pref>(),
         errorHandler: gh<_i6.ErrorHandler>(),
       ));
