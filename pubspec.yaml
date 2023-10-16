@@ -2,7 +2,7 @@ name: flutter_base
 description: A Flutter base project.
 
 publish_to: 'none'
-version: 1.0.7+19
+version: 1.0.8+20
 
 environment:
   sdk: ">=3.0.0"
@@ -51,7 +51,6 @@ dependencies:
   flutter_secure_storage: ^8.0.0
   qr_flutter: ^4.1.0
   flutter_inapp_purchase: ^5.4.2
-#  android_play_install_referrer: ^0.3.0
 
 dev_dependencies:
   # test
