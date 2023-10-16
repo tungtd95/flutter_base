@@ -58,7 +58,6 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pushNamed(Routes.ADD_CITY);
-          cubit.openWatch();
         },
         child: Icon(Icons.add),
       ),
@@ -131,7 +130,6 @@ class _HomeWidgetState extends BasePageState<HomeWidget, HomeCubit, HomeData> {
                   cubit.removeCity(weather.city);
                 },
                 onSelected: () {
-                  cubit.notifyWatch(weather);
                   Navigator.of(context).pushNamed(
                     Routes.CITY_DETAIL,
                     arguments: weather.city,

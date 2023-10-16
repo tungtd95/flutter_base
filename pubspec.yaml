@@ -36,14 +36,6 @@ dependencies:
   firebase_messaging: ^14.6.4
   cloud_firestore: ^4.8.2
 
-  # wearOS
-  wear:
-    git:
-      url: https://github.com/NadinZeitoune/flutter_wear_plugin.git
-      ref: master
-  watch_connectivity: ^0.1.6
-  is_wear: ^0.0.1+2
-
   # others
   rxdart: ^0.27.7
   rive: ^0.11.4
