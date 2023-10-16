@@ -1,5 +1,5 @@
-import 'package:android_play_install_referrer/android_play_install_referrer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_base/utils/android_play_install_referrer.dart';
 
 class SourceScreen extends StatefulWidget {
   const SourceScreen({super.key});
