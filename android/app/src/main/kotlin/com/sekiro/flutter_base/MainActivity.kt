@@ -1,141 +1,84 @@
 package com.sekiro.flutter_base
 
-import android.os.Bundle
-import androidx.annotation.NonNull
+import android.os.RemoteException
 import com.android.installreferrer.api.InstallReferrerClient
+import com.android.installreferrer.api.InstallReferrerClient.InstallReferrerResponse
 import com.android.installreferrer.api.InstallReferrerStateListener
 import com.android.installreferrer.api.ReferrerDetails
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugin.common.MethodChannel.Result
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 
-class MainActivity: FlutterActivity(), MethodChannel.MethodCallHandler {
-
+class MainActivity : FlutterActivity(), MethodChannel.MethodCallHandler {
+    private val backgroundExecutor: Executor = Executors.newSingleThreadExecutor()
     private lateinit var channel: MethodChannel
-    private val pendingResults = arrayListOf<Result>()
-    private var referrerClient: InstallReferrerClient? = null
-    private var referrerDetails: ReferrerDetails? = null
-    private var referrerError: Pair<String, String>? = null
 
-    private val isInstallReferrerPending: Boolean
-        @Synchronized
-        get() {
-            return referrerClient != null && !isInstallReferrerResolved
-        }
+    private val prefKey = "checkedInstallReferrer"
 
-    private val isInstallReferrerResolved: Boolean
-        @Synchronized
-        get() {
-            return referrerDetails != null || referrerError != null
+    private fun checkInstallReferrer(result: MethodChannel.Result) {
+        if (getPreferences(MODE_PRIVATE).getBoolean(prefKey, false)) {
+            return
         }
+        val referrerClient = InstallReferrerClient.newBuilder(this).build()
+        backgroundExecutor.execute { getInstallReferrerFromClient(referrerClient, result) }
+    }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         channel = MethodChannel(
             flutterEngine.dartExecutor.binaryMessenger,
-            "de.lschmierer.android_play_install_referrer")
+            "com.sekiro.flutter_base.method_channel"
+        )
         channel.setMethodCallHandler(this)
     }
 
-    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+    private fun getInstallReferrerFromClient(
+        referrerClient: InstallReferrerClient,
+        result: MethodChannel.Result
+    ) {
+        referrerClient.startConnection(object : InstallReferrerStateListener {
+            override fun onInstallReferrerSetupFinished(responseCode: Int) {
+                when (responseCode) {
+                    InstallReferrerResponse.OK -> {
+                        val response: ReferrerDetails? = try {
+                            referrerClient.installReferrer
+                        } catch (e: RemoteException) {
+                            e.printStackTrace()
+                            return
+                        }
+                        result.success(response?.installReferrer)
+
+                        // Only check this once.
+                        getPreferences(MODE_PRIVATE).edit().putBoolean(prefKey, true).apply()
+
+                        // End the connection
+                        referrerClient.endConnection()
+                    }
+
+                    InstallReferrerResponse.FEATURE_NOT_SUPPORTED -> {
+                        result.success("FEATURE_NOT_SUPPORTED")
+                    }
+                    InstallReferrerResponse.SERVICE_UNAVAILABLE -> {
+                        result.success("SERVICE_UNAVAILABLE")
+                    }
+                }
+            }
+
+            override fun onInstallReferrerServiceDisconnected() {
+                result.success("onInstallReferrerServiceDisconnected")
+            }
+        })
+    }
+
+    override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         if (call.method == "getInstallReferrer") {
-            getInstallReferrer(result)
+            checkInstallReferrer(result)
         } else {
             result.notImplemented()
         }
-
     }
 
-    override fun onDestroy() {
-        pendingResults.clear()
-        referrerClient?.endConnection()
-        channel.setMethodCallHandler(null)
-        super.onDestroy()
-    }
-
-    @Synchronized
-    private fun getInstallReferrer(@NonNull result: Result) {
-        if (isInstallReferrerResolved) {
-            resolveInstallReferrerResult(result)
-        } else {
-            pendingResults.add(result)
-
-            if(!isInstallReferrerPending) {
-                referrerClient = InstallReferrerClient.newBuilder(context).build()
-                referrerClient?.startConnection(object : InstallReferrerStateListener {
-                    override fun onInstallReferrerSetupFinished(responseCode: Int) {
-                        handleOnInstallReferrerSetupFinished(responseCode)
-                    }
-
-                    override fun onInstallReferrerServiceDisconnected() {}
-                })
-            }
-        }
-    }
-
-    @Synchronized
-    private fun handleOnInstallReferrerSetupFinished(responseCode: Int) {
-        when (responseCode) {
-            InstallReferrerClient.InstallReferrerResponse.OK -> {
-                referrerClient?.let {
-                    referrerDetails = it.installReferrer
-                } ?: run {
-                    referrerError = Pair("BAD_STATE", "Result is null.")
-                }
-            }
-            InstallReferrerClient.InstallReferrerResponse.SERVICE_DISCONNECTED -> {
-                referrerError = Pair("SERVICE_DISCONNECTED", "Play Store service is not connected now - potentially transient state.")
-            }
-            InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE -> {
-                referrerError = Pair("SERVICE_UNAVAILABLE", "Connection couldn't be established.")
-            }
-            InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED -> {
-                referrerError = Pair("FEATURE_NOT_SUPPORTED", "API not available on the current Play Store app.")
-            }
-            InstallReferrerClient.InstallReferrerResponse.DEVELOPER_ERROR -> {
-                referrerError = Pair("DEVELOPER_ERROR", "General errors caused by incorrect usage.")
-            }
-            InstallReferrerClient.InstallReferrerResponse.PERMISSION_ERROR -> {
-                referrerError = Pair("PERMISSION_ERROR", "App is not allowed to bind to the Service.")
-            }
-            else -> {
-                referrerError = Pair("UNKNOWN_ERROR", "InstallReferrerClient returned unknown response code.")
-            }
-        }
-
-        resolvePendingInstallReferrerResults()
-        referrerClient?.endConnection()
-    }
-
-    @Synchronized
-    private fun resolvePendingInstallReferrerResults() {
-        pendingResults.forEach {
-            resolveInstallReferrerResult(it)
-        }
-        pendingResults.clear()
-    }
-
-    @Synchronized
-    private fun resolveInstallReferrerResult(@NonNull result: Result) {
-        referrerDetails?.let {
-            result.success(
-                mapOf(
-                    "installReferrer" to it.installReferrer,
-                    "referrerClickTimestampSeconds" to it.referrerClickTimestampSeconds,
-                    "installBeginTimestampSeconds" to it.installBeginTimestampSeconds,
-                    "referrerClickTimestampServerSeconds" to it.referrerClickTimestampServerSeconds,
-                    "installBeginTimestampServerSeconds" to it.installBeginTimestampServerSeconds,
-                    "installVersion" to it.installVersion,
-                    "googlePlayInstantParam" to it.googlePlayInstantParam
-                )
-            )
-            return
-        }
-        referrerError?.let {
-            result.error(it.first, it.second, null)
-            return
-        }
-    }
 }

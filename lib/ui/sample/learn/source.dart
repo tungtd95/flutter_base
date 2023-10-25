@@ -9,12 +9,14 @@ class SourceScreen extends StatefulWidget {
 }
 
 class _SourceScreenState extends State<SourceScreen> {
-  ReferrerDetails? referrerDetails;
+  String? referrerDetails;
 
   @override
   void initState() {
     super.initState();
-    _getSource();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _getSource();
+    });
   }
 
   _getSource() async {
@@ -27,7 +29,7 @@ class _SourceScreenState extends State<SourceScreen> {
     return Scaffold(
       body: Center(
         child: Text(
-          'referrerDetails: ' + (referrerDetails?.toString() ?? ''),
+          'referrerDetails: $referrerDetails',
         ),
       ),
     );
