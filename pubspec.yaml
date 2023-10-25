@@ -2,7 +2,7 @@ name: flutter_base
 description: A Flutter base project.
 
 publish_to: 'none'
-version: 1.0.8+20
+version: 1.0.9+21
 
 environment:
   sdk: ">=3.0.0"
