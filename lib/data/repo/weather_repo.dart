@@ -82,6 +82,14 @@ class WeatherRepo {
     await FirebaseFirestore.instance.doc("config/1").get().then((value) {
       remoteFlavor = value.data()?["env"] ?? '';
     });
+    final user = await FirebaseFirestore.instance
+        .doc("users/lL8QCLLfKG34hppZ2Skb")
+        .get()
+        .then((value) {
+      final conversations = value.data()?["conversations"];
+      (conversations[0] as DocumentReference<Map<String, dynamic>>);
+      print(conversations);
+    });
     return remoteFlavor;
   }
 }
